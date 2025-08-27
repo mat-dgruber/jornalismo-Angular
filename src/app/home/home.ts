@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { articles } from './articles';
+import { CommonModule } from '@angular/common';
 
 // Define a estrutura de um artigo para um código mais seguro
 interface Article {
@@ -13,7 +14,7 @@ interface Article {
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [RouterLink],
+  imports: [RouterLink, CommonModule],
   templateUrl: './home.html',
   styleUrls: ['./home.css']
 })

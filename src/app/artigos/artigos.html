@@ -1,30 +1,19 @@
 <main class="post-page">
-        <div class="container">
-            <header class="post-header">
-                <h1 class="post-title">Matérias</h1>
-                <p class="post-meta">Uma coleção das matérias escritas.</p>
-            </header>
-            <div id="articles-container" class="portfolio-grid">
-                <!-- Os artigos serão inseridos aqui via JavaScript -->
+    <div class="container">
+        <header class="post-header">
+            <h1 class="post-title">Matérias</h1>
+            <p class="post-meta">Uma coleção das matérias escritas.</p>
+        </header>
+        <div class="portfolio-grid">
+            <div *ngFor="let article of articles" class="portfolio-item">
+                <h3>{{ article.title }}</h3>
+                <p class="description" [innerHTML]="article.description"></p>
+                <p class="source">Publicado em: {{ article.source }}</p>
+                <a [href]="article.url" target="_blank" class="btn">Ler Matéria Original</a>
             </div>
-            <footer class="post-footer">
-                <a href="index.html" class="btn">Voltar à Página Inicial</a>
-            </footer>
         </div>
-    </main>
-
-    <script src="articles.js"></script>
-    <script>
-        const articlesContainer = document.getElementById('articles-container');
-        articles.forEach(article => {
-            const articleElement = document.createElement('div');
-            articleElement.classList.add('portfolio-item');
-            articleElement.innerHTML = `
-                <h3>${article.title}</h3>
-                <p class="description">${article.description}</p>
-                <p class="source">Publicado em: ${article.source}</p>
-                <a href="${article.url}" target="_blank" class="btn">Ler Matéria Original</a>
-            `;
-            articlesContainer.appendChild(articleElement);
-        });
-    </script>
+        <footer class="post-footer">
+            <a routerLink="/" class="btn">Voltar à Página Inicial</a>
+        </footer>
+    </div>
+</main>

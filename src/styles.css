@@ -52,11 +52,29 @@ body {
 .bg-light {
     background-color: var(--bg-light);
 }
+h1 {
+    font-family: var(--font-heading);
+    font-size: 3rem;
+    margin-bottom: 20px;
+}
+
 
 h2 {
     font-family: var(--font-heading);
     font-size: 2.5rem;
     margin-bottom: 40px;
+}
+
+h3 {
+    font-family: var(--font-heading);
+    font-size: 1.8rem;
+    margin-bottom: 20px;
+}
+
+h4 {
+    font-family: var(--font-heading);
+    font-size: 1.5rem;
+    margin-bottom: 15px;
 }
 
 /* Botões */
