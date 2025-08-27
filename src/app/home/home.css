@@ -1,0 +1,96 @@
+/* Estilos da Seção Hero */
+.hero {
+    padding: 80px 0;
+    text-align: center;
+    color: var(--light-text-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    background-image: url('../../assets/Imagens/banner-jornalismo-maria-izabela.png');
+    background-size: cover;
+    background-attachment: fixed;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-color: var(--primary-color); /* Fallback color */
+}
+
+.hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(43, 2, 51, 0.6); /* Overlay color */
+    z-index: 1;
+}
+
+.hero .container {
+    position: relative;
+    z-index: 2;
+}
+
+.hero h2 {
+    font-family: var(--font-heading);
+    font-size: 3rem;
+    margin-bottom: 10px;
+}
+
+.hero p {
+    font-size: 1.2rem;
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+/* Seção de Contato */
+.contact-section {
+    padding: 80px 0;
+    text-align: center;
+}
+
+.contact-section .contact-links a {
+    color: var(--primary-color);
+    text-decoration: none;
+    font-weight: 700;
+    margin: 0 10px;
+}
+
+.contact-section .contact-links a:hover {
+    text-decoration: underline;
+}
+
+/* Biografia */
+.bio-container {
+    display: flex;
+    gap: 30px;
+    align-items: flex-start;
+}
+
+.bio-text {
+    flex: 2;
+}
+
+.bio-photos {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.bio-photos img {
+    width: 100%;
+    border-radius: 8px;
+}
+
+/* Responsividade para Home */
+@media (max-width: 768px) {
+    .hero,
+    .contact-section {
+        text-align: center;
+    }
+
+    .bio-container {
+        flex-direction: column;
+    }
+}
