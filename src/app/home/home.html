@@ -10,31 +10,19 @@
     </section>
 
     <section id="materias" class="portfolio-section">
-        <div class="container">
-            <h2>Última Matéria</h2>
-            <div id="latest-article-container" class="portfolio-grid">
-                <!-- O último artigo será inserido aqui via JavaScript -->
+    <div class="container">
+        <h2>Última Matéria</h2>
+        <div class="portfolio-grid">
+            <div *ngIf="latestArticle" class="portfolio-item">
+                <h3>{{ latestArticle.title }}</h3>
+                <p class="description" [innerHTML]="latestArticle.description"></p>
+                <p class="source">Publicado em: {{ latestArticle.source }}</p>
+                <a [href]="latestArticle.url" target="_blank" class="btn">Ler Matéria Original</a>
             </div>
-            <a routerLink="/artigos" class="btn">Ver Todas as Matérias</a>
         </div>
-    </section>
-
-    <script src="articles.js"></script>
-    <script>
-        const latestArticleContainer = document.getElementById('latest-article-container');
-        if (articles.length > 0) {
-            const latestArticle = articles[articles.length - 1];
-            const articleElement = document.createElement('div');
-            articleElement.classList.add('portfolio-item');
-            articleElement.innerHTML = `
-                <h3>${latestArticle.title}</h3>
-                <p class="description">${latestArticle.description}</p>
-                <p class="source">Publicado em: ${latestArticle.source}</p>
-                <a href="${latestArticle.url}" target="_blank" class="btn">Ler Matéria Original</a>
-            `;
-            latestArticleContainer.appendChild(articleElement);
-        }
-    </script>
+        <a routerLink="/artigos" class="btn">Ver Todas as Matérias</a>
+    </div>
+</section>
 
     <!--
     <section id="midia" class="portfolio-section bg-light">
