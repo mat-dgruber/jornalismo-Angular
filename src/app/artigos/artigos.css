@@ -1,4 +1,4 @@
-/* Estilos do Blog */
+/* Estilos da página de listagem de artigos */
 .blog-page, .post-page {
     padding: 80px 0;
 }
@@ -22,74 +22,39 @@
     font-size: 1.8rem;
 }
 
+.post-excerpt {
+    margin-bottom: 20px;
+}
+
+.post-page .container {
+    max-width: 800px;
+}
+
+.post-header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.post-title {
+    font-family: var(--font-heading);
+    font-size: 3rem;
+    margin-bottom: 10px;
+}
+
 .post-meta {
     font-size: 0.9rem;
     color: #777;
     margin: 10px 0;
 }
 
-.post-excerpt {
-    margin-bottom: 20px;
-}
-
-/* Estilos de Post Individual */
-.post-page .container {
-    max-width: 800px;
-}
-
-.blog-post .post-header {
-    text-align: center;
-    margin-bottom: 40px;
-}
-
-.blog-post .post-title {
-    font-family: var(--font-heading);
-    font-size: 3rem;
-    margin-bottom: 10px;
-}
-
-.blog-post .post-content {
-    font-size: 1.1rem;
-    line-height: 1.8;
-}
-
-.blog-post .post-content img {
-    width: 100%;
-    height: auto;
-    border-radius: 8px;
-    margin: 30px 0;
-}
-
-.blog-post .post-content blockquote {
-    border-left: 4px solid var(--primary-color);
-    padding-left: 20px;
-    margin: 30px 0;
-    font-style: italic;
-    font-size: 1.2rem;
-}
-
-.blog-post .post-footer {
+.post-footer {
     text-align: center;
     margin-top: 40px;
 }
 
-/* Responsividade para Artigos */
+/* Responsividade da página de artigos */
 @media (max-width: 768px) {
-    .blog-post-preview,
-    .blog-post .post-content {
-        text-align: center;
-    }
-
-    .blog-post .post-title {
+    .post-title {
         font-size: 2.2rem;
-    }
-
-    .blog-post .post-content blockquote,
-    .blog-post .post-content li {
-        text-align: left;
-    }
-
-    .blog-post .post-content li {
-        margin-left: 50px;
     }
 }
