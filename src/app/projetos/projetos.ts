@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
-import { RouterLink } from "../../../node_modules/@angular/router/router_module.d";
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-projetos',
+  standalone: true,
   imports: [RouterLink],
   templateUrl: './projetos.html',
-  styleUrl: './projetos.css'
+  styleUrls: ['./projetos.css']
 })
 export class Projetos {
 
