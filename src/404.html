@@ -1,33 +1,222 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Page Not Found</title>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Página não encontrada - Portfólio de Jornalismo Teológico - Maria Izabela</title>
+    <link rel="icon" href="data:,">
+    <style>
+        /* Global Styles from src/styles.css */
+        @import url('https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&family=Quintessential&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&display=swap');
 
-    <style media="screen">
-      body { background: #ECEFF1; color: rgba(0,0,0,0.87); font-family: Roboto, Helvetica, Arial, sans-serif; margin: 0; padding: 0; }
-      #message { background: white; max-width: 360px; margin: 100px auto 16px; padding: 32px 24px 16px; border-radius: 3px; }
-      #message h3 { color: #888; font-weight: normal; font-size: 16px; margin: 16px 0 12px; }
-      #message h2 { color: #ffa100; font-weight: bold; font-size: 16px; margin: 0 0 8px; }
-      #message h1 { font-size: 22px; font-weight: 300; color: rgba(0,0,0,0.6); margin: 0 0 16px;}
-      #message p { line-height: 140%; margin: 16px 0 24px; font-size: 14px; }
-      #message a { display: block; text-align: center; background: #039be5; text-transform: uppercase; text-decoration: none; color: white; padding: 16px; border-radius: 4px; }
-      #message, #message a { box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24); }
-      #load { color: rgba(0,0,0,0.4); text-align: center; font-size: 13px; }
-      @media (max-width: 600px) {
-        body, #message { margin-top: 0; background: white; box-shadow: none; }
-        body { border-top: 16px solid #ffa100; }
-      }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #2b0053;
+            --secondary-color: #c180ffe3;
+            --text-color: #202020;
+            --light-text-color: #fff0f0;
+            --bg-light: #C8B4C0;
+            --background-color: #F9F7F7;
+            --font-heading: 'Newsreader', serif;
+            --font-body: 'Jost', sans-serif;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font-body);
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--background-color);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        h1 {
+            font-family: var(--font-heading);
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+
+        h2 {
+            font-family: var(--font-heading);
+            font-size: 2.5rem;
+            margin-bottom: 40px;
+        }
+        
+        main {
+            flex: 1;
+            text-align: center;
+            padding: 80px 20px;
+        }
+
+        /* Header Styles from src/app/header/header.css */
+        .header {
+            background-color: var(--primary-color);
+            color: var(--light-text-color);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: var(--font-heading);
+            font-size: 1.5rem;
+        }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+        }
+
+        .nav-links li {
+            margin-left: 20px;
+        }
+
+        a {
+            color: var(--light-text-color);
+            text-decoration: none;
+        }
+
+        .nav-links a {
+            color: var(--light-text-color);
+            text-decoration: none;
+            font-weight: 700;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--secondary-color);
+        }
+
+        .menu-toggle {
+            display: none;
+            font-size: 2rem;
+            background: none;
+            border: none;
+            color: var(--light-text-color);
+            cursor: pointer;
+        }
+
+        @media (max-width: 768px) {
+            .header .container {
+                justify-content: space-between;
+                align-items: center;
+                text-align: initial;
+            }
+            
+            .nav-links {
+                display: none; /* Hidden by default on mobile */
+                flex-direction: column;
+                width: 100%;
+                text-align: center;
+                background-color: var(--primary-color);
+                position: absolute;
+                top: 60px;
+                left: 0;
+                transform: translateY(-150%);
+                transition: transform 0.5s ease-out;
+            }
+
+            .nav-links.active {
+                display: flex;
+                transform: translateY(0);
+            }
+
+            .nav-links li {
+                margin: 10px 0;
+            }
+
+            .menu-toggle {
+                display: block;
+            }
+        }
+
+        /* Footer Styles from src/app/footer/footer.css */
+        .footer {
+            background-color: var(--primary-color);
+            color: var(--light-text-color);
+            padding: 20px 0;
+            text-align: center;
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: var(--primary-color);
+            color: var(--light-text-color);
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 25px;
+            transition: background-color 0.3s ease;
+            margin-top: 30px;
+            border: 1px solid transparent;
+        }
+
+        .btn:hover {
+            background-color: #3b008db4;
+        }
+
     </style>
-  </head>
-  <body>
-    <div id="message">
-      <h2>404</h2>
-      <h1>Page Not Found</h1>
-      <p>The specified file was not found on this website. Please check the URL for mistakes and try again.</p>
-      <h3>Why am I seeing this?</h3>
-      <p>This page was generated by the Firebase Command-Line Interface. To modify it, edit the <code>404.html</code> file in your project's configured <code>public</code> directory.</p>
-    </div>
-  </body>
+</head>
+<body>
+
+    <header class="header">
+        <div class="container">
+            <h1 class="logo"><a href="/">Maria Izabela</a></h1>
+            <nav class="navbar">
+                <button class="menu-toggle" aria-label="Abrir menu" onclick="toggleMenu()">&#9776;</button>
+                <ul class="nav-links" id="nav-links">
+                    <li><a href="/#materias">Matérias Escritas</a></li>
+                    <li><a href="/#projetos">Projetos</a></li>
+                    <li><a href="/#contato">Contato</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <div class="container">
+            <h1>404 - Página Não Encontrada</h1>
+            <p>A página que você está procurando não existe ou foi movida.</p>
+            <a routerLink="/" class="btn">Voltar para a página inicial</a>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 Maria Izabela. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+
+    <script>
+        function toggleMenu() {
+            const navLinks = document.getElementById('nav-links');
+            navLinks.classList.toggle('active');
+        }
+    </script>
+
+</body>
 </html>
