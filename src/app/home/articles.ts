@@ -23,4 +23,10 @@ export const articles = [
         source: "Projeto Lamed",
         url: "https://lamed148.com.br/artigo/o-maior-tesouro-existente-o-amor"
     },
+    {
+        title: "A Importância de Crescer, mas Continuar a Ser como Criança",
+        description: "Quando somos mais novos, vemos a vida de forma diferente, tudo tem mais cor, tudo é mais simples, podemos chegar à conclusão de que para acabar com a guerra em países, basta um simples pedido de desculpas.Ao conviver com crianças podemos rir muito com as “pérolas” que podemos ouvir, elas podem não saber, mas tem o dom de deixar a vida mais leve.",
+        source: "Projeto Lamed",
+        url: "https://lamed148.com.br/artigo/a-importancia-de-crescer-mas-continuar-a-ser-como-crianca"
+    },
 ];

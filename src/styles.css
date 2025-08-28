@@ -92,3 +92,7 @@ h4 {
 .btn:hover {
     background-color: #3b008db4;
 }
+
+a[routerLink] {
+    cursor: pointer;
+}
