@@ -21,8 +21,8 @@ export class Artigos implements OnInit {
   articles: Article[] = []; // Variável para armazenar o array de artigos
 
   ngOnInit(): void {
-      // Atribua o array de artigos à sua variável
-      this.articles = articles;
+    // Atribua o array de artigos à sua variável em ordem inversa
+    this.articles = articles.slice().reverse();
   }
 } {
 
