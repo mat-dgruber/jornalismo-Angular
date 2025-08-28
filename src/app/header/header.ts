@@ -9,10 +9,19 @@ import { Router, RouterModule } from '@angular/router';
   styleUrl: './header.css'
 })
 export class Header {
+  isMenuOpen = false;
+
   constructor(private router: Router) {}
 
   isHomePage(): boolean {
     return this.router.url === '/' || this.router.url.startsWith('/#');
   }
 
+  toggleMenu() {
+    this.isMenuOpen = !this.isMenuOpen;
+  }
+
+  closeMenu() {
+    this.isMenuOpen = false;
+  }
 }

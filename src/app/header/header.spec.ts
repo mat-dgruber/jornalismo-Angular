@@ -20,4 +20,18 @@ describe('Header', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should toggle isMenuOpen property when toggleMenu is called', () => {
+    expect(component.isMenuOpen).toBe(false);
+    component.toggleMenu();
+    expect(component.isMenuOpen).toBe(true);
+    component.toggleMenu();
+    expect(component.isMenuOpen).toBe(false);
+  });
+
+  it('should set isMenuOpen to false when closeMenu is called', () => {
+    component.isMenuOpen = true;
+    component.closeMenu();
+    expect(component.isMenuOpen).toBe(false);
+  });
 });
