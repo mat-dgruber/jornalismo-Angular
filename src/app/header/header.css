@@ -29,6 +29,11 @@
     margin-left: 20px;
 }
 
+a {
+    color: var(--light-text-color);
+    text-decoration: none;
+}
+
 .nav-links a {
     color: var(--light-text-color);
     text-decoration: none;
