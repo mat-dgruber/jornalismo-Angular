@@ -30,7 +30,7 @@ export class Contato implements OnInit {
       this.isSubmitting = true;
       this.submissionMessage = '';
       const formData = this.contactForm.value;
-      const formspreeUrl = 'https://formspree.io/f/mjkevknj';
+      const formspreeUrl = 'https://formspree.io/f/mwpnpgrg';
 
       this.http.post(formspreeUrl, formData).subscribe(
         (response) => {

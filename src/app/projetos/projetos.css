@@ -1,4 +1,8 @@
 /* Estilos reutilizáveis de Portfólio/Grid */
+.post-page {
+    flex-grow: 1;
+}
+
 .portfolio-section {
     padding: 80px 0;
     text-align: center;
