@@ -1,6 +1,6 @@
 {
   "hosting": {
-    "public": "dist/jornalismo-angular/browser",
+    "public": "dist/jornalismo-angular/browser/browser",
     "ignore": [
       "firebase.json",
       "**/.*",
