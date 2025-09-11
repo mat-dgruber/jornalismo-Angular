@@ -29,4 +29,11 @@ export const articles = [
         source: "Projeto Lamed",
         url: "https://lamed148.com.br/artigo/a-importancia-de-crescer-mas-continuar-a-ser-como-crianca"
     },
+
+    {
+        title: "Enxergando Além do Olhar Humano",
+        description: "Você conhece alguém que se transformou completamente depois de conhecer Jesus?Algumas vezes, conhecemos pessoas que nos contam como eram e o que faziam antes de Jesus e não conseguimos acreditar. Outras vezes, conhecemos pessoas antes do encontro com Jesus e não acreditamos que elas possam ser diferentes.",
+        source: "Projeto Lamed",
+        url: "https://lamed148.com.br/artigo/enxergando-alem-do-olhar-humano"
+    }
 ];
