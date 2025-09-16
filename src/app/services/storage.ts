@@ -1,15 +1,14 @@
-import { Injectable } from '@angular/core';
-import { Storage, ref, uploadBytes, getDownloadURL } from '@angular/fire/storage';
+import { Injectable, inject } from '@angular/core';
+import { Storage, ref, uploadBytes, getDownloadURL, UploadResult } from '@angular/fire/storage';
 
 @Injectable({
   providedIn: 'root'
 })
 export class StorageService {
-
-  constructor(private storage: Storage) { }
+  private storage = inject(Storage);
 
   uploadImage(file: File) {
     const storageRef = ref(this.storage, `images/${file.name}`);
-    return uploadBytes(storageRef, file).then(snapshot => getDownloadURL(snapshot.ref));
+    return uploadBytes(storageRef, file).then((snapshot: UploadResult) => getDownloadURL(snapshot.ref));
   }
 }

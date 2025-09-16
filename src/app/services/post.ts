@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { Firestore, collection, collectionData, doc, docData, addDoc, updateDoc, deleteDoc } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 
@@ -12,9 +12,13 @@ export interface Post {
   providedIn: 'root'
 })
 export class PostService {
-  private postsCollection = collection(this.firestore, 'posts');
+  private firestore: Firestore;
+  private postsCollection;
 
-  constructor(private firestore: Firestore) { }
+  constructor() {
+    this.firestore = inject(Firestore);
+    this.postsCollection = collection(this.firestore, 'posts');
+  }
 
   getPosts(): Observable<Post[]> {
     return collectionData(this.postsCollection, { idField: 'id' }) as Observable<Post[]>;

@@ -10,17 +10,16 @@ import { PostListComponent } from './post-list/post-list';
 import { PostEditComponent } from './post-edit/post-edit';
 
 @NgModule({
-  declarations: [
-    LoginComponent,
-    DashboardComponent,
-    PostListComponent,
-    PostEditComponent
-  ],
+  declarations: [],
   imports: [
     CommonModule,
     AdminRoutingModule,
     ReactiveFormsModule,
-    QuillModule.forRoot()
+    QuillModule.forRoot(),
+    LoginComponent,
+    DashboardComponent,
+    PostListComponent,
+    PostEditComponent
   ]
 })
 export class AdminModule { }
