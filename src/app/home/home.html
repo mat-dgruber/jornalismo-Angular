@@ -9,58 +9,21 @@
         </div>
     </section>
 
-    <section id="materias" class="portfolio-section">
-    <div class="container">
-        <h2>Última Matéria</h2>
-        <div class="portfolio-grid">
-            <div *ngIf="latestArticle" class="portfolio-item">
-                <h3>{{ latestArticle.title }}</h3>
-                <p class="description" [innerHTML]="latestArticle.description"></p>
-                <p class="source">Publicado em: {{ latestArticle.source }}</p>
-                <a [href]="latestArticle.url" target="_blank" class="btn">Ler Matéria Original</a>
+    <section id="blog-recentes" class="portfolio-section bg-light">
+        <div class="container">
+            <h2>Últimas do Blog</h2>
+            <div class="portfolio-grid">
+                <div *ngFor="let post of posts$ | async" class="portfolio-item">
+                    <h3>{{ post.title }}</h3>
+                    <p class="description" [innerHTML]="post.content.substring(0, 150) + '...'"></p>
+                    <a [routerLink]="['/post', post.id]" class="btn">Leia Mais</a>
+                </div>
             </div>
-        </div>
-        <a routerLink="/artigos" class="btn">Ver Todas as Matérias</a>
-    </div>
-</section>
-
-    <!--
-    <section id="midia" class="portfolio-section bg-light">
-        <div class="container">
-            <h2>Reportagens em Áudio & Vídeo</h2>
-            <div class="portfolio-grid">
-                <div class="portfolio-item">
-                    <h3>Título do Vídeo ou Podcast</h3>
-                    <p class="description">
-                        Descreva seu papel na produção (roteirista, repórter, editor) e o contexto do projeto.
-                    </p>
-                    <div class="embed-container">
-                        <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" frameborder="0" allowfullscreen></iframe>
-                    </div>
-                </div>
-                </div>
-                <a href="reportagens.html" class="btn">Ver Todas as Reportagens</a>
+            <a routerLink="/blog" class="btn">Ver Todos os Posts</a>
         </div>
     </section>
 
-    <section id="fotografia" class="portfolio-section">
-        <div class="container">
-            <h2>Fotografia e Multimídia</h2>
-            <div class="portfolio-grid">
-                <div class="portfolio-item">
-                    <h3>Título da Foto ou Infográfico</h3>
-                    <p class="description">
-                        Descreva a história por trás da foto ou do projeto multimídia.
-                    </p>
-                    <img src="https://via.placeholder.com/600x400.png?text=Sua+Foto+aqui" alt="Descrição da imagem">
-                </div>
-                </div>
-                <a href="multimidia.html" class="btn">Ver Toda a Multimídia</a>
-        </div>
-    </section>
-    -->
-
-    <section id="projetos" class="portfolio-section bg-light">
+    <section id="projetos" class="portfolio-section">
         <div class="container">
             <h2>Projetos Acadêmicos e Pessoais</h2>
             <div class="portfolio-grid">
@@ -75,25 +38,6 @@
             <a routerLink="/projetos" class="btn">Ver Todos os Projetos</a>
         </div>
     </section>
-
-    <!-- <section id="blog-recentes" class="portfolio-section bg-light">
-        <div class="container">
-            <h2>Últimas do Blog</h2>
-            <div class="portfolio-grid">
-                
-                <div class="portfolio-item">
-                    <h3>Primeiro Post do Blog</h3>
-                    <p class="description">
-                        Este é um resumo do primeiro artigo do blog. Aqui você pode escrever um parágrafo
-                        introdutório para atrair o leitor.
-                    </p>
-                    <a href="posts/primeiro-post.html" class="btn">Leia Mais</a>
-                </div>
-                
-            </div>
-            <a href="blog.html" class="btn">Ver Todos os Posts</a>
-        </div>
-    </section> -->
 
     <section id="contato" class="contact-section">
         <div class="container">
