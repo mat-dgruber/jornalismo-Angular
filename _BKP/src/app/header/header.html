@@ -1,0 +1,24 @@
+<header class="header">
+        <div class="container">
+            <h1 class="logo"><a routerLink="/">Maria Izabela</a></h1>
+            <nav class="navbar">
+                <button class="menu-toggle" (click)="toggleMenu()" aria-label="Abrir menu">&#9776;</button>
+                <ul class="nav-links" [ngClass]="{ 'active': isMenuOpen }">
+                    <ng-container *ngIf="isHomePage(); else otherPages">
+                        <li><a href="#materias" (click)="closeMenu()">Matérias Escritas</a></li>
+                        <li><a href="#projetos" (click)="closeMenu()">Projetos</a></li>
+                        <li><a href="#contato" (click)="closeMenu()">Contato</a></li>
+                    </ng-container>
+                    <ng-template #otherPages>
+                        <li><a [routerLink]="'/artigos'" fragment="materias" (click)="closeMenu()">Matérias Escritas</a></li>
+                        <li><a [routerLink]="'/projetos'" fragment="projetos" (click)="closeMenu()">Projetos</a></li>
+                        <li><a [routerLink]="'/contato'" fragment="contato" (click)="closeMenu()">Contato</a></li>
+                    </ng-template>
+                    <!--<li><a href="#midia">Áudio & Vídeo</a></li>
+                    <li><a href="#fotografia">Fotografia & Multimídia</a></li> -->
+                    <!-- <li><a href="#blog-recentes">Blog</a></li> -->
+                    <!--<li><a href="biografia.html">Sobre Mim</a></li> -->
+                </ul>
+            </nav>
+        </div>
+     </header>
