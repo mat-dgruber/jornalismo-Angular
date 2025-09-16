@@ -33,12 +33,12 @@ export class Contato implements OnInit {
       const formspreeUrl = 'https://formspree.io/f/mwpnpgrg';
 
       this.http.post(formspreeUrl, formData).subscribe(
-        (response) => {
+        (response: any) => {
           this.submissionMessage = 'Mensagem enviada com sucesso!';
           this.isSubmitting = false;
           this.contactForm.reset();
         },
-        (error) => {
+        (error: any) => {
           this.submissionMessage = 'Ocorreu um erro ao enviar a mensagem. Tente novamente mais tarde.';
           this.isSubmitting = false;
         }
