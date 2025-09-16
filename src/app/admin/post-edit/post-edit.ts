@@ -1,15 +1,19 @@
-import { Component, inject } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Component, inject, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { PostService } from '../../services/post';
 import { StorageService } from '../../services/storage';
+import { CommonModule } from '@angular/common';
+import { QuillModule } from 'ngx-quill';
 
 @Component({
   selector: 'app-post-edit',
   templateUrl: './post-edit.html',
-  styleUrls: ['./post-edit.css']
+  styleUrls: ['./post-edit.css'],
+  standalone: true,
+  imports: [CommonModule, ReactiveFormsModule, QuillModule]
 })
-export class PostEditComponent {
+export class PostEditComponent implements OnInit {
   postForm: FormGroup;
   fb = inject(FormBuilder);
   router = inject(Router);
@@ -17,7 +21,8 @@ export class PostEditComponent {
   postService = inject(PostService);
   storageService = inject(StorageService);
   editMode = false;
-  postId: string;
+  postId: string | null = null;
+  quill: any;
   quillConfig = {
     toolbar: {
       container: [
@@ -47,38 +52,44 @@ export class PostEditComponent {
       title: ['', Validators.required],
       content: ['', Validators.required]
     });
+  }
 
+  ngOnInit(): void {
     this.postId = this.route.snapshot.paramMap.get('id');
     if (this.postId) {
       this.editMode = true;
       this.postService.getPost(this.postId).subscribe(post => {
-        this.postForm.setValue({
-          title: post.title,
-          content: post.content
-        });
+        if (post) {
+          this.postForm.setValue({
+            title: post.title,
+            content: post.content
+          });
+        }
       });
     }
   }
 
-  imageHandler(this: any) {
+  imageHandler() {
     const input = document.createElement('input');
     input.setAttribute('type', 'file');
     input.setAttribute('accept', 'image/*');
     input.click();
 
     input.onchange = async () => {
-      const file = input.files[0];
-      if (file) {
-        const url = await this.storageService.uploadImage(file);
-        const range = this.quill.getSelection(true);
-        this.quill.insertEmbed(range.index, 'image', url);
+      if (input.files) {
+        const file = input.files[0];
+        if (file) {
+          const url = await this.storageService.uploadImage(file);
+          const range = this.quill.getSelection(true);
+          this.quill.insertEmbed(range.index, 'image', url);
+        }
       }
     };
   }
 
   savePost() {
     if (this.postForm.valid) {
-      if (this.editMode) {
+      if (this.editMode && this.postId) {
         this.postService.updatePost({ id: this.postId, ...this.postForm.value })
           .then(() => this.router.navigate(['/admin/posts']));
       } else {

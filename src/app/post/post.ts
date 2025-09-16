@@ -1,20 +1,25 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { PostService, Post } from '../services/post';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-post',
   templateUrl: './post.html',
-  styleUrls: ['./post.css']
+  styleUrls: ['./post.css'],
+  standalone: true,
+  imports: [CommonModule]
 })
-export class PostComponent {
-  post$: Observable<Post>;
+export class PostComponent implements OnInit {
+  post$: Observable<Post | undefined> = of(undefined);
   postService = inject(PostService);
   route = inject(ActivatedRoute);
 
-  constructor() {
+  ngOnInit(): void {
     const postId = this.route.snapshot.paramMap.get('id');
-    this.post$ = this.postService.getPost(postId);
+    if (postId) {
+      this.post$ = this.postService.getPost(postId);
+    }
   }
 }
