@@ -1,7 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { articles } from './articles';
 import { CommonModule } from '@angular/common';
+import { Post, PostService } from '../services/post';
+import { Observable } from 'rxjs';
 
 // Define a estrutura de um artigo para um código mais seguro
 interface Article {
@@ -20,6 +22,8 @@ interface Article {
 })
 export class Home implements OnInit {
   latestArticle!: Article; // Use "!" para dizer que a variável será inicializada em ngOnInit
+  protected posts$!: Observable<Post[]>;
+  private postService = inject(PostService);
 
   constructor() { }
 
@@ -28,5 +32,6 @@ export class Home implements OnInit {
     if (articles.length > 0) {
       this.latestArticle = articles[articles.length - 1];
     }
+    this.posts$ = this.postService.getPosts();
   }
 }
