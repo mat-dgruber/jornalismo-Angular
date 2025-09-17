@@ -10,11 +10,7 @@ import { BlogComponent } from './blog/blog';
 import { PostComponent } from './post/post';
 import { AdminModule } from './admin/admin-module';
 import { Post } from './services/post';
-import { AuthGuard } from './admin/auth.guard';
-import { PostEditComponent } from './admin/post-edit/post-edit';
-import { PostListComponent } from './admin/post-list/post-list';
-import { LoginComponent } from './admin/login/login';
-import { DashboardComponent } from './admin/dashboard/dashboard';
+import { authGuard } from './guards/auth-guard';
 
 
 export const routes: Routes = [
@@ -23,14 +19,8 @@ export const routes: Routes = [
      {path: 'projetos', component: Projetos},
      {path: 'projeto-tcc', component: ProjetoTCC},
      {path: 'contato', component: Contato},
-     {path: 'blog/:id', component: PostComponent },
+     {path: 'post/:id', component: PostComponent },
      {path: 'blog', component: BlogComponent},
-     {path: 'admin', loadChildren: () => import('./admin/admin-module').then(m => m.AdminModule)},
-     {path: `post-edit/:id`, component: PostEditComponent, canActivate: [AuthGuard]},
-     {path: 'post-list', component: PostListComponent, canActivate: [AuthGuard]},
-     {path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard]},
-     {path: 'login', component: LoginComponent},
-     {path: 'admin', component: AdminComponent, canActivate: [AuthGuard]},
-     {path: 'admin', loadChildren: () => import('./admin/admin-module').then(m => m.AdminModule), canActivate: [AuthGuard]},
+     {path: 'admin', loadChildren: () => import('./admin/admin-module').then(m => m.AdminModule), canActivate: [authGuard]},
      {path: '**', redirectTo: ''},
 ];

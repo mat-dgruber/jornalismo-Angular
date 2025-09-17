@@ -22,7 +22,7 @@ interface Article {
 })
 export class Home implements OnInit {
   latestArticle!: Article; // Use "!" para dizer que a variável será inicializada em ngOnInit
-  protected posts$!: Observable<Post[]>;
+  latestPost: Post | undefined;
   private postService = inject(PostService);
 
   constructor() { }
@@ -32,6 +32,11 @@ export class Home implements OnInit {
     if (articles.length > 0) {
       this.latestArticle = articles[articles.length - 1];
     }
-    this.posts$ = this.postService.getPosts();
+
+    this.postService.getPosts().subscribe(posts => {
+      if (posts.length > 0) {
+        this.latestPost = posts[posts.length - 1];
+      }
+    });
   }
 }
