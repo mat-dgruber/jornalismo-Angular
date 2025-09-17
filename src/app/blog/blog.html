@@ -1,11 +1,13 @@
 <div class="container">
   <h1>Blog</h1>
-  <div *ngIf="(posts$ | async)?.length > 0; else noPosts">
-    <div *ngFor="let post of posts$ | async" class="card mb-3">
-      <div class="card-body">
-        <h5 class="card-title">{{ post.title }}</h5>
-        <p class="card-text">{{ post.content.substring(0, 200) }}...</p>
-        <a [routerLink]="['/post', post.id]" class="btn btn-primary">Read More</a>
+  <div *ngIf="(posts$ | async) as posts; else noPosts">
+    <div *ngIf="posts.length > 0; else noPosts">
+      <div *ngFor="let post of posts" class="card mb-3">
+        <div class="card-body">
+          <h5 class="card-title">{{ post.title }}</h5>
+          <p class="card-text">{{ post.content.substring(0, 200) }}...</p>
+          <a [routerLink]="['/post', post.id]" class="btn btn-primary">Read More</a>
+        </div>
       </div>
     </div>
   </div>
