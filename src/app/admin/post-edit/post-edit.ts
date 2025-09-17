@@ -69,6 +69,10 @@ export class PostEditComponent implements OnInit {
     }
   }
 
+  onEditorCreated(editor: any) {
+    this.quill = editor;
+  }
+
   imageHandler() {
     const input = document.createElement('input');
     input.setAttribute('type', 'file');
@@ -80,11 +84,18 @@ export class PostEditComponent implements OnInit {
         const file = input.files[0];
         if (file) {
           const url = await this.storageService.uploadImage(file);
-          const range = this.quill.getSelection(true);
-          this.quill.insertEmbed(range.index, 'image', url);
+          const editor = this.getEditorInstance();
+          if (editor) {
+            const range = editor.getSelection(true);
+            editor.insertEmbed(range.index, 'image', url);
+          }
         }
       }
     };
+  }
+
+  getEditorInstance() {
+    return this.quill;
   }
 
   savePost() {

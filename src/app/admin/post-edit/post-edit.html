@@ -1,4 +1,4 @@
-<div class="container">
+<div class="post-edit-container">
   <h1 *ngIf="editMode">Edit Post</h1>
   <h1 *ngIf="!editMode">New Post</h1>
   <form [formGroup]="postForm" (ngSubmit)="savePost()">
@@ -8,7 +8,7 @@
     </div>
     <div class="form-group">
       <label for="content">Content</label>
-      <quill-editor formControlName="content" [modules]="quillConfig"></quill-editor>
+      <quill-editor formControlName="content" [modules]="quillConfig" (onEditorCreated)="onEditorCreated($event)"></quill-editor>
     </div>
     <button type="submit" [disabled]="!postForm.valid" class="btn btn-primary">Save</button>
   </form>
