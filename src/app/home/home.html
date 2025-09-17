@@ -45,17 +45,19 @@
             <h2>Últimas do Blog</h2>
             <div class="portfolio-grid">
                 
-                <div class="portfolio-item">
-                    <h3>Primeiro Post do Blog</h3>
+                <div *ngIf="latestPost" class="portfolio-item">
+                    <h3>{{ latestPost.title }}</h3>
                     <p class="description">
-                        Este é um resumo do primeiro artigo do blog. Aqui você pode escrever um parágrafo
-                        introdutório para atrair o leitor.
+                        {{ latestPost.content.substring(0, 200) }}...
                     </p>
-                    <a href="posts/primeiro-post.html" class="btn">Leia Mais</a>
+                    <a [routerLink]="['/post', latestPost.id]" class="btn">Leia Mais</a>
+                </div>
+                <div *ngIf="!latestPost">
+                    <p>Nenhum post no blog ainda.</p>
                 </div>
                 
             </div>
-            <a href="blog.html" class="btn">Ver Todos os Posts</a>
+            <a routerLink="/blog" class="btn">Ver Todos os Posts</a>
         </div>
     </section> 
 
