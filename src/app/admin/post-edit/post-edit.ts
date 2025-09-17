@@ -1,5 +1,5 @@
 import { Component, inject, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { PostService } from '../../services/post';
 import { StorageService } from '../../services/storage';
@@ -11,7 +11,7 @@ import { QuillModule } from 'ngx-quill';
   templateUrl: './post-edit.html',
   styleUrls: ['./post-edit.css'],
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, QuillModule]
+  imports: [CommonModule, ReactiveFormsModule, QuillModule, FormsModule]
 })
 export class PostEditComponent implements OnInit {
   postForm: FormGroup;
