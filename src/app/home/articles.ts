@@ -36,5 +36,11 @@ export const articles = [
         source: "Projeto Lamed",
         url: "https://lamed148.com.br/artigo/enxergando-alem-do-olhar-humano"
     },
+    {
+        title: "Fragrância Eterna – A Salvação Divina é o Melhor Perfume",
+        description: "Alguma vez você já olhou para Jesus e sentiu que gostaria de fazer algo por Ele? Já teve vontade de honrar Jesus por nos ter perdoado de tantos pecados? Maria, em Lucas 7, nos ensina uma lição valiosa sobre atitude, arrependimento e devoção pessoal.",
+        source: "Projeto Lamed",
+        url: "https://lamed148.com.br/artigo/fragancia-eterna-a-salvacao-divina-e-o-melhor-perfume"
+    }
     
 ];
