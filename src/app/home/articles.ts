@@ -41,6 +41,19 @@ export const articles = [
         description: "Alguma vez você já olhou para Jesus e sentiu que gostaria de fazer algo por Ele? Já teve vontade de honrar Jesus por nos ter perdoado de tantos pecados? Maria, em Lucas 7, nos ensina uma lição valiosa sobre atitude, arrependimento e devoção pessoal.",
         source: "Projeto Lamed",
         url: "https://lamed148.com.br/artigo/fragancia-eterna-a-salvacao-divina-e-o-melhor-perfume"
+    },
+    {
+        title: "O Primeiro Lugar no Reino dos Céus é o Último na Terra",
+        description: "Jesus foi o maior exemplo de humildade de todo o Universo, além de Se fazer homem e morrer por nossos pecados, nos ensinou lições valiosas sobre como agir como habitantes de seu Reino.<br> Em Mateus 23:11-12, Jesus nos ensina que o maior no Reino dos Céus é aquele que se faz servo de todos. Mas o que isso significa na prática? Como podemos aplicar esse ensinamento em nossas vidas hoje?",
+        source: "Projeto Lamed",
+        url: "https://lamed148.com.br/artigo/o-primeiro-lugar-no-reino-dos-ceus-e-o-ultimo-na-terra"
+    },
+    {
+        title: "Máscaras Ocultas – A maldição da figueira e a relação com a nossa vida espiritual",
+        description: "Você já leu alguma vez essa cena de Jesus e não entendeu de primeira o que aconteceu ali? No estudo de hoje vamos entender o motivo de tal ação de Jesus e a mensagem por trás dela.",
+        source: "Projeto Lamed",
+        url: "https://lamed148.com.br/artigo/mascaras-ocultas-a-maldicao-da-figueira"
     }
+
     
 ];
