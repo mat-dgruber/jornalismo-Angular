@@ -40,26 +40,13 @@
         </div>
  </section>
 
-     <section id="blog-recentes" class="portfolio-section bg-light">
+    <section id="materiais" class="portfolio-section bg-light">
         <div class="container">
-            <h2>Últimas do Blog</h2>
-            <div class="portfolio-grid">
-                
-                <div *ngIf="latestPost" class="portfolio-item">
-                    <h3>{{ latestPost.title }}</h3>
-                    <p class="description">
-                        {{ latestPost.content.substring(0, 200) }}...
-                    </p>
-                    <a [routerLink]="['/post', latestPost.id]" class="btn">Leia Mais</a>
-                </div>
-                <div *ngIf="!latestPost">
-                    <p>Nenhum post no blog ainda.</p>
-                </div>
-                
-            </div>
-            <a routerLink="/blog" class="btn">Ver Todos os Posts</a>
+            <h2>Materiais</h2>
+            <p>Acesse a página de materiais para encontrar e-books, artigos e outros recursos para aprofundar seus conhecimentos.</p>
+            <a routerLink="/materiais" class="btn">Ver Materiais</a>
         </div>
-    </section> 
+    </section>
 
     <section id="contato" class="contact-section">
         <div class="container">
