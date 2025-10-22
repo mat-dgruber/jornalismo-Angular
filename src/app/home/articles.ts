@@ -53,6 +53,13 @@ export const articles = [
         description: "Você já leu alguma vez essa cena de Jesus e não entendeu de primeira o que aconteceu ali? No estudo de hoje vamos entender o motivo de tal ação de Jesus e a mensagem por trás dela.",
         source: "Projeto Lamed",
         url: "https://lamed148.com.br/artigo/mascaras-ocultas-a-maldicao-da-figueira"
+    },
+    {
+        title: "Preparação - Entendendo o passado, preparando-me no presente e estando pronto para o futuro",
+        description: "Frutos levam tempo para crescer: primeiro lança-se a semente na terra, depois ela fica escondida no sulco por um tempo, para só então crescer e gerar frutos que alimentarão aqueles que sentirem fome.<br> Da mesma forma, nossa preparação espiritual leva tempo e exige paciência. No estudo dessa semana, vamos refletir sobre o Sacrifício de Jesus e sua volta.",
+        source: "Projeto Lamed",
+        url: "https://lamed148.com.br/artigo/preparacao-passado-presente-futuro"
+
     }
 
     
