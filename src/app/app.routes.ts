@@ -11,11 +11,13 @@ import { PostComponent } from './post/post';
 import { AdminModule } from './admin/admin-module';
 import { Post } from './services/post';
 import { authGuard } from './guards/auth-guard';
+import { Materiais } from './materiais/materiais';
 
 
 export const routes: Routes = [
      {path: '', component: Home},
      {path: 'artigos', component: Artigos},
+     {path: 'materiais', component: Materiais},
      {path: 'projetos', component: Projetos},
      {path: 'projeto-tcc', component: ProjetoTCC},
      {path: 'contato', component: Contato},

@@ -1,0 +1,38 @@
+.materiais-page {
+    padding: 80px 0;
+}
+
+.page-header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.page-title {
+    font-family: var(--font-heading);
+    font-size: 3rem;
+    margin-bottom: 10px;
+}
+
+.page-meta {
+    font-size: 1rem;
+    color: #777;
+}
+
+.materiais-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+}
+
+.material-item {
+    background-color: #f6f3ff;
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 1px 15px rgba(0, 0, 0, 0.463);
+    text-align: left;
+}
+
+.page-footer {
+    text-align: center;
+    margin-top: 40px;
+}
