@@ -7,14 +7,13 @@
                     <ng-container *ngIf="isHomePage(); else otherPages">
                         <li><a href="#materias" (click)="closeMenu()">Artigos</a></li>
                         <li><a href="#projetos" (click)="closeMenu()">Projetos</a></li>
-                        <li><a routerLink="/blog" (click)="closeMenu()">Blog</a></li>
+                        <li><a routerLink="/materiais" (click)="closeMenu()">Materiais</a></li>
                         <li><a href="#contato" (click)="closeMenu()">Contato</a></li>
                     </ng-container>
                     <ng-template #otherPages>
                         <li><a [routerLink]="'/artigos'" fragment="materias" (click)="closeMenu()">Artigos</a></li>
                         <li><a [routerLink]="'/materiais'" (click)="closeMenu()">Materiais</a></li>
                         <li><a [routerLink]="'/projetos'" fragment="projetos" (click)="closeMenu()">Projetos</a></li>
-                        <li><a routerLink="/blog" (click)="closeMenu()">Blog</a></li>
                         <li><a [routerLink]="'/contato'" fragment="contato" (click)="closeMenu()">Contato</a></li>
                     </ng-template>
                     <!--<li><a href="#midia">Áudio & Vídeo</a></li>

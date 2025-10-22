@@ -21,8 +21,6 @@ export const routes: Routes = [
      {path: 'projetos', component: Projetos},
      {path: 'projeto-tcc', component: ProjetoTCC},
      {path: 'contato', component: Contato},
-     {path: 'post/:id', component: PostComponent },
-     {path: 'blog', component: BlogComponent},
      {path: 'admin', loadChildren: () => import('./admin/admin-module').then(m => m.AdminModule), canActivate: [authGuard]},
      {path: '**', redirectTo: ''},
 ];
