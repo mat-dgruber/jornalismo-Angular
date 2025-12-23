@@ -30,6 +30,37 @@
     border-radius: 15px;
     box-shadow: 0 1px 15px rgba(0, 0, 0, 0.463);
     text-align: left;
+    display: flex;
+    flex-direction: column;
+}
+
+.material-item img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 10px;
+    margin-bottom: 15px;
+}
+
+.material-item h3 {
+    margin-bottom: 10px;
+}
+
+.material-item p {
+    flex-grow: 1;
+    margin-bottom: 15px;
+}
+
+.btn-material {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #6a1b9a;
+    color: #fff;
+    text-align: center;
+    border-radius: 5px;
+    text-decoration: none;
+    margin-top: auto;
+    align-self: flex-start;
 }
 
 .page-footer {
