@@ -1,0 +1,28 @@
+services:
+  web:
+    build: ./backend
+    container_name: jornalismo-web
+    ports:
+      - "8000:8000"
+    restart: always
+    volumes:
+      - ./backend:/app
+      - /app/.venv
+    depends_on:
+      - db
+    env_file:
+      - ./backend/.env
+
+  db:
+    image: postgres:18.1
+    restart: always
+    container_name: jornalismo-db
+    environment:
+      POSTGRES_USER: mabelaaaa
+      POSTGRES_PASSWORD: Mi150203!@
+      POSTGRES_DB: jornalismo
+    ports:
+      - "5432:5432"
+
+volumes:
+  postgres_data:
