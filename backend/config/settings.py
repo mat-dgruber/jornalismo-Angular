@@ -30,9 +30,26 @@ SECRET_KEY = 'django-insecure-3%^yg%78owb=6br4*_=&zr1fwt!%vdo9)qf5x6p1fjglcp_i3+
 DEBUG = True
 
 ALLOWED_HOSTS = [
-    "http://localhost:4200",
-    "http://localhost:4200/*"
+    "localhost",
+    "127.0.0.1",
+    "0.0.0.0",
 ]
+
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:4200",
+]
+
+CORS_ALLOW_CREDENTIALS = True
+
+CSRF_TRUSTED_ORIGINS = [
+    "http://localhost:4200",
+    "http://localhost:8000",
+    "http://127.0.0.1:8000",
+]
+
+# Angular CSRF compatibility
+CSRF_COOKIE_NAME = "XSRF-TOKEN"
+CSRF_HEADER_NAME = "HTTP_X_XSRF_TOKEN"
 
 
 # Application definition

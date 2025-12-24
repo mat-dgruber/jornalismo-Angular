@@ -1,5 +1,3 @@
-import { UrlCreationOptions } from "@angular/router";
-
 export interface Post {
   id: number;
   title: string;

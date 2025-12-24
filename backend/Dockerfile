@@ -9,7 +9,7 @@ ENV PYTHONDONTWRITEBYTECODE=1
 ENV PYTHONUNBUFFERED=1
 
 # Copia apenas a "receita" das bibliotecas
-COPY pyproject.toml uv.lock /app/
+COPY pyproject.toml /app/
 
 RUN uv sync
 

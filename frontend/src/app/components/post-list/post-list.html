@@ -1,0 +1,27 @@
+<div class="container">
+  <h1>Posts</h1>
+
+  <div class="grid">
+    @for (post of posts(); track post.id) {
+      <article class="post-card">
+        @if (post.image) {
+          <img [src]="post.image" alt="post.title" [title]="post.title"/>
+        }
+
+        <h2>{{post.title}}</h2>
+        <p>{{post.subtitle}}</p>
+
+        <small> Por: {{post.author}}</small>
+        <small> Data: {{post.published_date | date: 'dd/MM/yyyy'}}</small>
+
+        <div class="content">
+          {{post.content | slice: 0:100}}...
+        </div>
+
+        <a [routerLink]="['/post', post.slug]">Ler mais</a>
+      </article>
+    } @empty {
+      <p>Nenhum post no blog ainda.</p>
+    }
+  </div>
+</div>

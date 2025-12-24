@@ -10,7 +10,7 @@
     align-items: center;
     justify-content: center;
     position: relative;
-    background-image: url('../../assets/Imagens/banner-jornalismo-maria-izabela.png');
+    background-image: url('../../../assets/Imagens/banner-jornalismo-maria-izabela.png');
     /* filter: blur(2px);  <-- Remove this line */
     background-size: cover;
     background-attachment: fixed;

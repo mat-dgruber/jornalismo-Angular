@@ -1,21 +1,10 @@
 <div class="container">
-  <h1>Blog</h1>
-  @if (posts$ | async; as posts) {
-    @if (posts.length > 0) {
-      @for (post of posts; track post.id) {
-        <div class="card mb-3">
-          <div class="card-body">
-            <img class="card-img-top" src="{{ post.image }}" alt="{{ post.title }}">
-            <h2 class="card-title">{{ post.title }}</h2>
-            <p class="card-subtitle">{{ post.subtitle }}...</p>
-            <p class="card-autor">Por: {{post.author}}</p>
-            <p class="card-data">Publicado em: {{post.published_date}}</p>
-            <p class="card-text">{{post.content}}</p>
-            <a [routerLink]="['/post', post.slug]" class="btn btn-primary">Ler mais</a>
-          </div>
-        </div>
-      }
-    } @else {
-      <p>Nenhum post no blog ainda.</p>
-    }
-  }
+  <div class="d-flex justify-content-between align-items-center mb-4 mt-4">
+    <h1>Blog</h1>
+    <a routerLink="/post/create" class="btn btn-primary">
+      Criar Novo Post
+    </a>
+  </div>
+
+  <app-post-list></app-post-list>
+</div>

@@ -1,0 +1,36 @@
+<div class="container">
+  <a routerLink="/" class="back-link">⬅️ Voltar para a lista</a>
+
+  @if (postResource.isLoading()) {
+  <div class="loading-state">Carregando conteúdo...</div>
+  }
+
+  @else if (postResource.error()) {
+  <div class="error-state">
+    <p>Erro ao carregar o post. Verifique sua conexão.</p>
+    <button (click)="postResource.reload()">Tentar novamente</button>
+  </div>
+  }
+
+  @else if (postResource.value(); as p) {
+  <article class="post-detail">
+    <header>
+      <h1>{{ p.title }}</h1>
+      <p class="subtitle">{{ p.subtitle }}</p>
+      <div class="meta">
+        <span>Por: {{ p.author }}</span> |
+        <span>Data: {{ p.published_date | date: 'dd/MM/yyyy' }}</span>
+      </div>
+    </header>
+
+    @if (p.image) {
+    <div class="image-wrapper">
+      <img [src]="p.image" [alt]="p.title">
+    </div>
+    }
+
+    <div class="content" [innerHTML]="p.content">
+    </div>
+  </article>
+  }
+</div>

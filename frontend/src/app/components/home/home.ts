@@ -2,7 +2,9 @@ import { Component, OnInit, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { articles } from './articles';
 import { CommonModule } from '@angular/common';
-import { Post, PostService } from '../services/post';
+import { PostService } from '../../services/post';
+import { Post } from '../../services/post.model';
+import { PostList } from '../post-list/post-list';
 import { Observable } from 'rxjs';
 
 // Define a estrutura de um artigo para um código mais seguro
@@ -16,7 +18,7 @@ interface Article {
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [RouterLink, CommonModule],
+  imports: [RouterLink, CommonModule, PostList],
   templateUrl: './home.html',
   styleUrls: ['./home.css']
 })
@@ -32,7 +34,7 @@ export class Home implements OnInit {
     if (articles.length > 0) {
       this.latestArticle = articles[articles.length - 1];
     }
-    
+
     this.postService.getPosts().subscribe(posts => {
       if (posts.length > 0) {
         this.latestPost = posts[posts.length - 1];
