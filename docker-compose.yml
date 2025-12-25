@@ -12,9 +12,21 @@ services:
       - db
     env_file:
       - ./backend/.env
+    environment:
+      - DB_HOST=db
+
+  frontend:
+    build: ./frontend
+    container_name: jornalismo-frontend
+    ports:
+      - "4200:80"
+    restart: always
+    depends_on:
+      - web
+
 
   db:
-    image: postgres:18.1
+    image: postgres:16
     restart: always
     container_name: jornalismo-db
     environment:

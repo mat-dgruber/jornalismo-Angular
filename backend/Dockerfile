@@ -1,4 +1,4 @@
-FROM python:3.14-slim
+FROM python:3.12-slim
 
 # Isso "pega" o uv emprestado da imagem oficial e coloca no nosso container
 COPY --from=ghcr.io/astral-sh/uv:latest /uv /bin/uv

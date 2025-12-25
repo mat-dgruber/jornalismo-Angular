@@ -1,28 +1,43 @@
 <main class="materiais-page">
-    <div class="container">
-        <header class="page-header">
-            <h1 class="page-title">Materiais Produzidos</h1>
-            <p class="page-meta">Aqui você encontra materiais para download e materiais pagos.</p>
-        </header>
+  <div class="container">
+    <header class="page-header">
+      <h1 class="page-title">Materiais Produzidos</h1>
+      <p class="page-meta">
+        Aqui você encontra materiais para download e materiais pagos.
+      </p>
+    </header>
 
-        <section class="materiais-grid">
-            <div class="material-item">
-                <img src="https://via.placeholder.com/300x200" alt="Material Placeholder">
-                <h3>Material para Download 1</h3>
-                <p>Descrição do material para download.</p>
-                <a href="#" class="btn-material">Acessar Material</a>
-            </div>
+    <section class="materiais-grid">
+      <div class="material-item" *ngFor="let material of materials">
+        <img [src]="material.image" [alt]="material.name" />
+        <h3>{{ material.name }}</h3>
+        <p>{{ material.description }}</p>
 
-            <div class="material-item">
-                <img src="https://via.placeholder.com/300x200" alt="Material Placeholder">
-                <h3>Material Pago 1</h3>
-                <p>Descrição do material pago.</p>
-                <a href="#" class="btn-material">Acessar Material</a>
-            </div>
-        </section>
+        <a
+          *ngIf="material.type === 'gratuito'"
+          [href]="material.file"
+          class="btn-material"
+          download
+        >
+          Baixar
+        </a>
 
-        <footer class="page-footer">
-            <a routerLink="/home" class="btn">Voltar à Página Inicial</a>
-        </footer>
-    </div>
+        <a
+          *ngIf="material.type === 'pago'"
+          [href]="material.external_link"
+          class="btn-material"
+          target="_blank"
+        >
+          Acessar ({{ material.price | currency : "BRL" }})
+        </a>
+      </div>
+      <p *ngIf="materials.length === 0" class="no-materials">
+        Nenhum material disponível no momento.
+      </p>
+    </section>
+
+    <footer class="page-footer">
+      <a routerLink="/home" class="btn">Voltar à Página Inicial</a>
+    </footer>
+  </div>
 </main>

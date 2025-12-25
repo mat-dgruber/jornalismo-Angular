@@ -35,11 +35,21 @@ ALLOWED_HOSTS = [
     "0.0.0.0",
 ]
 
+from corsheaders.defaults import default_headers, default_methods
+
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:4200",
+    "http://127.0.0.1:4200",
+    "http://[::1]:4200",
 ]
 
 CORS_ALLOW_CREDENTIALS = True
+
+CORS_ALLOW_HEADERS = list(default_headers) + [
+    "authorization",
+]
+
+CORS_ALLOW_METHODS = list(default_methods)
 
 CSRF_TRUSTED_ORIGINS = [
     "http://localhost:4200",
@@ -64,7 +74,18 @@ INSTALLED_APPS = [
     'corsheaders',
     'rest_framework',
     'blog',
+    'materiais',
 ]
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'config.authentication.FirebaseAuthentication',
+        'rest_framework.authentication.SessionAuthentication', # Optional: keep session auth for admin panel
+    ],
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.AllowAny', # Default to public, lock down specific views
+    ]
+}
 
 MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
@@ -106,7 +127,7 @@ DATABASES = {
         'NAME': 'jornalismo',
         'USER': 'mabelaaaa',
         'PASSWORD': 'Mi150203!@',
-        'HOST': 'db',
+        'HOST': os.environ.get('DB_HOST', 'localhost'),
         'PORT': '5432',
     }
 }
@@ -151,3 +172,7 @@ STATIC_URL = 'static/'
 # Configuração de Arquivos de Mídia (Uploads)
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
+
+# Aumentar limite de upload para 50MB
+DATA_UPLOAD_MAX_MEMORY_SIZE = 52428800
+FILE_UPLOAD_MAX_MEMORY_SIZE = 52428800

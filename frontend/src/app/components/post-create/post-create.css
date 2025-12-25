@@ -1,48 +1,112 @@
+/* Global Inherited Styles */
 .container {
-  max-width: 600px;
-  margin: 2rem auto;
-  padding: 1rem;
+  max-width: 800px;
+  margin: 3rem auto;
+  padding: 2.5rem;
+  background-color: white;
+  border-radius: 12.5px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+}
+
+h2 {
+  font-family: var(--font-heading);
+  color: var(--primary-color);
+  text-align: center;
+  margin-bottom: 2rem;
+  font-size: 2.5rem;
 }
 
 .form-group {
-  margin-bottom: 1rem;
+  margin-bottom: 1.5rem;
 }
 
 label {
   display: block;
   margin-bottom: 0.5rem;
+  font-weight: 600;
+  color: var(--primary-color);
+  font-size: 1.05rem;
+}
+
+/* File Upload Styling (Custom Component) */
+.file-upload-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-top: 5px;
+}
+
+.file-input {
+  display: none; /* Hide original input */
+}
+
+.file-upload-button {
+  background-color: var(--secondary-color);
+  color: var(--primary-color);
   font-weight: bold;
-}
-
-input,
-textarea {
-  width: 100%;
-  padding: 0.8rem;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-}
-
-button {
-  background-color: #28a745;
-  color: white;
-  padding: 1rem 2rem;
-  border: none;
-  border-radius: 4px;
+  padding: 0.8rem 1.5rem;
+  border-radius: 25px;
   cursor: pointer;
-  font-size: 1rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: background-color 0.3s, transform 0.2s;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
 }
 
-button:disabled {
-  background-color: #ccc;
-  cursor: not-allowed;
+.file-upload-button:hover {
+  filter: brightness(0.95);
+  transform: translateY(-1px);
 }
 
+.file-name {
+  font-style: italic;
+  color: #666;
+  font-size: 0.9rem;
+}
+
+/* Validation Messages */
 .error {
-  color: red;
-  font-size: 0.8rem;
+  color: #dc3545;
+  font-size: 0.85rem;
+  margin-top: 5px;
+  display: block;
 }
 
-.success {
-  color: green;
-  font-size: 0.8rem;
+/* Ensure PrimeNG Select takes full width */
+p-select, ::ng-deep .p-select {
+    width: 100%;
+    display: flex; /* Helps with internal alignment */
+}
+
+/* Optional: Slight spacing tweaks for PrimeNG if strictly needed */
+/* But generally we trust the theme now */
+::ng-deep .p-button {
+    width: 100%;
+    justify-content: center;
+}
+
+/* Editor Styling - Using PrimeNG Design Tokens */
+p-editor {
+    /* Override Aura theme tokens for this component */
+    --p-editor-toolbar-background: #fbf9ff; /* Very light purple tint */
+    --p-editor-toolbar-border-color: #e5e7eb; /* Subtle gray, or var(--primary-color) for strong brand */
+    --p-editor-content-border-color: #e5e7eb;
+    --p-editor-border-radius: 8px;
+    
+    /* Ensure content text uses our font */
+    font-family: var(--font-body);
+}
+
+/* We still need to set the height on the editor content area */
+::ng-deep .ql-editor {
+    min-height: 200px;
+    font-family: var(--font-body);
+    font-size: 1rem;
+    color: #495057;
+}
+
+/* Optional: Focus state for editor (simulated) */
+::ng-deep .p-editor-content.p-focus {
+    border-color: var(--primary-color);
 }

@@ -62,29 +62,31 @@ O frontend rodará em `http://localhost:4200`.
 - **Criar Post**: Área para criar novas notícias (com upload de imagens).
 - **Outras Seções**: Artigos, Materiais, Projetos, Contato.
 
-## Rodando com Docker
+## Rodando com Docker (Backend + Frontend + Banco)
 
-Se preferir, você pode rodar o **Backend (Django)** e o **Banco de Dados (PostgreSQL)** via Docker. O frontend ainda deve ser rodado localmente (por enquanto).
+Agora é possível rodar a aplicação completa com um único comando. O Docker irá subir:
 
+- **Frontend (Angular)**: http://localhost:4200
+- **Backend (Django)**: http://localhost:8000
+- **Banco de Dados (PostgreSQL)**: porta 5432
 
-1. **Subir os serviços:**
+1. **Subir tudo:**
 
-    ```bash
-    docker-compose up -d --build
-    ```
+   ```bash
+   docker-compose up -d --build
+   ```
 
 2. **Rodar as migrações (apenas na primeira vez):**
 
-    ```bash
-    docker-compose exec web python manage.py migrate
-    ```
+   ```bash
+   docker-compose exec web python manage.py migrate
+   ```
 
 3. **Criar superusuário (opcional):**
 
-    ```bash
-    docker-compose exec web python manage.py createsuperuser
-    ```
+   ```bash
+   docker-compose exec web python manage.py createsuperuser
+   ```
 
-4. **Iniciar o Frontend:**
-    Siga os passos da seção [Frontend](#2-frontend-angular) acima (`ng serve`).
-
+4. **Acessar:**
+   - Abra `http://localhost:4200` no seu navegador.

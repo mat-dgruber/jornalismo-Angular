@@ -5,25 +5,30 @@ Este é o backend do projeto, construído com **Django** e **Django REST Framewo
 ## Configuração
 
 1.  **Crie um ambiente virtual:**
+
     ```bash
     python -m venv .venv
     ```
 
 2.  **Ative o ambiente:**
-    *   Windows: `.venv\Scripts\activate`
-    *   Linux/Mac: `source .venv/bin/activate`
+
+    - Windows: `.venv\Scripts\activate`
+    - Linux/Mac: `source .venv/bin/activate`
 
 3.  **Instale as dependências:**
+
     ```bash
     pip install -r requirements.txt
     ```
 
 4.  **Execute as migrações do banco de dados:**
+
     ```bash
     python manage.py migrate
     ```
 
 5.  **Crie um superusuário (opcional, para acessar /admin):**
+
     ```bash
     python manage.py createsuperuser
     ```
@@ -51,12 +56,10 @@ Este é o backend do projeto, construído com **Django** e **Django REST Framewo
 Na raiz do projeto (um nível acima deste), execute:
 
 ```bash
-docker-compose up -d
-```
-```bash
 docker-compose up -d --build
 ```
-Isso iniciará o Django e o PostgreSQL.
+
+Isso iniciará o Django, o Frontend e o PostgreSQL.
 
 **Para rodar as migrações (necessário na primeira vez):**
 
@@ -69,4 +72,3 @@ docker-compose exec web python manage.py migrate
 ```bash
 docker-compose exec web python manage.py createsuperuser
 ```
-

@@ -1,7 +1,8 @@
 import { Component, inject } from '@angular/core';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { Post } from '../../services/post.model';
-import { PostService } from '../../services/post';
+
+import { BlogService } from '../../services/blog.service';
 import { rxResource } from '@angular/core/rxjs-interop';
 import { CommonModule } from '@angular/common';
 
@@ -15,10 +16,10 @@ import { CommonModule } from '@angular/common';
 
 export class PostDetail {
   private route = inject(ActivatedRoute);
-  private postService = inject(PostService);
+  private blogService = inject(BlogService);
 
   postResource = rxResource<Post, any>({
     params: () => this.route.snapshot.paramMap.get('slug') || undefined,
-    stream: ({params: slug}) => this.postService.getPostBySlug(slug)
+    stream: ({params: slug}) => this.blogService.getPost(slug)
   });
 }

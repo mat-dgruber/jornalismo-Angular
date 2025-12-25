@@ -1,85 +1,108 @@
+/* Post List Styling matches Home Page Portfolio */
+
 .container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 2rem;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  /* Inherits from global .container, we can just add specific padding if needed */
+  padding-bottom: 4rem;
 }
 
 h1 {
+  font-family: var(--font-heading);
   text-align: center;
-  color: #333;
+  color: var(--primary-color);
   margin-bottom: 2rem;
-  font-size: 2.5rem;
+  font-size: 3rem;
 }
 
-/* Criando o Grid Responsivo */
+/* Grid Layout */
 .grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: 2rem;
+  gap: 30px;
 }
 
-/* Estilização do Card */
+/* Post Card - Similar to .portfolio-item */
 .post-card {
-  background: #fff;
-  border-radius: 12px;
+  background-color: white; /* Or #f6f3ff to match portfolio-item exactly? Let's stick to white or consistent light bg */
+  border-radius: 12.5px;
   overflow: hidden;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s ease;
+  box-shadow: 0 1px 15px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
   display: flex;
   flex-direction: column;
+  height: 100%;
 }
 
 .post-card:hover {
   transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(43, 0, 83, 0.15);
 }
 
 .post-card img {
   width: 100%;
-  height: 200px;
+  height: 220px;
   object-fit: cover;
-  /* Mantém a proporção sem distorcer */
+  border-bottom: 3px solid var(--secondary-color);
 }
 
 .post-card h2 {
-  font-size: 1.4rem;
-  margin: 1rem;
-  color: #1a1a1a;
+  font-family: var(--font-heading);
+  font-size: 1.5rem;
+  margin: 1.2rem;
+  margin-bottom: 0.5rem;
+  color: var(--primary-color);
+  line-height: 1.3;
 }
 
 .post-card p {
-  padding: 0 1rem;
-  color: #666;
-  font-size: 0.95rem;
-  flex-grow: 1;
-  /* Empurra o rodapé para baixo */
+  padding: 0 1.2rem;
+  color: var(--text-color);
+  font-family: var(--font-body);
+  font-size: 1rem;
+  margin-bottom: 1rem;
 }
 
 .post-card small {
   display: block;
-  padding: 0.2rem 1rem;
-  color: #888;
+  padding: 0 1.2rem;
+  color: #666; /* Neutral for metadata */
+  font-size: 0.85rem;
+  font-style: italic;
+  margin-bottom: 0.2rem;
 }
 
 .content {
-  padding: 1rem;
-  font-size: 0.9rem;
-  line-height: 1.5;
-  color: #444;
+  padding: 0 1.2rem 1.2rem;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: var(--text-color);
+  flex-grow: 1; /* Pushes button down */
+  opacity: 0.9;
 }
 
-/* Botão Ler Mais */
+/* Button */
 .post-card a {
   display: block;
   text-align: center;
   padding: 1rem;
-  background-color: #007bff;
-  color: white;
+  background-color: var(--primary-color);
+  color: var(--light-text-color);
   text-decoration: none;
-  font-weight: bold;
-  transition: background 0.2s;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  transition: background-color 0.3s ease;
+  margin: 1.2rem;
+  border-radius: 25px; /* Pill shape matching global buttons */
+  margin-top: auto;
 }
 
 .post-card a:hover {
-  background-color: #0056b3;
+  background-color: #3b008db4; /* Matches global .btn:hover */
+}
+
+/* Empty State */
+.grid p {
+  text-align: center;
+  grid-column: 1 / -1;
+  font-size: 1.2rem;
+  color: #666;
 }

@@ -13,6 +13,24 @@
 }
 
 :root {
+    color-scheme: light;
+    
+    /* Force PrimeNG Light Theme Surfaces (Aura) */
+    --p-surface-0: #ffffff !important;
+    --p-surface-50: #f9fafb !important;
+    --p-surface-100: #f3f4f6 !important;
+    --p-surface-200: #e5e7eb !important;
+    --p-surface-300: #d1d5db !important;
+    --p-surface-400: #9ca3af !important;
+    --p-surface-500: #6b7280 !important;
+    --p-surface-600: #4b5563 !important;
+    --p-surface-700: #374151 !important;
+    --p-surface-800: #1f2937 !important;
+    --p-surface-900: #111827 !important;
+    --p-surface-950: #0b0f19 !important;
+    --p-content-background: var(--p-surface-0) !important;
+    --p-text-color: #4b5563 !important; /* Dark gray for text */
+    
     --primary-color: #2b0053; /* Verde escuro para destaque */
     --secondary-color: #c180ffe3; /* Verde claro para fundo */
     --text-color: #202020;
@@ -32,6 +50,11 @@ body {
     line-height: 1.6;
     color: var(--text-color);
     min-height: 100vh;
+    background-color: #ffffff !important;
+}
+
+html, body {
+    background-color: #ffffff !important;
 }
 
 .container {
@@ -93,4 +116,9 @@ h4 {
 
 a[routerLink] {
     cursor: pointer;
+}
+
+/* Utilities */
+.w-full {
+    width: 100% !important;
 }

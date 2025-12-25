@@ -2,9 +2,9 @@ import { Component, OnInit, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { articles } from './articles';
 import { CommonModule } from '@angular/common';
-import { PostService } from '../../services/post';
+import { BlogService } from '../../services/blog.service';
 import { Post } from '../../services/post.model';
-import { PostList } from '../post-list/post-list';
+
 import { Observable } from 'rxjs';
 
 // Define a estrutura de um artigo para um código mais seguro
@@ -18,14 +18,14 @@ interface Article {
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [RouterLink, CommonModule, PostList],
+  imports: [RouterLink, CommonModule],
   templateUrl: './home.html',
   styleUrls: ['./home.css']
 })
 export class Home implements OnInit {
   latestArticle!: Article; // Use "!" para dizer que a variável será inicializada em ngOnInit
   latestPost: Post | undefined;
-  private postService = inject(PostService);
+  private blogService = inject(BlogService);
 
   constructor() { }
 
@@ -35,7 +35,7 @@ export class Home implements OnInit {
       this.latestArticle = articles[articles.length - 1];
     }
 
-    this.postService.getPosts().subscribe(posts => {
+    this.blogService.getPosts().subscribe((posts: Post[]) => {
       if (posts.length > 0) {
         this.latestPost = posts[posts.length - 1];
       }
