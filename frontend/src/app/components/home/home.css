@@ -44,6 +44,7 @@
 .hero p {
     font-size: 1.2rem;
     max-width: 700px;
+    color: var(--light-text-color);
     margin: 0 auto;
 }
 
@@ -82,16 +83,38 @@
     border-radius: 8px;
 }
 
+.portfolio-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
 .portfolio-item {
-    background-color: #f6f3ff;
+    background-color: var(--p-surface-0);
     padding: 20px;
-    border-radius: 12.5px;
-    box-shadow: 0 1px 15px rgba(0, 0, 0, 0.463);
+    border-radius: 15px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
     text-align: left;
     display: flex;
     flex-direction: column;
     height: 100%;
+    transition: transform 0.2s, box-shadow 0.2s;
+    border: 1px solid var(--p-surface-200);
 }
+
+.portfolio-item .btn {
+    align-self: flex-start;
+}
+
+/* Add hover for non-pointer items too if needed, but pointer class handles transform. 
+   Here we just ensure the shadow updates. */
+.portfolio-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+
 
 .post-image {
     width: 100%;
@@ -103,12 +126,9 @@
 
 .pointer {
     cursor: pointer;
-    transition: transform 0.2s;
 }
 
-.pointer:hover {
-    transform: translateY(-5px);
-}
+/* Remove separate pointer:hover since .portfolio-item:hover handles it */
 
 .read-more {
     margin-top: auto;
@@ -121,10 +141,9 @@ p {
     font-size: 1rem;
     margin-bottom: 1rem;
     line-height: 1.5;
-    color: #2c2c2c;
+    color: var(--p-text-color);
     font-family: var(--font-body);
     font-weight: 400;
-    
 }
 
 /* Responsividade da Home */

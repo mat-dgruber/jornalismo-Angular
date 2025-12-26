@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/6.0/ref/settings/
 """
 import os
+import dj_database_url
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -24,16 +25,20 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/6.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-3%^yg%78owb=6br4*_=&zr1fwt!%vdo9)qf5x6p1fjglcp_i3+'
+SECRET_KEY = os.environ.get('SECRET_KEY', 'django-insecure-3%^yg%78owb=6br4*_=&zr1fwt!%vdo9)qf5x6p1fjglcp_i3+')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.environ.get('DEBUG', 'True') == 'True'
 
 ALLOWED_HOSTS = [
     "localhost",
     "127.0.0.1",
     "0.0.0.0",
 ]
+
+RENDER_EXTERNAL_HOSTNAME = os.environ.get('RENDER_EXTERNAL_HOSTNAME')
+if RENDER_EXTERNAL_HOSTNAME:
+    ALLOWED_HOSTS.append(RENDER_EXTERNAL_HOSTNAME)
 
 from corsheaders.defaults import default_headers, default_methods
 
@@ -42,6 +47,9 @@ CORS_ALLOWED_ORIGINS = [
     "http://127.0.0.1:4200",
     "http://[::1]:4200",
 ]
+
+if RENDER_EXTERNAL_HOSTNAME:
+    CORS_ALLOWED_ORIGINS.append(f"https://{RENDER_EXTERNAL_HOSTNAME}")
 
 CORS_ALLOW_CREDENTIALS = True
 
@@ -77,6 +85,7 @@ INSTALLED_APPS = [
     'materiais',
     'artigos',
     'projetos',
+    'config',
 ]
 
 REST_FRAMEWORK = {
@@ -90,9 +99,10 @@ REST_FRAMEWORK = {
 }
 
 MIDDLEWARE = [
-    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -123,15 +133,15 @@ WSGI_APPLICATION = 'config.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/6.0/ref/settings/#databases
 
+# Database
+# https://docs.djangoproject.com/en/6.0/ref/settings/#databases
+
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'jornalismo',
-        'USER': 'mabelaaaa',
-        'PASSWORD': 'Mi150203!@',
-        'HOST': os.environ.get('DB_HOST', 'localhost'),
-        'PORT': '5432',
-    }
+    'default': dj_database_url.config(
+        default=os.environ.get('DATABASE_URL', f"postgres://{os.environ.get('DB_USER', 'mabelaaaa')}:{os.environ.get('DB_PASSWORD', 'Mi150203!@')}@{os.environ.get('DB_HOST', 'localhost')}:5432/jornalismo"),
+        conn_max_age=600,
+        ssl_require=os.environ.get('DEBUG', 'True') != 'True'
+    )
 }
 
 
@@ -170,6 +180,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/6.0/howto/static-files/
 
 STATIC_URL = 'static/'
+STATIC_ROOT = BASE_DIR / 'staticfiles'
 
 # Configuração de Arquivos de Mídia (Uploads)
 MEDIA_URL = '/media/'
@@ -178,3 +189,18 @@ MEDIA_ROOT = BASE_DIR / 'media'
 # Aumentar limite de upload para 50MB
 DATA_UPLOAD_MAX_MEMORY_SIZE = 52428800
 FILE_UPLOAD_MAX_MEMORY_SIZE = 52428800
+
+# Storages
+STORAGES = {
+    "default": {
+        "BACKEND": "storages.backends.gcloud.GoogleCloudStorage",
+    },
+    "staticfiles": {
+        "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
+    },
+}
+
+# Google Cloud Storage (Firebase)
+GS_BUCKET_NAME = os.environ.get("GS_BUCKET_NAME")
+GS_QUERYSTRING_AUTH = False  # Optional: Don't sign URLs if public access is allowed via rules
+GS_DEFAULT_ACL = None # Optional: Let Firebase rules handle permissions

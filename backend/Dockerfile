@@ -16,4 +16,5 @@ RUN uv sync
 ENV PATH="/app/.venv/bin:$PATH"
 
 # Comando padrão para manter o container rodando (vamos mudar isso no compose)
-CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
+# Comando padrão para produção (gunicorn)
+CMD ["gunicorn", "config.wsgi:application", "--bind", "0.0.0.0:8000"]

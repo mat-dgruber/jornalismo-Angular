@@ -52,10 +52,15 @@ class FirebaseAuthentication(authentication.BaseAuthentication):
              raise exceptions.AuthenticationFailed('Firebase token has no email')
 
         # Get or create the user
+        # Get or create the user
         try:
             user = User.objects.get(username=uid)
         except User.DoesNotExist:
-            user = User.objects.create_user(username=uid, email=email)
-            user.save()
+            try:
+                # Handle race condition where another request might create the user
+                user = User.objects.create_user(username=uid, email=email)
+            except Exception:
+                # If create fails (e.g. IntegrityError), the user must have been created by another request
+                user = User.objects.get(username=uid)
 
         return (user, None)

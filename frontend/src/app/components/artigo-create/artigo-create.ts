@@ -8,10 +8,12 @@ import { InputText } from 'primeng/inputtext';
 import { Button } from 'primeng/button';
 import { TextareaModule } from 'primeng/textarea';
 
+import { DatePickerModule } from 'primeng/datepicker';
+
 @Component({
   selector: 'app-artigo-create',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, FormsModule, EditorModule, InputText, Button, TextareaModule],
+  imports: [CommonModule, ReactiveFormsModule, FormsModule, EditorModule, InputText, Button, TextareaModule, DatePickerModule],
   templateUrl: './artigo-create.html',
   styleUrl: './artigo-create.css'
 })

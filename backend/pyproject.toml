@@ -13,4 +13,9 @@ dependencies = [
     "python-dotenv",
     "psycopg[binary]",
     "firebase-admin",
+    "gunicorn",
+    "whitenoise",
+    "dj-database-url",
+    "django-storages",
+    "google-cloud-storage",
 ]

@@ -48,14 +48,14 @@
         <label for="data" class="block mb-2 font-bold"
           >Data de Publicação</label
         >
-        <p-calendar
+        <p-datepicker
           id="data"
           formControlName="data_publicacao"
           [showTime]="true"
           dateFormat="dd/mm/yy"
           styleClass="w-full"
           [showIcon]="true"
-        ></p-calendar>
+        ></p-datepicker>
       </div>
 
       <div class="col-12 md:col-6 mt-3">
@@ -110,7 +110,7 @@
       <p-button
         [label]="submitLabel"
         type="submit"
-        [disabled]="postForm?.invalid"
+        [disabled]="artigoForm.invalid"
       ></p-button>
     </div>
   </form>

@@ -6,11 +6,12 @@ import { rxResource } from '@angular/core/rxjs-interop';
 import { CommonModule } from '@angular/common';
 import { LucideAngularModule, ArrowLeft } from 'lucide-angular';
 import { AuthorNamePipe } from '../../pipes/author-name.pipe';
+import { SkeletonModule } from 'primeng/skeleton';
 
 @Component({
   selector: 'app-post-detail',
   standalone: true,
-  imports: [CommonModule, RouterLink, LucideAngularModule, AuthorNamePipe],
+  imports: [CommonModule, RouterLink, LucideAngularModule, AuthorNamePipe, SkeletonModule],
   templateUrl: './post-detail.html',
   styleUrl: './post-detail.css'
 })

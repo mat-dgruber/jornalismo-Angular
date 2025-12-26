@@ -20,7 +20,7 @@ export interface Artigo {
 })
 export class ArtigosService {
   private http = inject(HttpClient);
-  private apiUrl = `${environment.apiUrl}/artigos/`;
+  private apiUrl = `${environment.apiUrl}/api/artigos/`;
 
   getArtigos(): Observable<Artigo[]> {
     return this.http.get<Artigo[]>(this.apiUrl);

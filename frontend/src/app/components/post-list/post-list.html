@@ -2,7 +2,25 @@
   <h1>Postagens</h1>
 
   <div class="grid">
-    @for (post of posts(); track post.id) {
+    @if (isLoading) { @for (item of [1,2,3,4,5,6]; track item) {
+    <article class="post-card">
+      <p-skeleton height="220px" styleClass="mb-3"></p-skeleton>
+      <div class="p-3">
+        <p-skeleton width="80%" height="1.5rem" styleClass="mb-2"></p-skeleton>
+        <p-skeleton width="60%" height="1rem" styleClass="mb-3"></p-skeleton>
+        <p-skeleton width="40%" height="0.85rem" styleClass="mb-1"></p-skeleton>
+        <p-skeleton width="40%" height="0.85rem" styleClass="mb-3"></p-skeleton>
+        <p-skeleton width="100%" height="4rem" styleClass="mb-3"></p-skeleton>
+        <div class="flex justify-content-center mt-auto">
+          <p-skeleton
+            width="100%"
+            height="3rem"
+            borderRadius="25px"
+          ></p-skeleton>
+        </div>
+      </div>
+    </article>
+    } } @else { @for (post of posts(); track post.id) {
     <article class="post-card">
       @if (post.image) {
       <img [src]="post.image" [alt]="post.title" [title]="post.title" />
@@ -22,6 +40,6 @@
     </article>
     } @empty {
     <p>Nenhuma postagem disponível no blog ainda.</p>
-    }
+    } }
   </div>
 </div>

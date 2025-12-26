@@ -19,7 +19,7 @@ export interface Projeto {
 })
 export class ProjetosService {
   private http = inject(HttpClient);
-  private apiUrl = `${environment.apiUrl}/projetos/`;
+  private apiUrl = `${environment.apiUrl}/api/projetos/`;
 
   getProjetos(): Observable<Projeto[]> {
     return this.http.get<Projeto[]>(this.apiUrl);

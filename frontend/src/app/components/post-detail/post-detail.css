@@ -57,10 +57,11 @@
     max-width: 800px; /* Optimal reading width */
     margin: 0 auto;
     padding-bottom: 4rem;
-    background-color: white;
+    background-color: var(--p-surface-0);
     padding: 40px;
     border-radius: 12px;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    border: 1px solid var(--p-surface-200);
 }
 
 header {
