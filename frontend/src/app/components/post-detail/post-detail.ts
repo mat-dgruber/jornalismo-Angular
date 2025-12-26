@@ -1,20 +1,21 @@
 import { Component, inject } from '@angular/core';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { Post } from '../../services/post.model';
-
 import { BlogService } from '../../services/blog.service';
 import { rxResource } from '@angular/core/rxjs-interop';
 import { CommonModule } from '@angular/common';
+import { LucideAngularModule, ArrowLeft } from 'lucide-angular';
+import { AuthorNamePipe } from '../../pipes/author-name.pipe';
 
 @Component({
   selector: 'app-post-detail',
   standalone: true,
-  imports: [CommonModule, RouterLink],
-  templateUrl: './post-detail.html'
+  imports: [CommonModule, RouterLink, LucideAngularModule, AuthorNamePipe],
+  templateUrl: './post-detail.html',
+  styleUrl: './post-detail.css'
 })
-
-
 export class PostDetail {
+  readonly arrowLeft = ArrowLeft;
   private route = inject(ActivatedRoute);
   private blogService = inject(BlogService);
 

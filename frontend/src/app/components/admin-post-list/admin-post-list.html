@@ -1,8 +1,8 @@
 <div class="card">
   <div class="flex justify-content-between mb-3">
-    <h2>Gerenciar Notícias</h2>
+    <h2>Gerenciar Postagens</h2>
     <p-button
-      label="Nova Notícia"
+      label="Nova Postagem"
       icon="pi pi-plus"
       routerLink="/post/create"
     ></p-button>
@@ -25,14 +25,15 @@
     <ng-template pTemplate="body" let-post>
       <tr>
         <td>
+          @if (post.image) {
           <img
             [src]="post.image"
             [alt]="post.title"
             width="80"
             class="shadow-4 border-round"
             style="object-fit: cover; aspect-ratio: 16/9"
-            *ngIf="post.image"
           />
+          }
         </td>
         <td class="font-bold">{{ post.title }}</td>
         <td>{{ post.author_first_name || post.author }}</td>

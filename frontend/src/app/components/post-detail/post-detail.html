@@ -1,36 +1,38 @@
 <div class="container">
-  <a routerLink="/" class="back-link">⬅️ Voltar para a lista</a>
+  <a routerLink="/blog" class="back-fab" aria-label="Voltar">
+    <lucide-icon [img]="arrowLeft" size="24"></lucide-icon>
+  </a>
 
   @if (postResource.isLoading()) {
   <div class="loading-state">Carregando conteúdo...</div>
-  }
-
-  @else if (postResource.error()) {
+  } @else if (postResource.error()) {
   <div class="error-state">
     <p>Erro ao carregar o post. Verifique sua conexão.</p>
     <button (click)="postResource.reload()">Tentar novamente</button>
   </div>
-  }
-
-  @else if (postResource.value(); as p) {
+  } @else if (postResource.value(); as p) {
   <article class="post-detail">
     <header>
+      <img [src]="p.image" [alt]="p.title" class="post-banner" />
       <h1>{{ p.title }}</h1>
       <p class="subtitle">{{ p.subtitle }}</p>
+      <hr />
       <div class="meta">
-        <span>Por: {{ p.author }}</span> |
-        <span>Data: {{ p.published_date | date: 'dd/MM/yyyy' }}</span>
+        <span>Por: {{ p | authorName }}</span> |
+        <span>Data: {{ p.published_date | date : "dd/MM/yyyy" }}</span>
       </div>
+      <hr />
     </header>
 
+    <!--
     @if (p.image) {
     <div class="image-wrapper">
       <img [src]="p.image" [alt]="p.title">
     </div>
     }
+-->
 
-    <div class="content" [innerHTML]="p.content">
-    </div>
+    <div class="content" [innerHTML]="p.content"></div>
   </article>
   }
 </div>

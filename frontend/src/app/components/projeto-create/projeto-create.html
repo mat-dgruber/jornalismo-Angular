@@ -1,0 +1,105 @@
+<div class="card">
+  <h2>{{ isEditMode ? "Editar Projeto" : "Novo Projeto" }}</h2>
+
+  <form
+    [formGroup]="projetoForm"
+    (ngSubmit)="onSubmit()"
+    class="flex flex-column gap-4"
+  >
+    <div class="grid">
+      <div class="col-12 md:col-8">
+        <label for="titulo" class="block mb-2 font-bold">Título</label>
+        <input
+          pInputText
+          id="titulo"
+          formControlName="titulo"
+          class="w-full"
+          placeholder="Digite o título do projeto"
+        />
+      </div>
+
+      <div class="col-12 md:col-4">
+        <label for="tipo" class="block mb-2 font-bold">Tipo</label>
+        <p-select
+          id="tipo"
+          [options]="tipoOptions"
+          formControlName="tipo"
+          optionLabel="label"
+          optionValue="value"
+          styleClass="w-full"
+        ></p-select>
+      </div>
+
+      <div class="col-12 md:col-6 mt-3">
+        <label for="data" class="block mb-2 font-bold"
+          >Data de Realização</label
+        >
+        <input
+          pInputText
+          type="date"
+          id="data"
+          formControlName="data_realizacao"
+          class="w-full"
+        />
+      </div>
+
+      <div class="col-12 md:col-6 mt-3">
+        <label for="link" class="block mb-2 font-bold"
+          >Link Externo (Opcional)</label
+        >
+        <input
+          pInputText
+          id="link"
+          formControlName="link_externo"
+          class="w-full"
+          placeholder="https://..."
+        />
+      </div>
+
+      <div class="col-12 mt-3">
+        <label for="descricao" class="block mb-2 font-bold">Descrição</label>
+        <textarea
+          pTextarea
+          id="descricao"
+          formControlName="descricao"
+          rows="5"
+          class="w-full"
+        ></textarea>
+      </div>
+
+      <div class="col-12 mt-3">
+        <label for="image" class="block mb-2 font-bold">Imagem de Capa</label>
+        <input
+          type="file"
+          (change)="onFileSelected($event)"
+          accept="image/*"
+          class="w-full"
+        />
+
+        @if (currentImageUrl) {
+        <div class="mt-2">
+          <p class="text-sm text-gray-500">Imagem atual:</p>
+          <img
+            [src]="currentImageUrl"
+            alt="Capa atual"
+            class="h-10rem border-round shadow-2"
+          />
+        </div>
+        }
+      </div>
+    </div>
+
+    <div class="flex justify-content-end gap-2 mt-4">
+      <p-button
+        label="Cancelar"
+        routerLink="/admin/projetos"
+        styleClass="p-button-text"
+      ></p-button>
+      <p-button
+        [label]="submitLabel"
+        type="submit"
+        [disabled]="projetoForm?.invalid"
+      ></p-button>
+    </div>
+  </form>
+</div>

@@ -88,6 +88,43 @@
     border-radius: 12.5px;
     box-shadow: 0 1px 15px rgba(0, 0, 0, 0.463);
     text-align: left;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.post-image {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-bottom: 15px;
+}
+
+.pointer {
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+.pointer:hover {
+    transform: translateY(-5px);
+}
+
+.read-more {
+    margin-top: auto;
+    color: var(--primary-color);
+    font-weight: bold;
+    font-size: 0.9rem;
+}
+
+p {
+    font-size: 1rem;
+    margin-bottom: 1rem;
+    line-height: 1.5;
+    color: #2c2c2c;
+    font-family: var(--font-body);
+    font-weight: 400;
+    
 }
 
 /* Responsividade da Home */

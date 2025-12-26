@@ -75,6 +75,8 @@ INSTALLED_APPS = [
     'rest_framework',
     'blog',
     'materiais',
+    'artigos',
+    'projetos',
 ]
 
 REST_FRAMEWORK = {

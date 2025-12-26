@@ -18,6 +18,10 @@ import { authGuard } from './guards/auth.guard';
 
 import { MaterialList } from './components/material-list/material-list';
 import { AdminPostList } from './components/admin-post-list/admin-post-list';
+import { AdminArtigoList } from './components/admin-artigo-list/admin-artigo-list';
+import { ArtigoCreate } from './components/artigo-create/artigo-create';
+import { AdminProjetoList } from './components/admin-projeto-list/admin-projeto-list';
+import { ProjetoCreate } from './components/projeto-create/projeto-create';
 
 export const routes: Routes = [
      {path: '', component: Home},
@@ -25,6 +29,8 @@ export const routes: Routes = [
      { path: 'admin', component: AdminDashboard, canActivate: [authGuard] },
      { path: 'admin/materiais', component: MaterialList, canActivate: [authGuard] },
      { path: 'admin/posts', component: AdminPostList, canActivate: [authGuard] },
+     { path: 'admin/artigos', component: AdminArtigoList, canActivate: [authGuard] },
+     { path: 'admin/projetos', component: AdminProjetoList, canActivate: [authGuard] },
      
      { path: 'blog', component: Blog },
      {path: 'post/create', component: PostCreate, canActivate: [authGuard]},
@@ -32,11 +38,16 @@ export const routes: Routes = [
      { path: 'post/:slug', component: PostDetail },
      
      {path: 'artigos', component: Artigos},
+     {path: 'artigos/novo', component: ArtigoCreate, canActivate: [authGuard]},
+     {path: 'artigos/editar/:id', component: ArtigoCreate, canActivate: [authGuard]},
+     
      {path: 'materiais/novo', component: MaterialCreate, canActivate: [authGuard]},
      {path: 'materiais/editar/:id', component: MaterialCreate, canActivate: [authGuard]},
      {path: 'materiais', component: Materiais},
      
      {path: 'projetos', component: Projetos},
+     {path: 'projetos/novo', component: ProjetoCreate, canActivate: [authGuard]},
+     {path: 'projetos/editar/:id', component: ProjetoCreate, canActivate: [authGuard]},
      {path: 'projeto-tcc', component: ProjetoTCC},
      {path: 'contato', component: Contato},
      {path: '**', redirectTo: ''},

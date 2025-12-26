@@ -54,12 +54,11 @@
         <div class="file-upload-button" (click)="fileInput.click()">
           <i class="pi pi-upload"></i> Escolher Imagem
         </div>
-        <span class="file-name" *ngIf="selectedFile">{{
-          selectedFile.name
-        }}</span>
-        <span class="file-name" *ngIf="!selectedFile"
-          >Nenhum arquivo selecionado</span
-        >
+        @if (selectedFile) {
+        <span class="file-name">{{ selectedFile.name }}</span>
+        } @else {
+        <span class="file-name">Nenhum arquivo selecionado</span>
+        }
       </div>
       <!-- Hidden ref for click trigger -->
       <input

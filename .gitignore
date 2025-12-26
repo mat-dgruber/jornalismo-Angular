@@ -17,3 +17,4 @@ yarn-error.log*
 coverage/
 .next/
 /.angular/cache
+postgres_data/

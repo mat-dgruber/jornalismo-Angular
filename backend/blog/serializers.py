@@ -14,8 +14,9 @@ class PostSerializer(serializers.ModelSerializer):
           queryset=User.objects.all()
      )
      author_first_name = serializers.ReadOnlyField(source='author.first_name')
+     author_last_name = serializers.ReadOnlyField(source='author.last_name')
      
      class Meta:
           model = Post
           
-          fields = ['id', 'title', 'content', 'author', 'author_first_name', 'published_date', 'subtitle', 'category', 'image', 'slug']
+          fields = ['id', 'title', 'content', 'author', 'author_first_name', 'author_last_name', 'published_date', 'subtitle', 'category', 'image', 'slug']

@@ -1,67 +1,127 @@
 <section id="biografia" class="hero">
-        <div class="container">
-            <div class="hero-content">
-                <h2>Maria Izabela — Jornalismo & Teologia</h2>
-                <p>
-                    Formada em Teologia e cursando Jornalismo, escrevo artigos sobre fé e sociedade. Busco ampliar minha atuação na comunicação e Teologia, unindo conhecimento e ética para impactar positivamente o público.
-                </p>
-            </div>
-        </div>
-    </section>
-
-    <section id="materias" class="portfolio-section">
-    <div class="container">
-        <h2>Última Matéria</h2>
-        <div class="portfolio-grid">
-            <div *ngIf="latestArticle" class="portfolio-item">
-                <h3>{{ latestArticle.title }}</h3>
-                <p class="description" [innerHTML]="latestArticle.description"></p>
-                <p class="source">Publicado em: {{ latestArticle.source }}</p>
-                <a [href]="latestArticle.url" target="_blank" class="btn">Ler Matéria Original</a>
-            </div>
-        </div>
-        <a routerLink="/artigos" class="btn">Ver Todas as Matérias</a>
+  <div class="container">
+    <div class="hero-content">
+      <h2>Maria Izabela — Jornalismo & Teologia</h2>
+      <p>
+        Formada em Teologia e cursando Jornalismo, escrevo artigos sobre fé e
+        sociedade. Busco ampliar minha atuação na comunicação e Teologia, unindo
+        conhecimento e ética para impactar positivamente o público.
+      </p>
     </div>
+  </div>
+</section>
+
+<section id="materias" class="portfolio-section">
+  <div class="container">
+    <h2>Últimas Matérias</h2>
+    <div class="portfolio-grid">
+      @for (article of recentArticles; track article.id) {
+      <div class="portfolio-item">
+        @if (article.imagem) {
+        <img [src]="article.imagem" [alt]="article.titulo" class="post-image" />
+        }
+        <h3>{{ article.titulo }}</h3>
+        <!-- Truncate content or use subtitle logic if needed. For now just subtitle or truncated content -->
+        <p class="description">
+          {{ article.subtitulo || article.conteudo.slice(0, 100) + "..." }}
+        </p>
+        <p class="source">Publicado em: {{ article.local_publicacao }}</p>
+        @if (article.link_externo) {
+        <a [href]="article.link_externo" target="_blank" class="btn"
+          >Ler Matéria Original</a
+        >
+        }
+      </div>
+      }
+    </div>
+    <a routerLink="/artigos" class="btn">Ver Todas as Matérias</a>
+  </div>
 </section>
 
 <section id="projetos" class="portfolio-section bg-light">
-        <div class="container">
-            <h2>Projetos Acadêmicos e Pessoais</h2>
-            <div class="portfolio-grid">
-                <div class="portfolio-item">
-                    <h3>FÉ SOB FOGO: UMA ANÁLISE TEOLÓGICA E GEOPOLÍTICA DA PERSEGUIÇÃO AOS CRISTÃOS E O DEVER DE INTERVENÇÃO DOS PAÍSES LIVRES</h3>
-                    <p class="description">
-                        Este trabalho aborda tanto o desafio da perseguição a cristãos na China quanto em outros países ao redor do mundo, trazendo tanto análises sobre os motivos quanto possíveis soluções para tais ocorrências.
-                    </p>
-                    <a routerLink="/projeto-tcc" class="btn">Ver Projeto Completo</a>
-                </div>
-            </div>
-            <a routerLink="/projetos" class="btn">Ver Todos os Projetos</a>
-        </div>
- </section>
-
- <section id="blog" class="portfolio-section">
-    <div class="container">
-        <h2>Blog</h2>
-        <a routerLink="/blog" class="btn">Ver Todos os Posts</a>
+  <div class="container">
+    <h2>Projetos Acadêmicos e Pessoais</h2>
+    <div class="portfolio-grid">
+      @for (project of recentProjects; track project.id) {
+      <div class="portfolio-item">
+        @if (project.imagem) {
+        <img [src]="project.imagem" [alt]="project.titulo" class="post-image" />
+        }
+        <h3>{{ project.titulo }}</h3>
+        <p class="description">{{ project.descricao.slice(0, 150) + "..." }}</p>
+        <!-- Link to detail page if we have one, or external link -->
+        @if (project.link_externo) {
+        <a [href]="project.link_externo" target="_blank" class="btn"
+          >Ver Projeto</a
+        >
+        } @else {
+        <!-- If no external link, maybe link to local detail or list? For now just static text or list link -->
+        <a routerLink="/projetos" class="btn">Ver Mais</a>
+        }
+      </div>
+      }
     </div>
+    <a routerLink="/projetos" class="btn">Ver Todos os Projetos</a>
+  </div>
 </section>
 
-    <section id="materiais" class="portfolio-section bg-light">
-        <div class="container">
-            <h2>Materiais</h2>
-            <p>Acesse a página de materiais para encontrar e-books, artigos e outros recursos para aprofundar seus conhecimentos.</p>
-            <a routerLink="/materiais" class="btn">Ver Materiais</a>
-        </div>
-    </section>
+<section id="blog" class="portfolio-section">
+  <div class="container">
+    <h2>Blog</h2>
+    <div class="portfolio-grid">
+      @for (post of recentPosts; track post.slug) {
+      <div class="portfolio-item pointer" [routerLink]="['/post', post.slug]">
+        @if (post.image) {
+        <img [src]="post.image" [alt]="post.title" class="post-image" />
+        }
+        <h3>{{ post.title }}</h3>
+        <p class="description">{{ post.subtitle }}</p>
+        <span class="read-more">Ler mais</span>
+      </div>
+      }
+    </div>
+    <a routerLink="/blog" class="btn">Ver Todos os Posts</a>
+  </div>
+</section>
 
-    <section id="contato" class="contact-section">
-        <div class="container">
-            <h2>Contato</h2>
-            <p>Entre em contato para oportunidades de trabalho, colaborações ou para uma conversa.</p>
-            <div class="contact-links">
-                <a routerLink="/contato">contato@mariaizabela.com.br</a>
-                <a href="https://www.linkedin.com/in/maria-izabela-ara%C3%BAjo-32332a186/" target="_blank">LinkedIn</a>
-            </div>
-        </div>
-    </section>
+<section id="materiais" class="portfolio-section bg-light">
+  <div class="container">
+    <h2>Materiais</h2>
+    <p>
+      Acesse a página de materiais para encontrar e-books, artigos e outros
+      recursos para aprofundar seus conhecimentos.
+    </p>
+    <br />
+    <div class="portfolio-grid">
+      @for (material of recentMaterials; track material.id) {
+      <div class="portfolio-item pointer" routerLink="/materiais">
+        @if (material.image) {
+        <img [src]="material.image" [alt]="material.name" class="post-image" />
+        }
+        <h3>{{ material.name }}</h3>
+        <p class="description">{{ material.description }}</p>
+        <span class="read-more">Ver Material</span>
+      </div>
+      }
+    </div>
+    <a routerLink="/materiais" class="btn">Ver Todos Materiais</a>
+  </div>
+</section>
+
+<section id="contato" class="contact-section">
+  <div class="container">
+    <h2>Contato</h2>
+    <p>
+      Entre em contato para oportunidades de trabalho, colaborações ou para uma
+      conversa.
+    </p>
+    <div class="contact-links">
+      <a routerLink="/contato">contato@mariaizabela.com.br</a>
+      <a
+        href="https://www.linkedin.com/in/maria-izabela-ara%C3%BAjo-32332a186/"
+        target="_blank"
+        >LinkedIn</a
+      >
+    </div>
+  </div>
+</section>

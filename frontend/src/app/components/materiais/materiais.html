@@ -8,32 +8,25 @@
     </header>
 
     <section class="materiais-grid">
-      <div class="material-item" *ngFor="let material of materials">
+      @for (material of materials; track material.id) {
+      <div class="material-item">
+        @if (material.image) {
         <img [src]="material.image" [alt]="material.name" />
+        }
         <h3>{{ material.name }}</h3>
         <p>{{ material.description }}</p>
 
-        <a
-          *ngIf="material.type === 'gratuito'"
-          [href]="material.file"
-          class="btn-material"
-          download
-        >
-          Baixar
-        </a>
-
-        <a
-          *ngIf="material.type === 'pago'"
-          [href]="material.external_link"
-          class="btn-material"
-          target="_blank"
-        >
+        @if (material.type === 'gratuito') {
+        <a [href]="material.file" class="btn-material" download> Baixar </a>
+        } @if (material.type === 'pago') {
+        <a [href]="material.external_link" class="btn-material" target="_blank">
           Acessar ({{ material.price | currency : "BRL" }})
         </a>
+        }
       </div>
-      <p *ngIf="materials.length === 0" class="no-materials">
-        Nenhum material disponível no momento.
-      </p>
+      } @empty {
+      <p class="no-materials">Nenhum material disponível no momento.</p>
+      }
     </section>
 
     <footer class="page-footer">

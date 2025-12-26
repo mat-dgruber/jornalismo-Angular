@@ -1,5 +1,5 @@
 <div class="container">
-  <h1>Posts</h1>
+  <h1>Postagens</h1>
 
   <div class="grid">
     @for (post of posts(); track post.id) {
@@ -21,7 +21,7 @@
       <a [routerLink]="['/post', post.slug]">Ler mais</a>
     </article>
     } @empty {
-    <p>Nenhum post no blog ainda.</p>
+    <p>Nenhuma postagem disponível no blog ainda.</p>
     }
   </div>
 </div>

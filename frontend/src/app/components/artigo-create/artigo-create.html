@@ -1,0 +1,117 @@
+<div class="card">
+  <h2>{{ isEditMode ? "Editar Artigo" : "Novo Artigo" }}</h2>
+
+  <form
+    [formGroup]="artigoForm"
+    (ngSubmit)="onSubmit()"
+    class="flex flex-column gap-4"
+  >
+    <div class="grid">
+      <div class="col-12 md:col-8">
+        <label for="titulo" class="block mb-2 font-bold">Título</label>
+        <input
+          pInputText
+          id="titulo"
+          formControlName="titulo"
+          class="w-full"
+          placeholder="Digite o título do artigo"
+        />
+      </div>
+
+      <div class="col-12 md:col-4">
+        <label for="local" class="block mb-2 font-bold"
+          >Local de Publicação</label
+        >
+        <input
+          pInputText
+          id="local"
+          formControlName="local_publicacao"
+          class="w-full"
+          placeholder="Ex: Revista X, Blog Y"
+        />
+      </div>
+
+      <div class="col-12 mt-3">
+        <label for="subtitulo" class="block mb-2 font-bold"
+          >Subtítulo (Opcional)</label
+        >
+        <input
+          pInputText
+          id="subtitulo"
+          formControlName="subtitulo"
+          class="w-full"
+          placeholder="Digite um subtítulo curto"
+        />
+      </div>
+
+      <div class="col-12 md:col-6 mt-3">
+        <label for="data" class="block mb-2 font-bold"
+          >Data de Publicação</label
+        >
+        <p-calendar
+          id="data"
+          formControlName="data_publicacao"
+          [showTime]="true"
+          dateFormat="dd/mm/yy"
+          styleClass="w-full"
+          [showIcon]="true"
+        ></p-calendar>
+      </div>
+
+      <div class="col-12 md:col-6 mt-3">
+        <label for="link" class="block mb-2 font-bold"
+          >Link Externo (Opcional)</label
+        >
+        <input
+          pInputText
+          id="link"
+          formControlName="link_externo"
+          class="w-full"
+          placeholder="https://..."
+        />
+      </div>
+
+      <div class="col-12 mt-3">
+        <label for="content" class="block mb-2 font-bold">Conteúdo</label>
+        <p-editor
+          formControlName="conteudo"
+          [style]="{ height: '320px' }"
+        ></p-editor>
+      </div>
+
+      <div class="col-12 mt-3">
+        <label for="image" class="block mb-2 font-bold">Imagem de Capa</label>
+        <input
+          type="file"
+          (change)="onFileSelected($event)"
+          accept="image/*"
+          class="w-full"
+        />
+
+        @if (currentImageUrl) {
+        <div class="mt-2">
+          <p class="text-sm text-gray-500">Imagem atual:</p>
+          <img
+            [src]="currentImageUrl"
+            alt="Capa atual"
+            class="h-10rem border-round shadow-2"
+          />
+        </div>
+        }
+      </div>
+    </div>
+
+    <div class="flex justify-content-end gap-2 mt-4">
+      <p-button
+        label="Cancelar"
+        routerLink="/admin/artigos"
+        styleClass="p-button-text"
+      ></p-button>
+      <p-button
+        [label]="submitLabel"
+        type="submit"
+        [disabled]="postForm?.invalid"
+      ></p-button>
+    </div>
+  </form>
+</div>

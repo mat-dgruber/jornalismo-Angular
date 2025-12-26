@@ -1,14 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
-import { articles } from '../home/articles';
+import { ArtigosService, Artigo } from '../../services/artigos.service';
 
-interface Article {
-  title: string;
-  description: string;
-  source: string;
-  url: string;
-}
 
 @Component({
   selector: 'app-artigos',
@@ -18,12 +12,12 @@ interface Article {
   styleUrl: './artigos.css'
 })
 export class Artigos implements OnInit {
-  articles: Article[] = []; // Variável para armazenar o array de artigos
+  articles: Artigo[] = []; 
+  private artigosService = inject(ArtigosService);
 
   ngOnInit(): void {
-    // Atribua o array de artigos à sua variável em ordem inversa
-    this.articles = articles.slice().reverse();
+    this.artigosService.getArtigos().subscribe((data) => {
+        this.articles = data.reverse(); // Show newest first
+    });
   }
-} {
-
 }

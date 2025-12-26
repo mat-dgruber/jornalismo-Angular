@@ -1,19 +1,30 @@
 <main class="post-page">
-    <div class="container">
-        <header class="post-header">
-            <h1 class="post-title">Artigos</h1>
-            <p class="post-meta">Uma coleção dos artigos escritos.</p>
-        </header>
-        <div class="portfolio-grid">
-            <div *ngFor="let article of articles" class="portfolio-item">
-                <h3>{{ article.title }}</h3>
-                <p class="description" [innerHTML]="article.description"></p>
-                <p class="source">Publicado em: {{ article.source }}</p>
-                <a [href]="article.url" target="_blank" class="btn">Ler Matéria Original</a>
-            </div>
-        </div>
-        <footer class="post-footer">
-            <a routerLink="/home" class="btn">Voltar à Página Inicial</a>
-        </footer>
+  <div class="container">
+    <header class="post-header">
+      <h1 class="post-title">Artigos</h1>
+      <p class="post-meta">Uma coleção dos artigos escritos.</p>
+    </header>
+    <div class="portfolio-grid">
+      @for (article of articles; track article.id) {
+      <div class="portfolio-item">
+        @if (article.imagem) {
+        <img [src]="article.imagem" [alt]="article.titulo" class="post-image" />
+        }
+        <h3>{{ article.titulo }}</h3>
+        <p class="description">
+          {{ article.subtitulo || article.conteudo.slice(0, 150) + "..." }}
+        </p>
+        <p class="source">Publicado em: {{ article.local_publicacao }}</p>
+        @if (article.link_externo) {
+        <a [href]="article.link_externo" target="_blank" class="btn"
+          >Ler Matéria Original</a
+        >
+        }
+      </div>
+      }
     </div>
+    <footer class="post-footer">
+      <a routerLink="/home" class="btn">Voltar à Página Inicial</a>
+    </footer>
+  </div>
 </main>
