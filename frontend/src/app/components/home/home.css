@@ -153,7 +153,15 @@ p {
         text-align: center;
     }
 
+    .hero {
+        background-attachment: scroll; /* Fix for iOS mobile jitter */
+    }
+
     .bio-container {
         flex-direction: column;
+    }
+
+    .portfolio-grid {
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     }
 }
