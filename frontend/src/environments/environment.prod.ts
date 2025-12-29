@@ -1,5 +1,6 @@
 export const environment = {
-  apiUrl: 'http://localhost:8000',
+  // UPDATE THIS URL AFTER DEPLOYING BACKEND TO RENDER
+  apiUrl: 'https://YOUR-BACKEND-SERVICE-NAME.onrender.com',
   production: true,
   firebase: {
     apiKey: "AIzaSyCcudQ1-NAZJOG53EWsCfWugj_-PusaH7I",
