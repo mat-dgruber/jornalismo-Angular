@@ -64,20 +64,29 @@ CSRF_TRUSTED_ORIGINS = [
     "http://127.0.0.1:8000",
 ]
 
+# Allowed Frontend Origins
+ALLOWED_ORIGINS = [
+    "https://portfolio-jornalismo.web.app",
+    "https://portfolio-jornalismo.firebaseapp.com",
+    "https://mariaizabela.com.br",
+    "http://localhost:4200", # Localhost default
+]
+
 FRONTEND_URL = os.environ.get('FRONTEND_URL')
 if FRONTEND_URL:
-    # Remove existing scheme for ALLOWED_HOSTS
-    clean_host = FRONTEND_URL.replace("https://", "").replace("http://", "").strip("/")
-    ALLOWED_HOSTS.append(clean_host)
-    
-    # Ensure scheme for CORS and CSRF
-    if not FRONTEND_URL.startswith("http"):
-        origin = f"https://{clean_host}"
-    else:
-        origin = FRONTEND_URL.strip("/")
-        
+    ALLOWED_ORIGINS.append(FRONTEND_URL)
+
+for origin in ALLOWED_ORIGINS:
+    # Add to CORS and CSRF (schemes required)
+    if not origin.startswith("http"):
+        origin = f"https://{origin}"
     CORS_ALLOWED_ORIGINS.append(origin)
     CSRF_TRUSTED_ORIGINS.append(origin)
+    
+    # Add to ALLOWED_HOSTS (no scheme)
+    clean_host = origin.replace("https://", "").replace("http://", "").strip("/")
+    if clean_host not in ALLOWED_HOSTS:
+        ALLOWED_HOSTS.append(clean_host)
 
 # Angular CSRF compatibility
 CSRF_COOKIE_NAME = "XSRF-TOKEN"
