@@ -66,13 +66,25 @@ CSRF_TRUSTED_ORIGINS = [
 
 FRONTEND_URL = os.environ.get('FRONTEND_URL')
 if FRONTEND_URL:
-    ALLOWED_HOSTS.append(FRONTEND_URL.replace("https://", "").replace("http://", ""))
-    CORS_ALLOWED_ORIGINS.append(FRONTEND_URL)
-    CSRF_TRUSTED_ORIGINS.append(FRONTEND_URL)
+    # Remove existing scheme for ALLOWED_HOSTS
+    clean_host = FRONTEND_URL.replace("https://", "").replace("http://", "").strip("/")
+    ALLOWED_HOSTS.append(clean_host)
+    
+    # Ensure scheme for CORS and CSRF
+    if not FRONTEND_URL.startswith("http"):
+        origin = f"https://{clean_host}"
+    else:
+        origin = FRONTEND_URL.strip("/")
+        
+    CORS_ALLOWED_ORIGINS.append(origin)
+    CSRF_TRUSTED_ORIGINS.append(origin)
 
 # Angular CSRF compatibility
 CSRF_COOKIE_NAME = "XSRF-TOKEN"
 CSRF_HEADER_NAME = "HTTP_X_XSRF_TOKEN"
+
+# Default primary key field type
+DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
 # Application definition
