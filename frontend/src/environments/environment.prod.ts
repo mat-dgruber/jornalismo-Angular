@@ -1,6 +1,6 @@
 export const environment = {
   // UPDATE THIS URL AFTER DEPLOYING BACKEND TO RENDER
-  apiUrl: 'https://YOUR-BACKEND-SERVICE-NAME.onrender.com',
+  apiUrl: 'https://jornalismo-angular.onrender.com',
   production: true,
   firebase: {
     apiKey: "AIzaSyCcudQ1-NAZJOG53EWsCfWugj_-PusaH7I",
