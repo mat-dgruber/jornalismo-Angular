@@ -1,0 +1,48 @@
+services:
+  web:
+    build: ./backend
+    container_name: jornalismo-web
+    ports:
+      - "8000:8000"
+    command: sh -c "uv sync && python manage.py runserver 0.0.0.0:8000"
+    restart: always
+    volumes:
+      - ./backend:/app
+      - /app/.venv
+    depends_on:
+      db:
+        condition: service_healthy
+    env_file:
+      - ./backend/.env
+    environment:
+      - DB_HOST=db
+
+  frontend:
+    build: ./frontend
+    container_name: jornalismo-frontend
+    ports:
+      - "4200:80"
+    restart: always
+    depends_on:
+      - web
+
+  db:
+    image: postgres:16
+    restart: always
+    container_name: jornalismo-db
+    environment:
+      POSTGRES_USER: mabelaaaa
+      POSTGRES_PASSWORD: Mi150203!@
+      POSTGRES_DB: jornalismo
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U mabelaaaa -d jornalismo"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  postgres_data:

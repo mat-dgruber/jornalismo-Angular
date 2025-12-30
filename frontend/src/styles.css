@@ -1,0 +1,124 @@
+/* You can add global styles to this file, and also import other style files */
+/* You can add global styles to this file, and also import other style files */
+
+/* Importação de Fontes do Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&family=Quintessential&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&display=swap');
+
+/* Reset Básico */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    color-scheme: light;
+    
+    /* Force PrimeNG Light Theme Surfaces (Aura) */
+    --p-surface-0: #ffffff !important;
+    --p-surface-50: #f9fafb !important;
+    --p-surface-100: #f3f4f6 !important;
+    --p-surface-200: #e5e7eb !important;
+    --p-surface-300: #d1d5db !important;
+    --p-surface-400: #9ca3af !important;
+    --p-surface-500: #6b7280 !important;
+    --p-surface-600: #4b5563 !important;
+    --p-surface-700: #374151 !important;
+    --p-surface-800: #1f2937 !important;
+    --p-surface-900: #111827 !important;
+    --p-surface-950: #0b0f19 !important;
+    --p-content-background: var(--p-surface-0) !important;
+    --p-text-color: #4b5563 !important; /* Dark gray for text */
+    
+    --primary-color: #2b0053; /* Verde escuro para destaque */
+    --secondary-color: #c180ffe3; /* Verde claro para fundo */
+    --text-color: #202020;
+    --light-text-color: #fff0f0;
+    --bg-light: #C8B4C0;
+     --background-color: #F9F7F7; /* Creme Suave para o fundo */    
+    --font-heading: 'Newsreader', serif;
+    --font-body: 'Jost', sans-serif;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: var(--font-body);
+    line-height: 1.6;
+    color: var(--text-color);
+    min-height: 100vh;
+    background-color: #ffffff !important;
+}
+
+html, body {
+    background-color: #ffffff !important;
+}
+
+.container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 20px;
+    
+}
+
+/* Seções genéricas */
+.portfolio-section {
+    padding: 80px 0;
+    text-align: center;
+}
+
+.bg-light {
+    background-color: var(--bg-light);
+}
+h1 {
+    font-family: var(--font-heading);
+    font-size: 3rem;
+    margin-bottom: 20px;
+}
+
+
+h2 {
+    font-family: var(--font-heading);
+    font-size: 2.5rem;
+    margin-bottom: 40px;
+}
+
+h3 {
+    font-family: var(--font-heading);
+    font-size: 1.8rem;
+    margin-bottom: 20px;
+}
+
+h4 {
+    font-family: var(--font-heading);
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+}
+
+/* Botões */
+.btn {
+    display: inline-block;
+    background-color: var(--primary-color);
+    color: var(--light-text-color);
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 25px;
+    transition: background-color 0.3s ease;
+    margin-top: 30px;
+}
+
+.btn:hover {
+    background-color: #3b008db4;
+}
+
+a[routerLink] {
+    cursor: pointer;
+}
+
+/* Utilities */
+.w-full {
+    width: 100% !important;
+}

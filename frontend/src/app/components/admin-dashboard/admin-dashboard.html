@@ -1,0 +1,130 @@
+<div class="admin-container">
+  <div class="admin-header">
+    <h1>Painel Administrativo</h1>
+    <p>Bem-vindo de volta! O que você gostaria de fazer hoje?</p>
+  </div>
+
+  <div class="admin-grid">
+    <p-card
+      header="Gerenciar Notícias"
+      subheader="Blog e Postagens"
+      [style]="{ width: '100%' }"
+    >
+      <ng-template pTemplate="header">
+        <div class="card-icon-wrapper">
+          <i class="pi pi-file-edit card-icon"></i>
+        </div>
+      </ng-template>
+      <p>Escreva novas notícias, artigos e mantenha o blog atualizado.</p>
+      <ng-template pTemplate="footer">
+        <div class="flex gap-3 mt-1">
+          <p-button
+            label="Criar Nova Postagem"
+            icon="pi pi-plus"
+            [routerLink]="['/post/create']"
+            styleClass="w-full"
+          ></p-button>
+          <p-button
+            label="Gerenciar"
+            icon="pi pi-list"
+            [routerLink]="['/admin/posts']"
+            styleClass="w-full p-button-outlined"
+          ></p-button>
+        </div>
+      </ng-template>
+    </p-card>
+
+    <p-card
+      header="Gerenciar Materiais"
+      subheader="Downloads e Produtos"
+      [style]="{ width: '100%' }"
+    >
+      <ng-template pTemplate="header">
+        <div class="card-icon-wrapper">
+          <i class="pi pi-box card-icon"></i>
+        </div>
+      </ng-template>
+      <p>Adicione novos materiais para download gratuito ou venda.</p>
+      <ng-template pTemplate="footer">
+        <div class="flex gap-3 mt-1">
+          <p-button
+            label="Adicionar Material"
+            icon="pi pi-plus"
+            [routerLink]="['/materiais/novo']"
+            severity="secondary"
+            styleClass="w-full"
+          ></p-button>
+          <p-button
+            label="Gerenciar"
+            icon="pi pi-list"
+            [routerLink]="['/admin/materiais']"
+            severity="secondary"
+            styleClass="w-full p-button-outlined"
+          ></p-button>
+        </div>
+      </ng-template>
+    </p-card>
+
+    <p-card
+      header="Gerenciar Artigos"
+      subheader="Publicações Especiais"
+      [style]="{ width: '100%' }"
+    >
+      <ng-template pTemplate="header">
+        <div class="card-icon-wrapper">
+          <i class="pi pi-file-o card-icon"></i>
+        </div>
+      </ng-template>
+      <p>Escreva e gerencie artigos, reflexões e matérias.</p>
+      <ng-template pTemplate="footer">
+        <div class="flex gap-3 mt-1">
+          <p-button
+            label="Novo Artigo"
+            icon="pi pi-plus"
+            [routerLink]="['/artigos/novo']"
+            severity="secondary"
+            styleClass="w-full"
+          ></p-button>
+          <p-button
+            label="Gerenciar"
+            icon="pi pi-list"
+            [routerLink]="['/admin/artigos']"
+            severity="secondary"
+            styleClass="w-full p-button-outlined"
+          ></p-button>
+        </div>
+      </ng-template>
+    </p-card>
+
+    <p-card
+      header="Gerenciar Projetos"
+      subheader="Acadêmico e Pessoal"
+      [style]="{ width: '100%' }"
+    >
+      <ng-template pTemplate="header">
+        <div class="card-icon-wrapper">
+          <i class="pi pi-briefcase card-icon"></i>
+        </div>
+      </ng-template>
+      <p>Cadastre seus projetos acadêmicos, TCCs e projetos pessoais.</p>
+      <ng-template pTemplate="footer">
+        <div class="flex gap-3 mt-1">
+          <p-button
+            label="Novo Projeto"
+            icon="pi pi-plus"
+            [routerLink]="['/projetos/novo']"
+            severity="secondary"
+            styleClass="w-full"
+          ></p-button>
+          <p-button
+            label="Gerenciar"
+            icon="pi pi-list"
+            [routerLink]="['/admin/projetos']"
+            severity="secondary"
+            styleClass="w-full p-button-outlined"
+          ></p-button>
+        </div>
+      </ng-template>
+    </p-card>
+  </div>
+</div>

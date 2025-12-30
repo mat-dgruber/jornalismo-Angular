@@ -1,59 +1,92 @@
-# JornalismoAngular
+# Jornalismo - Maria Izabela
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 20.1.0.
+Este projeto é um site pessoal e blog para portfólio de jornalismo, desenvolvido com **Angular** no frontend e **Django** no backend.
 
-## Development server
+## Estrutura do Projeto
 
-To start a local development server, run:
+- **frontend/**: Aplicação Angular (v20+).
+- **backend/**: API REST desenvolvida com Django e Django REST Framework.
+
+## Pré-requisitos
+
+- Node.js e NPM
+- Python 3.10+
+- Angular CLI
+
+## Como Rodar o Projeto
+
+### 1. Backend (Django)
+
+Navegue até a pasta `backend` e configure o ambiente virtual:
 
 ```bash
+cd backend
+# Criar ambiente virtual
+python -m venv .venv
+# Ativar (Windows)
+.venv\Scripts\activate
+# Ativar (Linux/Mac)
+source .venv/bin/activate
+
+# Instalar dependências
+pip install -r requirements.txt
+
+# Rodar migrações
+python manage.py migrate
+
+# Iniciar servidor
+python manage.py runserver
+```
+
+O backend rodará em `http://127.0.0.1:8000`.
+
+### 2. Frontend (Angular)
+
+Em outro terminal, navegue até a pasta `frontend`:
+
+```bash
+cd frontend
+# Instalar dependências
+npm install
+
+# Iniciar servidor de desenvolvimento
 ng serve
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+O frontend rodará em `http://localhost:4200`.
 
-## Code scaffolding
+## Funcionalidades
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+- **Home**: Apresentação e destaques.
+- **Blog**: Listagem de notícias e artigos.
+- **Criar Post**: Área para criar novas notícias (com upload de imagens).
+- **Outras Seções**: Artigos, Materiais, Projetos, Contato.
 
-```bash
-ng generate component component-name
-```
+## Rodando com Docker (Backend + Frontend + Banco)
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+Agora é possível rodar a aplicação completa com um único comando. O Docker irá subir:
 
-```bash
-ng generate --help
-```
+- **Frontend (Angular)**: http://localhost:4200
+- **Backend (Django)**: http://localhost:8000
+- **Banco de Dados (PostgreSQL)**: porta 5432
 
-## Building
+1. **Subir tudo:**
 
-To build the project run:
+   ```bash
+   docker-compose up -d --build
+   ```
 
-```bash
-ng build
-```
+2. **Rodar as migrações (apenas na primeira vez):**
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+   ```bash
+   docker-compose exec web python manage.py migrate
+   ```
 
-## Running unit tests
+3. **Criar superusuário (opcional):**
 
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
+   ```bash
+   docker-compose exec web python manage.py createsuperuser
+   ```
 
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+4. **Acessar:**
+   - Abra `http://localhost:4200` no seu navegador.

@@ -1,0 +1,84 @@
+.materiais-page {
+    padding: 80px 0;
+}
+
+.page-header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.page-title {
+    font-family: var(--font-heading);
+    font-size: 3rem;
+    margin-bottom: 10px;
+}
+
+.page-meta {
+    font-size: 1rem;
+    color: #777;
+}
+
+.materiais-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+}
+
+.material-item {
+    background-color: var(--p-surface-0);
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    border: 1px solid var(--p-surface-200);
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.material-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+
+.material-item img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 10px;
+    margin-bottom: 15px;
+}
+
+.material-item h3 {
+    margin-bottom: 10px;
+    font-family: var(--font-heading);
+    color: var(--primary-color);
+}
+
+.material-item p {
+    flex-grow: 1;
+    margin-bottom: 15px;
+    color: var(--p-text-color);
+}
+
+.btn-material {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: var(--primary-color);
+    color: var(--light-text-color);
+    text-align: center;
+    border-radius: 25px; /* Pill shape */
+    text-decoration: none;
+    margin-top: auto;
+    align-self: flex-start;
+    transition: background-color 0.3s ease;
+}
+
+.btn-material:hover {
+    background-color: #3b008db4;
+}
+
+.page-footer {
+    text-align: center;
+    margin-top: 40px;
+}

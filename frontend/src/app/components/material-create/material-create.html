@@ -1,0 +1,135 @@
+<div class="container">
+  <h2>Novo Material</h2>
+
+  <form [formGroup]="materialForm" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label for="name">Nome do Material</label>
+      <input
+        pInputText
+        id="name"
+        type="text"
+        formControlName="name"
+        placeholder="Ex: Ebook Completo de Jornalismo"
+        class="w-full"
+      />
+      @if (materialForm.get('name')?.invalid &&
+      materialForm.get('name')?.touched) {
+      <small class="error">O nome é obrigatório.</small>
+      }
+    </div>
+
+    <div class="form-group">
+      <label for="description">Descrição</label>
+      <textarea
+        pTextarea
+        formControlName="description"
+        rows="5"
+        class="w-full"
+        placeholder="Descreva o material..."
+      >
+      </textarea>
+    </div>
+
+    <div class="form-group">
+      <label for="category">Categoria</label>
+      <p-select
+        [options]="categories"
+        formControlName="category"
+        optionLabel="label"
+        optionValue="value"
+        placeholder="Selecione a categoria"
+        class="w-full"
+      ></p-select>
+    </div>
+
+    <div class="form-group">
+      <label for="type">Tipo</label>
+      <p-select
+        [options]="types"
+        formControlName="type"
+        optionLabel="label"
+        optionValue="value"
+        placeholder="Selecione o tipo"
+        class="w-full"
+      ></p-select>
+    </div>
+
+    @if (materialForm.get('type')?.value === 'pago') {
+    <div class="form-group">
+      <label for="price">Preço (R$)</label>
+      <p-inputNumber
+        formControlName="price"
+        mode="currency"
+        currency="BRL"
+        locale="pt-BR"
+        class="w-full"
+      >
+      </p-inputNumber>
+    </div>
+
+    <div class="form-group">
+      <label for="external_link">Link Externo (Checkout/Pagamento)</label>
+      <input
+        pInputText
+        id="external_link"
+        type="url"
+        formControlName="external_link"
+        placeholder="https://..."
+        class="w-full"
+      />
+    </div>
+    }
+
+    <div class="form-group">
+      <label for="image">Imagem de Capa (Obrigatório)</label>
+      <div class="file-upload-wrapper">
+        <input
+          #imageInput
+          type="file"
+          (change)="onImageSelected($event)"
+          accept="image/*"
+          style="display: none"
+        />
+        <div class="file-upload-button" (click)="imageInput.click()">
+          <i class="pi pi-image"></i> Escolher Capa
+        </div>
+        @if (selectedImage) {
+        <span class="file-name">{{ selectedImage.name }}</span>
+        } @else {
+        <span class="file-name">Nenhum arquivo selecionado</span>
+        }
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="file"
+        >Arquivo do Material (Opcional se for link externo)</label
+      >
+      <div class="file-upload-wrapper">
+        <input
+          #fileInput
+          type="file"
+          (change)="onFileSelected($event)"
+          style="display: none"
+        />
+        <div class="file-upload-button" (click)="fileInput.click()">
+          <i class="pi pi-file"></i> Escolher Arquivo
+        </div>
+        @if (selectedFile) {
+        <span class="file-name">{{ selectedFile.name }}</span>
+        } @else {
+        <span class="file-name">Nenhum arquivo selecionado</span>
+        }
+      </div>
+    </div>
+
+    <div class="form-actions">
+      <p-button
+        label="Criar Material"
+        type="submit"
+        [disabled]="materialForm.invalid"
+        styleClass="w-full"
+      ></p-button>
+    </div>
+  </form>
+</div>

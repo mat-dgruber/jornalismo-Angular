@@ -1,0 +1,21 @@
+[project]
+name = "backend"
+version = "0.1.0"
+description = "Backend for Jornalismo Angular"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "asgiref==3.8.1",
+    "Django==5.0.4",
+    "django-cors-headers==4.3.1",
+    "djangorestframework>=3.16.1",
+    "pillow",
+    "python-dotenv",
+    "psycopg[binary]",
+    "firebase-admin",
+    "gunicorn",
+    "whitenoise",
+    "dj-database-url",
+    "django-storages",
+    "google-cloud-storage",
+]

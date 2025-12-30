@@ -1,0 +1,13 @@
+.card {
+    padding: 2rem;
+    background: var(--surface-card);
+    border-radius: 12px;
+    margin: 2rem;
+}
+
+@media (max-width: 768px) {
+    .card {
+        margin: 1rem;
+        padding: 1rem;
+    }
+}
