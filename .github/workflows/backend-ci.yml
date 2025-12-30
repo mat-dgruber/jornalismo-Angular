@@ -1,0 +1,45 @@
+name: Backend CI
+
+on:
+  push:
+    branches: [ "main" ]
+    paths:
+      - 'backend/**'
+  pull_request:
+    branches: [ "main" ]
+    paths:
+      - 'backend/**'
+
+jobs:
+  test-and-build:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./backend
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Set up Python 3.12
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.12'
+
+    - name: Install uv
+      run: curl -LsSf https://astral.sh/uv/install.sh | sh
+
+    - name: Install dependencies
+      run: uv sync
+
+    - name: Run Tests
+      # Assuming default test settings. If specific settings are needed, adjust command.
+      # Setting DJANGO_SETTINGS_MODULE if not set in manage.py or via env
+      env:
+        DJANGO_SETTINGS_MODULE: config.settings
+      run: uv run python manage.py test
+
+    - name: Build Docker Image
+      # Building from root context but Dockerfile is in backend
+      # Adjusting context to ./backend since we are in working-directory ./backend
+      # and the Dockerfile expects to copy pyproject.toml from the context.
+      run: docker build . -t backend:latest

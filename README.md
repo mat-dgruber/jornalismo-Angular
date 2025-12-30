@@ -1,6 +1,9 @@
-# Jornalismo - Maria Izabela
+# Jornalismo Angular & Django
 
-Este projeto é um site pessoal e blog para portfólio de jornalismo, desenvolvido com **Angular** no frontend e **Django** no backend.
+![Frontend CI/CD](https://github.com/mat-dgruber/jornalismo-Angular/actions/workflows/frontend-ci.yml/badge.svg)
+![Backend CI](https://github.com/mat-dgruber/jornalismo-Angular/actions/workflows/backend-ci.yml/badge.svg)
+
+Projeto integrando Angular (Frontend) e Django (Backend).
 
 ## Estrutura do Projeto
 
