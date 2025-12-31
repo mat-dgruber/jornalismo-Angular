@@ -35,7 +35,13 @@
         <p>{{ material.description }}</p>
 
         @if (material.type === 'gratuito') {
-        <a [href]="material.file" class="btn-material" download> Baixar </a>
+        <a
+          href="javascript:void(0)"
+          (click)="onDownload(material)"
+          class="btn-material"
+        >
+          Baixar
+        </a>
         } @if (material.type === 'pago') {
         <a [href]="material.external_link" class="btn-material" target="_blank">
           Acessar ({{ material.price | currency : "BRL" }})

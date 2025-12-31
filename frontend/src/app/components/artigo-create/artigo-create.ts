@@ -117,12 +117,29 @@ export class ArtigoCreate implements OnInit {
 
     request$.subscribe({
       next: (res) => {
-        alert(this.isEditMode ? 'Artigo atualizado!' : 'Artigo publicado com sucesso!');
-        this.router.navigate(['/admin/artigos']);
+        const message = this.isEditMode ? 'Artigo atualizado com sucesso!' : 'Artigo publicado com sucesso!';
+        this.router.navigate(['/admin/sucesso'], {
+            queryParams: {
+                message: message,
+                actionLabel: 'Voltar para Artigos',
+                actionUrl: '/admin/artigos',
+                createLabel: 'Criar novo Artigo',
+                createUrl: '/artigos/novo'
+            }
+        });
       },
       error: (err) => {
         console.error('Erro no envio:', err);
-        alert('Erro: ' + JSON.stringify(err.error));
+        const errorMessage = err.error?.detail || JSON.stringify(err.error) || 'Não foi possível salvar o artigo.';
+        this.router.navigate(['/admin/erro'], {
+            queryParams: {
+                message: 'Erro ao salvar o artigo.',
+                details: errorMessage,
+                retryLabel: 'Tentar novamente',
+                retryUrl: this.router.url, // Current URL to retry
+                backUrl: '/admin/artigos'
+            }
+        });
       }
     });
   }

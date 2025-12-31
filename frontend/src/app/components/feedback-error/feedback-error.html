@@ -1,0 +1,31 @@
+<div class="feedback-container">
+  <p-card styleClass="feedback-card">
+    <i class="pi pi-times-circle error-icon"></i>
+    <h2>Oops, algo deu errado!</h2>
+    <p class="text-xl mb-4 text-color-secondary">{{ message }}</p>
+
+    <details *ngIf="details" class="w-full mb-4 error-details-container">
+      <summary class="cursor-pointer p-3 bg-gray-100 rounded select-none">
+        Ver detalhes técnicos
+      </summary>
+      <div class="error-details mt-2">
+        {{ details }}
+      </div>
+    </details>
+
+    <div class="flex justify-content-center flex-wrap gap-2 mt-4">
+      <p-button
+        [label]="backLabel"
+        (onClick)="goBack()"
+        severity="secondary"
+        outlined="true"
+      ></p-button>
+      <p-button
+        *ngIf="retryUrl"
+        [label]="retryLabel"
+        (onClick)="retry()"
+        severity="danger"
+      ></p-button>
+    </div>
+  </p-card>
+</div>
