@@ -1,3 +1,9 @@
+from rest_framework import viewsets, permissions, status
+from rest_framework.response import Response
+from rest_framework.decorators import action
+from .models import Post
+from django.contrib.auth.models import User
+from .serializers import PostSerializer, UserSerializer
 from config.permissions import IsUnderUsageLimit
 
 class PostViewSet(viewsets.ModelViewSet):
@@ -17,4 +23,3 @@ class PostViewSet(viewsets.ModelViewSet):
         users = User.objects.all()
         serializer = UserSerializer(users, many=True)
         return Response(serializer.data)
-
