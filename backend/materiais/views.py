@@ -1,3 +1,6 @@
+from rest_framework import viewsets, permissions
+from .models import Material
+from .serializers import MaterialSerializer
 from config.permissions import IsUnderUsageLimit
 
 class MaterialViewSet(viewsets.ModelViewSet):
