@@ -75,11 +75,6 @@
       }"
       styleClass="h-full shadow-4"
     >
-      <ng-template pTemplate="header">
-        <div class="card-icon-wrapper">
-          <i class="pi pi-file-edit card-icon"></i>
-        </div>
-      </ng-template>
       <p>Escreva novas postagens, artigos e mantenha o blog atualizado.</p>
       <ng-template pTemplate="footer">
         <div class="flex flex-column gap-2 mt-3">
@@ -108,11 +103,6 @@
       }"
       styleClass="h-full shadow-4"
     >
-      <ng-template pTemplate="header">
-        <div class="card-icon-wrapper secondary-wrapper">
-          <i class="pi pi-box card-icon"></i>
-        </div>
-      </ng-template>
       <p>Adicione novos materiais para download gratuito ou venda.</p>
       <ng-template pTemplate="footer">
         <div class="flex flex-column gap-2 mt-3">
@@ -120,7 +110,7 @@
             label="Adicionar Material"
             icon="pi pi-plus"
             [routerLink]="['/materiais/novo']"
-            styleClass="w-full p-button-raised p-button-secondary"
+            styleClass="w-full p-button-raised"
           ></p-button>
           <p-button
             label="Gerenciar"
@@ -141,11 +131,6 @@
       }"
       styleClass="h-full shadow-4"
     >
-      <ng-template pTemplate="header">
-        <div class="card-icon-wrapper">
-          <i class="pi pi-file-o card-icon"></i>
-        </div>
-      </ng-template>
       <p>Escreva e gerencie artigos, reflexões e matérias.</p>
       <ng-template pTemplate="footer">
         <div class="flex flex-column gap-2 mt-3">
@@ -174,11 +159,6 @@
       }"
       styleClass="h-full shadow-4"
     >
-      <ng-template pTemplate="header">
-        <div class="card-icon-wrapper secondary-wrapper">
-          <i class="pi pi-briefcase card-icon"></i>
-        </div>
-      </ng-template>
       <p>Cadastre seus projetos acadêmicos, TCCs e projetos pessoais.</p>
       <ng-template pTemplate="footer">
         <div class="flex flex-column gap-2 mt-3">
@@ -186,7 +166,7 @@
             label="Novo Projeto"
             icon="pi pi-plus"
             [routerLink]="['/projetos/novo']"
-            styleClass="w-full p-button-raised p-button-secondary"
+            styleClass="w-full p-button-raised"
           ></p-button>
           <p-button
             label="Gerenciar"
