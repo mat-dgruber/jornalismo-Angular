@@ -1,34 +1,99 @@
 <div class="admin-container">
   <div class="admin-header">
     <h1>Painel Administrativo</h1>
-    <p>Bem-vindo de volta! O que você gostaria de fazer hoje?</p>
+    <p>
+      Bem-vindo de volta! Gerencie seu conteúdo e acompanhe o uso dos recursos.
+    </p>
+  </div>
+
+  <!-- Usage Stats Section -->
+  <div class="usage-section mb-5" *ngIf="usageStats">
+    <div class="usage-grid">
+      <div class="usage-card">
+        <h3><i class="pi pi-database mr-2"></i> Banco de Dados (Postgres)</h3>
+        <p class="mb-2">
+          <span class="font-bold">{{
+            formatBytes(usageStats.database.used_bytes)
+          }}</span>
+          de {{ formatBytes(usageStats.database.limit_bytes) }}
+        </p>
+        <p-progressBar
+          [value]="usageStats.database.percentage"
+          [showValue]="false"
+          [style]="{ height: '10px' }"
+          [color]="
+            usageStats.database.percentage > 90
+              ? 'var(--red-500)'
+              : 'var(--primary-color)'
+          "
+        >
+        </p-progressBar>
+        <small
+          class="text-secondary mt-1 block"
+          *ngIf="usageStats.database.percentage > 90"
+        >
+          Atenção: Limite próximo!
+        </small>
+      </div>
+
+      <div class="usage-card">
+        <h3><i class="pi pi-cloud mr-2"></i> Armazenamento (Firebase)</h3>
+        <p class="mb-2">
+          <span class="font-bold">{{
+            formatBytes(usageStats.storage.used_bytes)
+          }}</span>
+          de {{ formatBytes(usageStats.storage.limit_bytes) }}
+        </p>
+        <p-progressBar
+          [value]="usageStats.storage.percentage"
+          [showValue]="false"
+          [style]="{ height: '10px' }"
+          [color]="
+            usageStats.storage.percentage > 90
+              ? 'var(--red-500)'
+              : 'var(--primary-color)'
+          "
+        >
+        </p-progressBar>
+        <small
+          class="text-secondary mt-1 block"
+          *ngIf="usageStats.storage.percentage > 90"
+        >
+          Atenção: Limite próximo!
+        </small>
+      </div>
+    </div>
   </div>
 
   <div class="admin-grid">
     <p-card
-      header="Gerenciar Notícias"
+      header="Gerenciar Postagens"
       subheader="Blog e Postagens"
-      [style]="{ width: '100%' }"
+      [style]="{
+        width: '100%',
+        'border-top': '4px solid var(--primary-color)'
+      }"
+      styleClass="h-full shadow-4"
     >
       <ng-template pTemplate="header">
         <div class="card-icon-wrapper">
           <i class="pi pi-file-edit card-icon"></i>
         </div>
       </ng-template>
-      <p>Escreva novas notícias, artigos e mantenha o blog atualizado.</p>
+      <p>Escreva novas postagens, artigos e mantenha o blog atualizado.</p>
       <ng-template pTemplate="footer">
-        <div class="flex gap-3 mt-1">
+        <div class="flex flex-column gap-2 mt-3">
           <p-button
             label="Criar Nova Postagem"
             icon="pi pi-plus"
             [routerLink]="['/post/create']"
-            styleClass="w-full"
+            styleClass="w-full p-button-raised"
           ></p-button>
           <p-button
             label="Gerenciar"
             icon="pi pi-list"
             [routerLink]="['/admin/posts']"
-            styleClass="w-full p-button-outlined"
+            styleClass="w-full p-button-outlined p-button-secondary"
           ></p-button>
         </div>
       </ng-template>
@@ -37,29 +102,31 @@
     <p-card
       header="Gerenciar Materiais"
       subheader="Downloads e Produtos"
-      [style]="{ width: '100%' }"
+      [style]="{
+        width: '100%',
+        'border-top': '4px solid var(--secondary-color)'
+      }"
+      styleClass="h-full shadow-4"
     >
       <ng-template pTemplate="header">
-        <div class="card-icon-wrapper">
+        <div class="card-icon-wrapper secondary-wrapper">
           <i class="pi pi-box card-icon"></i>
         </div>
       </ng-template>
       <p>Adicione novos materiais para download gratuito ou venda.</p>
       <ng-template pTemplate="footer">
-        <div class="flex gap-3 mt-1">
+        <div class="flex flex-column gap-2 mt-3">
           <p-button
             label="Adicionar Material"
             icon="pi pi-plus"
             [routerLink]="['/materiais/novo']"
-            severity="secondary"
-            styleClass="w-full"
+            styleClass="w-full p-button-raised p-button-secondary"
           ></p-button>
           <p-button
             label="Gerenciar"
             icon="pi pi-list"
             [routerLink]="['/admin/materiais']"
-            severity="secondary"
-            styleClass="w-full p-button-outlined"
+            styleClass="w-full p-button-outlined p-button-secondary"
           ></p-button>
         </div>
       </ng-template>
@@ -68,7 +135,11 @@
     <p-card
       header="Gerenciar Artigos"
       subheader="Publicações Especiais"
-      [style]="{ width: '100%' }"
+      [style]="{
+        width: '100%',
+        'border-top': '4px solid var(--primary-color)'
+      }"
+      styleClass="h-full shadow-4"
     >
       <ng-template pTemplate="header">
         <div class="card-icon-wrapper">
@@ -77,20 +148,18 @@
       </ng-template>
       <p>Escreva e gerencie artigos, reflexões e matérias.</p>
       <ng-template pTemplate="footer">
-        <div class="flex gap-3 mt-1">
+        <div class="flex flex-column gap-2 mt-3">
           <p-button
             label="Novo Artigo"
             icon="pi pi-plus"
             [routerLink]="['/artigos/novo']"
-            severity="secondary"
-            styleClass="w-full"
+            styleClass="w-full p-button-raised"
           ></p-button>
           <p-button
             label="Gerenciar"
             icon="pi pi-list"
             [routerLink]="['/admin/artigos']"
-            severity="secondary"
-            styleClass="w-full p-button-outlined"
+            styleClass="w-full p-button-outlined p-button-secondary"
           ></p-button>
         </div>
       </ng-template>
@@ -99,29 +168,31 @@
     <p-card
       header="Gerenciar Projetos"
       subheader="Acadêmico e Pessoal"
-      [style]="{ width: '100%' }"
+      [style]="{
+        width: '100%',
+        'border-top': '4px solid var(--secondary-color)'
+      }"
+      styleClass="h-full shadow-4"
     >
       <ng-template pTemplate="header">
-        <div class="card-icon-wrapper">
+        <div class="card-icon-wrapper secondary-wrapper">
           <i class="pi pi-briefcase card-icon"></i>
         </div>
       </ng-template>
       <p>Cadastre seus projetos acadêmicos, TCCs e projetos pessoais.</p>
       <ng-template pTemplate="footer">
-        <div class="flex gap-3 mt-1">
+        <div class="flex flex-column gap-2 mt-3">
           <p-button
             label="Novo Projeto"
             icon="pi pi-plus"
             [routerLink]="['/projetos/novo']"
-            severity="secondary"
-            styleClass="w-full"
+            styleClass="w-full p-button-raised p-button-secondary"
           ></p-button>
           <p-button
             label="Gerenciar"
             icon="pi pi-list"
             [routerLink]="['/admin/projetos']"
-            severity="secondary"
-            styleClass="w-full p-button-outlined"
+            styleClass="w-full p-button-outlined p-button-secondary"
           ></p-button>
         </div>
       </ng-template>

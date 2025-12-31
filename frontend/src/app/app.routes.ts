@@ -22,6 +22,8 @@ import { AdminArtigoList } from './components/admin-artigo-list/admin-artigo-lis
 import { ArtigoCreate } from './components/artigo-create/artigo-create';
 import { AdminProjetoList } from './components/admin-projeto-list/admin-projeto-list';
 import { ProjetoCreate } from './components/projeto-create/projeto-create';
+import { FeedbackSuccess } from './components/feedback-success/feedback-success';
+import { FeedbackError } from './components/feedback-error/feedback-error';
 
 export const routes: Routes = [
      {path: '', component: Home},
@@ -31,6 +33,9 @@ export const routes: Routes = [
      { path: 'admin/posts', component: AdminPostList, canActivate: [authGuard] },
      { path: 'admin/artigos', component: AdminArtigoList, canActivate: [authGuard] },
      { path: 'admin/projetos', component: AdminProjetoList, canActivate: [authGuard] },
+     
+     { path: 'admin/sucesso', component: FeedbackSuccess, canActivate: [authGuard] },
+     { path: 'admin/erro', component: FeedbackError, canActivate: [authGuard] },
      
      { path: 'blog', component: Blog },
      {path: 'post/create', component: PostCreate, canActivate: [authGuard]},

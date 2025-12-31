@@ -6,18 +6,46 @@
 
 .admin-header {
     text-align: center;
-    margin-bottom: 60px;
+    margin-bottom: 50px;
 }
 
 .admin-header h1 {
-    font-size: 2.5rem;
-    color: var(--text-color);
-    margin-bottom: 15px;
+    font-size: 2.8rem;
+    color: var(--primary-color, #2b0053);
+    margin-bottom: 10px;
+    font-weight: 700;
 }
 
 .admin-header p {
     font-size: 1.1rem;
-    color: #6c757d;
+    color: var(--text-color-secondary, #6c757d);
+}
+
+.usage-section {
+    margin-bottom: 50px;
+}
+
+.usage-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    justify-content: center;
+}
+
+.usage-card {
+    background: #fff;
+    border-radius: 12px;
+    padding: 25px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    border-left: 5px solid var(--primary-color);
+}
+
+.usage-card h3 {
+    margin-bottom: 15px;
+    font-size: 1.25rem;
+    color: var(--text-color);
+    display: flex;
+    align-items: center;
 }
 
 .admin-grid {
@@ -29,20 +57,45 @@
 
 @media (max-width: 768px) {
     .admin-container {
-        padding: 40px 15px;
+        padding: 30px 15px;
     }
 }
 
 .card-icon-wrapper {
-    background-color: #f8f9fa;
-    height: 150px;
+    background-color: var(--primary-color, #2b0053);
+    height: 120px;
     display: flex;
     align-items: center;
     justify-content: center;
     border-radius: 6px 6px 0 0;
 }
 
+.card-icon-wrapper.secondary-wrapper {
+    background-color: var(--secondary-color, #c180ff);
+}
+
+.card-icon-wrapper.secondary-wrapper .card-icon {
+    color: #fff;
+}
+
 .card-icon {
-    font-size: 3rem;
-    color: #6a1b9a;
+    font-size: 2.5rem;
+    color: #fff;
+}
+
+/* PrimeNG Overrides for consistency */
+::ng-deep .p-card .p-card-content {
+    padding: 1rem 0;
+    min-height: 80px;
+}
+
+::ng-deep .p-button-secondary {
+    background-color: var(--secondary-color) !important;
+    border-color: var(--secondary-color) !important;
+    color: #fff !important;
+}
+
+::ng-deep .p-button-secondary:enabled:hover {
+    background-color: #a060e0 !important;
+    border-color: #a060e0 !important;
 }

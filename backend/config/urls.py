@@ -10,6 +10,7 @@ urlpatterns = [
     path('api/', include('materiais.urls')),
     path('api/artigos/', include('artigos.urls')),
     path('api/projetos/', include('projetos.urls')),
+    path('api/admin/usage/', include('config.api_urls')), # New endpoint for stats
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 if settings.DEBUG:

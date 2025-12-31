@@ -129,16 +129,36 @@ export class MaterialCreate {
 
     request$.subscribe({
       next: (res) => {
-        alert(this.isEditMode ? 'Material atualizado com sucesso!' : 'Material criado com sucesso!');
-        this.router.navigate(['/admin/materiais']);
+        const message = this.isEditMode ? 'Material atualizado com sucesso!' : 'Material criado com sucesso!';
+        this.router.navigate(['/admin/sucesso'], {
+            queryParams: {
+                message: message,
+                actionLabel: 'Voltar para Materiais',
+                actionUrl: '/admin/materiais',
+                createLabel: 'Criar novo Material',
+                createUrl: '/materiais/novo'
+            }
+        });
       },
       error: (err) => {
         console.error('Erro ao salvar material:', err);
+        let errorDetails = '';
+        
         if (err.status === 0) {
-            alert('Erro de conexão: Não foi possível conectar ao servidor. Verifique se o backend está rodando.');
+            errorDetails = 'Erro de conexão: Verifique se o backend está rodando.';
         } else {
-            alert(`Erro ${err.status}: ${JSON.stringify(err.error) || err.message}`);
+            errorDetails = JSON.stringify(err.error) || err.message;
         }
+
+        this.router.navigate(['/admin/erro'], {
+            queryParams: {
+                message: 'Erro ao salvar o material.',
+                details: errorDetails,
+                retryLabel: 'Tentar novamente',
+                retryUrl: this.router.url,
+                backUrl: '/admin/materiais'
+            }
+        });
       }
     });
   }

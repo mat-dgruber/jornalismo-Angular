@@ -1,6 +1,4 @@
-from rest_framework import viewsets, permissions
-from .models import Material
-from .serializers import MaterialSerializer
+from config.permissions import IsUnderUsageLimit
 
 class MaterialViewSet(viewsets.ModelViewSet):
     queryset = Material.objects.all()
@@ -8,7 +6,7 @@ class MaterialViewSet(viewsets.ModelViewSet):
 
     def get_permissions(self):
         if self.action in ['create', 'update', 'partial_update', 'destroy']:
-            permission_classes = [permissions.IsAuthenticated]
+            permission_classes = [permissions.IsAuthenticated, IsUnderUsageLimit]
         else:
             permission_classes = [permissions.AllowAny]
         return [permission() for permission in permission_classes]

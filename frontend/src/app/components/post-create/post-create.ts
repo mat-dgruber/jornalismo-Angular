@@ -100,12 +100,30 @@ export class PostCreate implements OnInit {
 
     request$.subscribe({
       next: (res) => {
-        alert(this.isEditMode ? 'Notícia atualizada!' : 'Notícia publicada com sucesso!');
-        this.router.navigate(['/admin/posts']);
+        const message = this.isEditMode ? 'Notícia atualizada com sucesso!' : 'Notícia publicada com sucesso!';
+        this.router.navigate(['/admin/sucesso'], {
+            queryParams: {
+                message: message,
+                actionLabel: 'Voltar para Notícias',
+                actionUrl: '/admin/posts',
+                createLabel: 'Criar nova Notícia',
+                createUrl: '/post/create'
+            }
+        });
       },
       error: (err) => {
         console.error('Erro no envio:', err);
-        alert('Erro: ' + JSON.stringify(err.error));
+        const errorMessage = err.error?.detail || JSON.stringify(err.error) || 'Não foi possível salvar a notícia.';
+        
+        this.router.navigate(['/admin/erro'], {
+            queryParams: {
+                message: 'Erro ao salvar a notícia.',
+                details: errorMessage,
+                retryLabel: 'Tentar novamente',
+                retryUrl: this.router.url,
+                backUrl: '/admin/posts'
+            }
+        });
       }
     });
   }

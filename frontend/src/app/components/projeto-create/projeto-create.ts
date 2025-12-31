@@ -103,12 +103,30 @@ export class ProjetoCreate implements OnInit {
 
     request$.subscribe({
       next: (res) => {
-        alert(this.isEditMode ? 'Projeto atualizado!' : 'Projeto publicado com sucesso!');
-        this.router.navigate(['/admin/projetos']);
+        const message = this.isEditMode ? 'Projeto atualizado com sucesso!' : 'Projeto publicado com sucesso!';
+        this.router.navigate(['/admin/sucesso'], {
+            queryParams: {
+                message: message,
+                actionLabel: 'Voltar para Projetos',
+                actionUrl: '/admin/projetos',
+                createLabel: 'Criar novo Projeto',
+                createUrl: '/projetos/novo'
+            }
+        });
       },
       error: (err) => {
         console.error('Erro no envio:', err);
-        alert('Erro: ' + JSON.stringify(err.error));
+        const errorMessage = err.error?.detail || JSON.stringify(err.error) || 'Não foi possível salvar o projeto.';
+
+        this.router.navigate(['/admin/erro'], {
+            queryParams: {
+                message: 'Erro ao salvar o projeto.',
+                details: errorMessage,
+                retryLabel: 'Tentar novamente',
+                retryUrl: this.router.url,
+                backUrl: '/admin/projetos'
+            }
+        });
       }
     });
   }
