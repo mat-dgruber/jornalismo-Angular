@@ -36,11 +36,15 @@ ALLOWED_HOSTS = [
     "0.0.0.0",
 ]
 
-RENDER_EXTERNAL_HOSTNAME = os.environ.get('RENDER_EXTERNAL_HOSTNAME')
-if RENDER_EXTERNAL_HOSTNAME:
-    ALLOWED_HOSTS.append(RENDER_EXTERNAL_HOSTNAME)
+
+
+# Cloud Run handles SSL, so we need to tell Django to trust the header
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
 from corsheaders.defaults import default_headers, default_methods
+
+# Allow all origins to debug CORS/403 issues
+CORS_ALLOW_ALL_ORIGINS = True
 
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:4200",
@@ -71,6 +75,12 @@ ALLOWED_ORIGINS = [
     "https://mariaizabela.com.br",
     "http://localhost:4200", # Localhost default
 ]
+
+# Google Cloud Run Auto-Configuration (Moved to prevent NameError)
+if os.environ.get('CLOUDRUN_SERVICE_URL') or os.environ.get('K_SERVICE'):
+    ALLOWED_HOSTS.append('.run.app')
+    # Adicionamos wildcard aos origins confiaveis
+    CSRF_TRUSTED_ORIGINS.append('https://*.run.app')
 
 FRONTEND_URL = os.environ.get('FRONTEND_URL')
 if FRONTEND_URL:
@@ -117,7 +127,6 @@ INSTALLED_APPS = [
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
         'config.authentication.FirebaseAuthentication',
-        'rest_framework.authentication.SessionAuthentication', # Optional: keep session auth for admin panel
     ],
     'DEFAULT_PERMISSION_CLASSES': [
         'rest_framework.permissions.AllowAny', # Default to public, lock down specific views

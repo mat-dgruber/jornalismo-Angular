@@ -18,16 +18,18 @@ class IsUnderUsageLimit(permissions.BasePermission):
         if request.method == 'DELETE':
             return True
 
-        # Check DB Limit
-        db_usage = get_db_usage()
-        if db_usage >= DB_LIMIT_BYTES:
-            self.message = "Database limit exceeded (1GB). Please delete some data to continue."
-            return False
-
-        # Check Storage Limit
-        storage_usage = get_storage_usage()
-        if storage_usage >= STORAGE_LIMIT_BYTES:
-            self.message = "Storage limit exceeded (5GB). Please delete some files to continue."
-            return False
-
         return True
+        
+        # # Check DB Limit
+        # db_usage = get_db_usage()
+        # if db_usage >= DB_LIMIT_BYTES:
+        #     self.message = "Database limit exceeded (1GB). Please delete some data to continue."
+        #     return False
+
+        # # Check Storage Limit
+        # storage_usage = get_storage_usage()
+        # if storage_usage >= STORAGE_LIMIT_BYTES:
+        #     self.message = "Storage limit exceeded (5GB). Please delete some files to continue."
+        #     return False
+
+        # return True

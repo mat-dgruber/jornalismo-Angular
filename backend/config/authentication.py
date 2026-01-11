@@ -39,8 +39,8 @@ class FirebaseAuthentication(authentication.BaseAuthentication):
         
         try:
             decoded_token = auth.verify_id_token(id_token)
-        except Exception as e:
-            raise exceptions.AuthenticationFailed(f'Invalid Firebase token: {e}')
+        except Exception:
+            return None
 
         if not decoded_token:
             return None

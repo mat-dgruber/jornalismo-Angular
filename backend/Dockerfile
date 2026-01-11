@@ -15,6 +15,12 @@ RUN uv sync
 
 ENV PATH="/app/.venv/bin:$PATH"
 
+# Copia o restante do código fonte para dentro do container
+COPY . /app/
+
+# Gera os arquivos estáticos (necessário para o Whitenoise em produção)
+RUN python manage.py collectstatic --noinput
+
 # Comando padrão para manter o container rodando (vamos mudar isso no compose)
-# Comando padrão para produção (gunicorn)
-CMD ["gunicorn", "config.wsgi:application", "--bind", "0.0.0.0:8000"]
+# Comando padrão para Cloud Run (lê a var PORT automaticamente)
+CMD exec gunicorn config.wsgi:application --bind 0.0.0.0:$PORT
