@@ -1,59 +1,120 @@
 import { Routes } from '@angular/router';
 import { Home } from './components/home/home';
-import { Artigos } from './components/artigos/artigos';
-import { Projetos } from './components/projetos/projetos';
-import { ProjetoTCC } from './components/projeto-tcc/projeto-tcc';
-import { Contato } from './components/contato/contato';
-import { Materiais } from './components/materiais/materiais';
-import { PostList } from './components/post-list/post-list';
-import { PostDetail } from './components/post-detail/post-detail';
-import { PostCreate } from './components/post-create/post-create';
-
-import { Blog } from './components/blog/blog';
-
-import { LoginComponent } from './components/login/login.component';
-import { AdminDashboard } from './components/admin-dashboard/admin-dashboard';
-import { MaterialCreate } from './components/material-create/material-create';
 import { authGuard } from './guards/auth.guard';
 
-import { MaterialList } from './components/material-list/material-list';
-import { AdminPostList } from './components/admin-post-list/admin-post-list';
-import { AdminArtigoList } from './components/admin-artigo-list/admin-artigo-list';
-import { ArtigoCreate } from './components/artigo-create/artigo-create';
-import { AdminProjetoList } from './components/admin-projeto-list/admin-projeto-list';
-import { ProjetoCreate } from './components/projeto-create/projeto-create';
-import { FeedbackSuccess } from './components/feedback-success/feedback-success';
-import { FeedbackError } from './components/feedback-error/feedback-error';
-
 export const routes: Routes = [
-     {path: '', component: Home},
-     { path: 'login', component: LoginComponent },
-     { path: 'admin', component: AdminDashboard, canActivate: [authGuard] },
-     { path: 'admin/materiais', component: MaterialList, canActivate: [authGuard] },
-     { path: 'admin/posts', component: AdminPostList, canActivate: [authGuard] },
-     { path: 'admin/artigos', component: AdminArtigoList, canActivate: [authGuard] },
-     { path: 'admin/projetos', component: AdminProjetoList, canActivate: [authGuard] },
+     { path: '', component: Home },
+     { 
+         path: 'login', 
+         loadComponent: () => import('./components/login/login.component').then(m => m.LoginComponent) 
+     },
+     { 
+         path: 'admin', 
+         loadComponent: () => import('./components/admin-dashboard/admin-dashboard').then(m => m.AdminDashboard), 
+         canActivate: [authGuard] 
+     },
+     { 
+         path: 'admin/materiais', 
+         loadComponent: () => import('./components/material-list/material-list').then(m => m.MaterialList), 
+         canActivate: [authGuard] 
+     },
+     { 
+         path: 'admin/posts', 
+         loadComponent: () => import('./components/admin-post-list/admin-post-list').then(m => m.AdminPostList), 
+         canActivate: [authGuard] 
+     },
+     { 
+         path: 'admin/artigos', 
+         loadComponent: () => import('./components/admin-artigo-list/admin-artigo-list').then(m => m.AdminArtigoList), 
+         canActivate: [authGuard] 
+     },
+     { 
+         path: 'admin/projetos', 
+         loadComponent: () => import('./components/admin-projeto-list/admin-projeto-list').then(m => m.AdminProjetoList), 
+         canActivate: [authGuard] 
+     },
      
-     { path: 'admin/sucesso', component: FeedbackSuccess, canActivate: [authGuard] },
-     { path: 'admin/erro', component: FeedbackError, canActivate: [authGuard] },
+     { 
+         path: 'admin/sucesso', 
+         loadComponent: () => import('./components/feedback-success/feedback-success').then(m => m.FeedbackSuccess), 
+         canActivate: [authGuard] 
+     },
+     { 
+         path: 'admin/erro', 
+         loadComponent: () => import('./components/feedback-error/feedback-error').then(m => m.FeedbackError), 
+         canActivate: [authGuard] 
+     },
      
-     { path: 'blog', component: Blog },
-     {path: 'post/create', component: PostCreate, canActivate: [authGuard]},
-     {path: 'post/editar/:slug', component: PostCreate, canActivate: [authGuard]},
-     { path: 'post/:slug', component: PostDetail },
+     { 
+         path: 'blog', 
+         loadComponent: () => import('./components/blog/blog').then(m => m.Blog) 
+     },
+     {
+         path: 'post/create', 
+         loadComponent: () => import('./components/post-create/post-create').then(m => m.PostCreate), 
+         canActivate: [authGuard]
+     },
+     {
+         path: 'post/editar/:slug', 
+         loadComponent: () => import('./components/post-create/post-create').then(m => m.PostCreate), 
+         canActivate: [authGuard]
+     },
+     { 
+         path: 'post/:slug', 
+         loadComponent: () => import('./components/post-detail/post-detail').then(m => m.PostDetail) 
+     },
      
-     {path: 'artigos', component: Artigos},
-     {path: 'artigos/novo', component: ArtigoCreate, canActivate: [authGuard]},
-     {path: 'artigos/editar/:id', component: ArtigoCreate, canActivate: [authGuard]},
+     {
+         path: 'artigos', 
+         loadComponent: () => import('./components/artigos/artigos').then(m => m.Artigos)
+     },
+     {
+         path: 'artigos/novo', 
+         loadComponent: () => import('./components/artigo-create/artigo-create').then(m => m.ArtigoCreate), 
+         canActivate: [authGuard]
+     },
+     {
+         path: 'artigos/editar/:id', 
+         loadComponent: () => import('./components/artigo-create/artigo-create').then(m => m.ArtigoCreate), 
+         canActivate: [authGuard]
+     },
      
-     {path: 'materiais/novo', component: MaterialCreate, canActivate: [authGuard]},
-     {path: 'materiais/editar/:id', component: MaterialCreate, canActivate: [authGuard]},
-     {path: 'materiais', component: Materiais},
+     {
+         path: 'materiais/novo', 
+         loadComponent: () => import('./components/material-create/material-create').then(m => m.MaterialCreate), 
+         canActivate: [authGuard]
+     },
+     {
+         path: 'materiais/editar/:id', 
+         loadComponent: () => import('./components/material-create/material-create').then(m => m.MaterialCreate), 
+         canActivate: [authGuard]
+     },
+     {
+         path: 'materiais', 
+         loadComponent: () => import('./components/materiais/materiais').then(m => m.Materiais)
+     },
      
-     {path: 'projetos', component: Projetos},
-     {path: 'projetos/novo', component: ProjetoCreate, canActivate: [authGuard]},
-     {path: 'projetos/editar/:id', component: ProjetoCreate, canActivate: [authGuard]},
-     {path: 'projeto-tcc', component: ProjetoTCC},
-     {path: 'contato', component: Contato},
+     {
+         path: 'projetos', 
+         loadComponent: () => import('./components/projetos/projetos').then(m => m.Projetos)
+     },
+     {
+         path: 'projetos/novo', 
+         loadComponent: () => import('./components/projeto-create/projeto-create').then(m => m.ProjetoCreate), 
+         canActivate: [authGuard]
+     },
+     {
+         path: 'projetos/editar/:id', 
+         loadComponent: () => import('./components/projeto-create/projeto-create').then(m => m.ProjetoCreate), 
+         canActivate: [authGuard]
+     },
+     {
+         path: 'projeto-tcc', 
+         loadComponent: () => import('./components/projeto-tcc/projeto-tcc').then(m => m.ProjetoTCC)
+     },
+     {
+         path: 'contato', 
+         loadComponent: () => import('./components/contato/contato').then(m => m.Contato)
+     },
      {path: '**', redirectTo: ''},
 ];
