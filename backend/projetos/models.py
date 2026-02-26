@@ -13,7 +13,7 @@ class Projeto(models.Model):
     tipo = models.CharField(max_length=20, choices=TIPO_CHOICES, verbose_name="Tipo de Projeto")
     link_externo = models.URLField(verbose_name="Link do Projeto", blank=True, null=True)
     imagem = models.ImageField(upload_to="projetos/", verbose_name="Imagem", blank=True, null=True)
-    slug = models.SlugField(unique=True, verbose_name="URL Amigável", blank=True)
+    slug = models.SlugField(max_length=255, unique=True, verbose_name="URL Amigável", blank=True)
     created_at = models.DateTimeField(auto_now_add=True, verbose_name="Criado em")
     updated_at = models.DateTimeField(auto_now=True, verbose_name="Atualizado em")
 

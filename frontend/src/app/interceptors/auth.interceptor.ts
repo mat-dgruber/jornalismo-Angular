@@ -1,24 +1,27 @@
-
 import { HttpInterceptorFn } from '@angular/common/http';
 import { inject } from '@angular/core';
-import { Auth, idToken } from '@angular/fire/auth';
-import { switchMap, take } from 'rxjs/operators';
+import { Auth } from '@angular/fire/auth';
+import { from } from 'rxjs';
+import { switchMap } from 'rxjs/operators';
 
 export const authInterceptor: HttpInterceptorFn = (req, next) => {
   const auth = inject(Auth);
 
-  return idToken(auth).pipe(
-    take(1),
-    switchMap(token => {
+  if (!auth.currentUser) {
+    return next(req);
+  }
+
+  return from(auth.currentUser.getIdToken()).pipe(
+    switchMap((token) => {
       if (token) {
         const authReq = req.clone({
           setHeaders: {
-            Authorization: `Bearer ${token}`
-          }
+            Authorization: `Bearer ${token}`,
+          },
         });
         return next(authReq);
       }
       return next(req);
-    })
+    }),
   );
 };

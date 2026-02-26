@@ -19,3 +19,4 @@ coverage/
 /.angular/cache
 postgres_data/
 /frontend/.angular
+.agent/
