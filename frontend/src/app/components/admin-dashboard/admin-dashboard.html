@@ -1,9 +1,25 @@
 <div class="admin-container">
   <div class="admin-header">
-    <h1>Painel Administrativo</h1>
-    <p>
-      Bem-vindo de volta! Gerencie seu conteúdo e acompanhe o uso dos recursos.
-    </p>
+    <div
+      class="header-content flex flex-column md:flex-row align-items-center justify-content-between gap-4"
+    >
+      <div>
+        <h1>Painel Administrativo</h1>
+        <p>
+          Bem-vindo de volta! Gerencie seu conteúdo e acompanhe o uso dos
+          recursos.
+        </p>
+      </div>
+      <div>
+        <p-button
+          label="Sair"
+          icon="pi pi-sign-out"
+          styleClass="p-button-danger p-button-outlined"
+          (onClick)="logout()"
+        >
+        </p-button>
+      </div>
+    </div>
   </div>
 
   <!-- Usage Stats Section -->
@@ -71,7 +87,7 @@
       subheader="Blog e Postagens"
       [style]="{
         width: '100%',
-        'border-top': '4px solid var(--primary-color)'
+        'border-top': '4px solid var(--primary-color)',
       }"
       styleClass="h-full shadow-4"
     >
@@ -99,7 +115,7 @@
       subheader="Downloads e Produtos"
       [style]="{
         width: '100%',
-        'border-top': '4px solid var(--secondary-color)'
+        'border-top': '4px solid var(--secondary-color)',
       }"
       styleClass="h-full shadow-4"
     >
@@ -127,7 +143,7 @@
       subheader="Publicações Especiais"
       [style]="{
         width: '100%',
-        'border-top': '4px solid var(--primary-color)'
+        'border-top': '4px solid var(--primary-color)',
       }"
       styleClass="h-full shadow-4"
     >
@@ -155,7 +171,7 @@
       subheader="Acadêmico e Pessoal"
       [style]="{
         width: '100%',
-        'border-top': '4px solid var(--secondary-color)'
+        'border-top': '4px solid var(--secondary-color)',
       }"
       styleClass="h-full shadow-4"
     >

@@ -1,28 +1,48 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterLink } from '@angular/router';
+import { RouterLink, Router } from '@angular/router';
 import { CardModule } from 'primeng/card';
 import { ButtonModule } from 'primeng/button';
 import { ProgressBarModule } from 'primeng/progressbar';
 import { AdminService, UsageStats } from '../../services/admin.service';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-admin-dashboard',
   standalone: true,
-  imports: [CommonModule, RouterLink, CardModule, ButtonModule, ProgressBarModule],
+  imports: [
+    CommonModule,
+    RouterLink,
+    CardModule,
+    ButtonModule,
+    ProgressBarModule,
+  ],
   templateUrl: './admin-dashboard.html',
-  styleUrls: ['./admin-dashboard.css']
+  styleUrls: ['./admin-dashboard.css'],
 })
 export class AdminDashboard implements OnInit {
   usageStats: UsageStats | null = null;
 
-  constructor(private adminService: AdminService) {}
+  constructor(
+    private adminService: AdminService,
+    private authService: AuthService,
+    private router: Router,
+  ) {}
 
   ngOnInit() {
     this.adminService.getUsageStats().subscribe({
-        next: (stats) => this.usageStats = stats,
-        error: (err) => console.error('Failed to load usage stats', err)
+      next: (stats) => (this.usageStats = stats),
+      error: (err) => console.error('Failed to load usage stats', err),
     });
+  }
+
+  async logout() {
+    try {
+      await this.authService.logout();
+      this.router.navigate(['/login']);
+    } catch (error) {
+      console.error('Falha ao deslogar', error);
+    }
   }
 
   formatBytes(bytes: number, decimals = 2) {
