@@ -15,10 +15,14 @@ STORAGE_LIMIT_BYTES = 5 * 1024 * 1024 * 1024  # 5 GB
 
 def get_db_usage():
     """Returns the size of the current database in bytes."""
-    with connection.cursor() as cursor:
-        cursor.execute("SELECT pg_database_size(current_database());")
-        row = cursor.fetchone()
-        return row[0] if row else 0
+    try:
+        with connection.cursor() as cursor:
+            cursor.execute("SELECT pg_database_size(current_database());")
+            row = cursor.fetchone()
+            return row[0] if row else 0
+    except Exception as e:
+        logger.error(f"Error calculating database usage: {e}")
+        return 0
 
 def get_storage_usage():
     """
