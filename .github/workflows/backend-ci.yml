@@ -66,4 +66,5 @@ jobs:
           --image southamerica-east1-docker.pkg.dev/portfolio-jornalismo/jornalismo-repo/backend-api:latest \
           --region southamerica-east1 \
           --allow-unauthenticated \
-          --set-env-vars "DATABASE_URL=${{ secrets.DATABASE_URL }},DEBUG=False,GS_BUCKET_NAME=${{ secrets.GS_BUCKET_NAME }},FIREBASE_PROJECT_ID=portfolio-jornalismo,SECRET_KEY=${{ secrets.DJANGO_SECRET_KEY }}"
+          --port 8080 \
+          --set-env-vars "DATABASE_URL=${{ secrets.DATABASE_URL }},DEBUG=False,GS_BUCKET_NAME=${{ secrets.GS_BUCKET_NAME }},FIREBASE_PROJECT_ID=portfolio-jornalismo,SECRET_KEY=${{ secrets.DJANGO_SECRET_KEY }},ALLOWED_HOSTS=*"
