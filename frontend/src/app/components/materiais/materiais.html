@@ -29,7 +29,7 @@
       } } @else { @for (material of materials; track material.id) {
       <div class="material-item">
         @if (material.image) {
-        <img [src]="material.image" [alt]="material.name" />
+        <img [src]="getImageUrl(material.image)" [alt]="material.name" />
         }
         <h3>{{ material.name }}</h3>
         <p>{{ material.description }}</p>

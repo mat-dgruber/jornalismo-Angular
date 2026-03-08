@@ -4,6 +4,8 @@ import { RouterLink } from '@angular/router';
 import { SkeletonModule } from 'primeng/skeleton';
 import { MateriaisService, Material } from '../../services/materiais.service';
 
+import { environment } from '../../environments/environment';
+
 @Component({
   selector: 'app-materiais',
   templateUrl: './materiais.html',
@@ -30,29 +32,45 @@ export class Materiais implements OnInit {
     });
   }
 
+  getImageUrl(url: string | undefined): string {
+    if (!url) return 'assets/Imagens/placeholder.jpg';
+    if (url.startsWith('http')) return url;
+    
+    // If it starts with /media/, we need to ensure it uses the backend URL
+    // But remove duplicate / if needed
+    const baseUrl = environment.apiUrl.endsWith('/') ? environment.apiUrl.slice(0, -1) : environment.apiUrl;
+    const path = url.startsWith('/') ? url : `/${url}`;
+    return `${baseUrl}${path}`;
+  }
+
   onDownload(material: Material): void {
+    console.log('Download requested for:', material.name);
+    
     if (material.file) {
-      // 1. Open in new tab
-      window.open(material.file, '_blank');
+      const fileUrl = this.getImageUrl(material.file);
+      console.log('Attempting to download from:', fileUrl);
+
+      // 1. Open in new tab (as fallback)
+      window.open(fileUrl, '_blank');
 
       // 2. Trigger automatic download
-      this.materiaisService.downloadFile(material.file).subscribe({
+      this.materiaisService.downloadFile(fileUrl).subscribe({
         next: (blob) => {
           const url = window.URL.createObjectURL(blob);
           const link = document.createElement('a');
           link.href = url;
-          // Extract filename from URL or use default
           const filename = material.file?.split('/').pop() || 'download';
           link.download = filename;
           link.click();
           window.URL.revokeObjectURL(url);
         },
         error: (error) => {
-          console.error('Download failed:', error);
-          // Fallback is already handled by the window.open above, 
-          // but we could show a toast here if we had one.
+          console.error('Download via service failed:', error);
+          // Fallback is already handled by the window.open
         }
       });
+    } else {
+      console.warn('Material has no file associated for download.');
     }
   }
 }

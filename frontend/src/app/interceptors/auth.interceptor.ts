@@ -35,7 +35,9 @@ export const authInterceptor: HttpInterceptorFn = (req, next) => {
         }),
         switchMap((token) => {
           let authReq = req;
-          if (token) {
+          
+          // Only attach token if the request is for our API
+          if (token && req.url.startsWith(environment.apiUrl)) {
             // console.log('AuthInterceptor: Attaching token to request:', req.url);
             authReq = req.clone({
               setHeaders: {
