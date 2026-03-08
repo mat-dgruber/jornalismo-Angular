@@ -8,13 +8,14 @@ WORKDIR /app
 ENV PYTHONDONTWRITEBYTECODE=1
 ENV PYTHONUNBUFFERED=1
 
-# Copia apenas a "receita" das bibliotecas
+# Copia apenas a "receita" das bibliotecas primeiro para cache de camada
 COPY pyproject.toml /app/
-
 RUN uv sync
+
+# Copia todo o código-fonte agora
+COPY . /app/
 
 ENV PATH="/app/.venv/bin:$PATH"
 
-# Comando padrão para manter o container rodando (vamos mudar isso no compose)
 # Comando padrão para produção (gunicorn)
 CMD ["gunicorn", "config.wsgi:application", "--bind", "0.0.0.0:8000"]
