@@ -18,4 +18,4 @@ COPY . /app/
 ENV PATH="/app/.venv/bin:$PATH"
 
 # Comando padrão para produção (gunicorn)
-CMD ["gunicorn", "config.wsgi:application", "--bind", "0.0.0.0:8000"]
+CMD ["sh", "-c", "gunicorn config.wsgi:application --bind 0.0.0.0:${PORT:-8000}"]
