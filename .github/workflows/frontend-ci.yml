@@ -35,10 +35,12 @@ jobs:
 
       - name: Run Tests
         # Running tests in headless mode with no progress bar for cleaner logs
+        # If tests fail frequently in CI, consider if they are necessary or need fixing
         run: npm run test -- --no-watch --no-progress --browsers=ChromeHeadless
 
       - name: Build
-        run: npm run build
+        # Build specifically for production to use environment.prod.ts
+        run: npm run build -- --configuration production
 
       - name: Deploy to Firebase Hosting
         if: github.event_name == 'push' && github.ref == 'refs/heads/main'

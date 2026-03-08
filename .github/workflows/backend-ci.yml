@@ -11,7 +11,7 @@ on:
       - 'backend/**'
 
 jobs:
-  test-and-build:
+  test-build-deploy:
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -32,14 +32,39 @@ jobs:
       run: uv sync
 
     - name: Run Tests
-      # Assuming default test settings. If specific settings are needed, adjust command.
-      # Setting DJANGO_SETTINGS_MODULE if not set in manage.py or via env
       env:
         DJANGO_SETTINGS_MODULE: config.settings
+        # Add minimal dummy env vars for tests if needed
+        SECRET_KEY: "dummy-key-for-tests"
+        DATABASE_URL: "sqlite:///:memory:"
       run: uv run python manage.py test
 
-    - name: Build Docker Image
-      # Building from root context but Dockerfile is in backend
-      # Adjusting context to ./backend since we are in working-directory ./backend
-      # and the Dockerfile expects to copy pyproject.toml from the context.
-      run: docker build . -t backend:latest
+    - name: Google Auth
+      if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+      uses: 'google-github-actions/auth@v2'
+      with:
+        credentials_json: '${{ secrets.GCP_SA_KEY }}'
+
+    - name: 'Set up Cloud SDK'
+      if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+      uses: 'google-github-actions/setup-gcloud@v2'
+
+    - name: 'Configure Docker'
+      if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+      run: gcloud auth configure-docker southamerica-east1-docker.pkg.dev --quiet
+
+    - name: Build and Push Container
+      if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+      run: |
+        docker build -t southamerica-east1-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/jornalismo-repo/backend-api:latest .
+        docker push southamerica-east1-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/jornalismo-repo/backend-api:latest
+
+    - name: Deploy to Cloud Run
+      if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+      run: |
+        gcloud run deploy jornalismo-api \
+          --image southamerica-east1-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/jornalismo-repo/backend-api:latest \
+          --region southamerica-east1 \
+          --allow-unauthenticated \
+          --port 8000 \
+          --set-env-vars "DATABASE_URL=${{ secrets.DATABASE_URL }},DEBUG=False,GS_BUCKET_NAME=${{ secrets.GS_BUCKET_NAME }},FIREBASE_PROJECT_ID=${{ secrets.GCP_PROJECT_ID }},SECRET_KEY=${{ secrets.DJANGO_SECRET_KEY }}"

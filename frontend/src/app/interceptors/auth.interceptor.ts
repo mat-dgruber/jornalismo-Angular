@@ -4,6 +4,7 @@ import { Auth, idToken, authState } from '@angular/fire/auth';
 import { Router } from '@angular/router';
 import { catchError, switchMap, take, filter, timeout, first } from 'rxjs/operators';
 import { throwError, of, timer } from 'rxjs';
+import { environment } from '../../environments/environment';
 
 export const authInterceptor: HttpInterceptorFn = (req, next) => {
   const auth = inject(Auth);
