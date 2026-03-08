@@ -19,4 +19,4 @@ RUN uv sync
 ENV PATH="/app/.venv/bin:$PATH"
 
 # Comando padrão para produção (gunicorn)
-CMD ["sh", "-c", "gunicorn config.wsgi:application --bind 0.0.0.0:${PORT:-8080} --workers 1 --threads 8 --timeout 0 --access-log - --error-log -"]
+CMD ["sh", "-c", "gunicorn config.wsgi:application --bind 0.0.0.0:${PORT:-8080} --workers 1 --threads 8 --timeout 0 --access-logfile - --error-logfile -"]
