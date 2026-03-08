@@ -56,14 +56,14 @@ jobs:
     - name: Build and Push Container
       if: github.event_name == 'push' && github.ref == 'refs/heads/main'
       run: |
-        docker build -t southamerica-east1-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/jornalismo-repo/backend-api:latest .
-        docker push southamerica-east1-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/jornalismo-repo/backend-api:latest
+        docker build -t southamerica-east1-docker.pkg.dev/portfolio-jornalismo/jornalismo-repo/backend-api:latest .
+        docker push southamerica-east1-docker.pkg.dev/portfolio-jornalismo/jornalismo-repo/backend-api:latest
 
     - name: Deploy to Cloud Run
       if: github.event_name == 'push' && github.ref == 'refs/heads/main'
       run: |
         gcloud run deploy jornalismo-api \
-          --image southamerica-east1-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/jornalismo-repo/backend-api:latest \
+          --image southamerica-east1-docker.pkg.dev/portfolio-jornalismo/jornalismo-repo/backend-api:latest \
           --region southamerica-east1 \
           --allow-unauthenticated \
           --port 8000 \
