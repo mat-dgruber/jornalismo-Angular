@@ -29,20 +29,20 @@ export class MateriaisService {
     return this.http.get<Material[]>(this.apiUrl);
   }
 
-  getMaterial(id: number): Observable<Material> {
-    return this.http.get<Material>(`${this.apiUrl}${id}/`);
+  getMaterial(slug: string): Observable<Material> {
+    return this.http.get<Material>(`${this.apiUrl}${slug}/`);
   }
 
   createMaterial(data: FormData): Observable<Material> {
       return this.http.post<Material>(this.apiUrl, data);
   }
 
-  updateMaterial(id: number, data: FormData): Observable<Material> {
-    return this.http.patch<Material>(`${this.apiUrl}${id}/`, data);
+  updateMaterial(slug: string, data: FormData): Observable<Material> {
+    return this.http.patch<Material>(`${this.apiUrl}${slug}/`, data);
   }
 
-  deleteMaterial(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.apiUrl}${id}/`);
+  deleteMaterial(slug: string): Observable<void> {
+    return this.http.delete<void>(`${this.apiUrl}${slug}/`);
   }
 
   downloadFile(url: string): Observable<Blob> {

@@ -6,6 +6,7 @@ from config.permissions import IsUnderUsageLimit
 class MaterialViewSet(viewsets.ModelViewSet):
     queryset = Material.objects.all()
     serializer_class = MaterialSerializer
+    lookup_field = 'slug'
 
     def get_permissions(self):
         if self.action in ['create', 'update', 'partial_update', 'destroy']:

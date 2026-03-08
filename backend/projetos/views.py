@@ -6,6 +6,7 @@ from config.permissions import IsUnderUsageLimit
 class ProjetoViewSet(viewsets.ModelViewSet):
     queryset = Projeto.objects.all()
     serializer_class = ProjetoSerializer
+    lookup_field = 'slug'
 
     def get_permissions(self):
         if self.action in ['create', 'update', 'partial_update', 'destroy']:

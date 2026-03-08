@@ -35,7 +35,7 @@ export class AdminProjetoList implements OnInit {
     });
   }
 
-  deleteProjeto(id: number) {
+  deleteProjeto(slug: string) {
     this.confirmationService.confirm({
       message: 'Tem certeza que deseja excluir este projeto?',
       header: 'Confirmação de Exclusão',
@@ -45,7 +45,7 @@ export class AdminProjetoList implements OnInit {
       acceptButtonStyleClass: 'p-button-danger p-button-text',
       rejectButtonStyleClass: 'p-button-text p-button-plain',
       accept: () => {
-        this.projetosService.deleteProjeto(id).subscribe(() => {
+        this.projetosService.deleteProjeto(slug).subscribe(() => {
           this.loadProjetos();
         });
       }

@@ -35,7 +35,7 @@ export class AdminArtigoList implements OnInit {
     });
   }
 
-  deleteArtigo(id: number) {
+  deleteArtigo(slug: string) {
     this.confirmationService.confirm({
       message: 'Tem certeza que deseja excluir este artigo?',
       header: 'Confirmação de Exclusão',
@@ -45,7 +45,7 @@ export class AdminArtigoList implements OnInit {
       acceptButtonStyleClass: 'p-button-danger p-button-text',
       rejectButtonStyleClass: 'p-button-text p-button-plain',
       accept: () => {
-        this.artigosService.deleteArtigo(id).subscribe(() => {
+        this.artigosService.deleteArtigo(slug).subscribe(() => {
           this.loadArtigos();
         });
       }

@@ -44,15 +44,15 @@ export const routes: Routes = [
      
      {path: 'artigos', component: Artigos},
      {path: 'artigos/novo', component: ArtigoCreate, canActivate: [authGuard]},
-     {path: 'artigos/editar/:id', component: ArtigoCreate, canActivate: [authGuard]},
+     {path: 'artigos/editar/:slug', component: ArtigoCreate, canActivate: [authGuard]},
      
      {path: 'materiais/novo', component: MaterialCreate, canActivate: [authGuard]},
-     {path: 'materiais/editar/:id', component: MaterialCreate, canActivate: [authGuard]},
+     {path: 'materiais/editar/:slug', component: MaterialCreate, canActivate: [authGuard]},
      {path: 'materiais', component: Materiais},
      
      {path: 'projetos', component: Projetos},
      {path: 'projetos/novo', component: ProjetoCreate, canActivate: [authGuard]},
-     {path: 'projetos/editar/:id', component: ProjetoCreate, canActivate: [authGuard]},
+     {path: 'projetos/editar/:slug', component: ProjetoCreate, canActivate: [authGuard]},
      {path: 'projeto-tcc', component: ProjetoTCC},
      {path: 'contato', component: Contato},
      {path: '**', redirectTo: ''},

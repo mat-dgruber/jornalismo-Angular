@@ -44,7 +44,7 @@
               severity="info"
               [rounded]="true"
               [text]="true"
-              [routerLink]="['/artigos/editar', artigo.id]"
+              [routerLink]="['/artigos/editar', artigo.slug]"
               pTooltip="Editar"
               tooltipPosition="top"
             >
@@ -54,7 +54,7 @@
               severity="danger"
               [rounded]="true"
               [text]="true"
-              (onClick)="deleteArtigo(artigo.id!)"
+              (onClick)="deleteArtigo(artigo.slug!)"
               pTooltip="Excluir"
               tooltipPosition="top"
             >

@@ -22,7 +22,7 @@ export class ProjetoCreate implements OnInit {
   private route = inject(ActivatedRoute);
 
   isEditMode = false;
-  projetoId: number | null = null;
+  projetoSlug: string | null = null;
   submitLabel = 'Publicar Projeto';
 
   projetoForm: FormGroup = this.fb.group({
@@ -43,17 +43,17 @@ export class ProjetoCreate implements OnInit {
   currentImageUrl: string | null = null;
 
   ngOnInit() {
-    const id = this.route.snapshot.paramMap.get('id');
-    if (id) {
+    const slug = this.route.snapshot.paramMap.get('slug');
+    if (slug) {
       this.isEditMode = true;
-      this.projetoId = +id;
+      this.projetoSlug = slug;
       this.submitLabel = 'Salvar Alterações';
-      this.loadProjeto(+id);
+      this.loadProjeto(slug);
     }
   }
 
-  loadProjeto(id: number) {
-    this.projetosService.getProjeto(id).subscribe(projeto => {
+  loadProjeto(slug: string) {
+    this.projetosService.getProjeto(slug).subscribe(projeto => {
       this.projetoForm.patchValue({
         titulo: projeto.titulo,
         descricao: projeto.descricao,
@@ -97,8 +97,8 @@ export class ProjetoCreate implements OnInit {
       formData.append('imagem', this.selectedFile);
     }
 
-    const request$ = this.isEditMode && this.projetoId
-      ? this.projetosService.updateProjeto(this.projetoId, formData)
+    const request$ = this.isEditMode && this.projetoSlug
+      ? this.projetosService.updateProjeto(this.projetoSlug, formData)
       : this.projetosService.createProjeto(formData);
 
     request$.subscribe({

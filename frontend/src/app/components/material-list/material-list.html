@@ -55,7 +55,7 @@
               severity="info"
               [rounded]="true"
               [text]="true"
-              [routerLink]="['/materiais/editar', material.id]"
+              [routerLink]="['/materiais/editar', material.slug]"
               pTooltip="Editar"
               tooltipPosition="top"
             >
@@ -65,7 +65,7 @@
               severity="danger"
               [rounded]="true"
               [text]="true"
-              (onClick)="deleteMaterial(material.id)"
+              (onClick)="deleteMaterial(material.slug)"
               pTooltip="Excluir"
               tooltipPosition="top"
             >

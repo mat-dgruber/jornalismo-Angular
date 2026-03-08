@@ -44,7 +44,7 @@
               severity="info"
               [rounded]="true"
               [text]="true"
-              [routerLink]="['/projetos/editar', projeto.id]"
+              [routerLink]="['/projetos/editar', projeto.slug]"
               pTooltip="Editar"
               tooltipPosition="top"
             >
@@ -54,7 +54,7 @@
               severity="danger"
               [rounded]="true"
               [text]="true"
-              (onClick)="deleteProjeto(projeto.id!)"
+              (onClick)="deleteProjeto(projeto.slug!)"
               pTooltip="Excluir"
               tooltipPosition="top"
             >

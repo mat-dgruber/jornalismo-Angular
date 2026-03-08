@@ -25,19 +25,19 @@ export class ProjetosService {
     return this.http.get<Projeto[]>(this.apiUrl);
   }
 
-  getProjeto(id: number): Observable<Projeto> {
-    return this.http.get<Projeto>(`${this.apiUrl}${id}/`);
+  getProjeto(slug: string): Observable<Projeto> {
+    return this.http.get<Projeto>(`${this.apiUrl}${slug}/`);
   }
 
   createProjeto(projeto: FormData): Observable<Projeto> {
     return this.http.post<Projeto>(this.apiUrl, projeto);
   }
 
-  updateProjeto(id: number, projeto: FormData): Observable<Projeto> {
-    return this.http.put<Projeto>(`${this.apiUrl}${id}/`, projeto);
+  updateProjeto(slug: string, projeto: FormData): Observable<Projeto> {
+    return this.http.put<Projeto>(`${this.apiUrl}${slug}/`, projeto);
   }
 
-  deleteProjeto(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.apiUrl}${id}/`);
+  deleteProjeto(slug: string): Observable<void> {
+    return this.http.delete<void>(`${this.apiUrl}${slug}/`);
   }
 }

@@ -1,5 +1,4 @@
 export const environment = {
-  // UPDATE THIS URL AFTER DEPLOYING BACKEND TO RENDER
   apiUrl: 'https://backend-373104980698.southamerica-east1.run.app',
   production: true,
   firebase: {

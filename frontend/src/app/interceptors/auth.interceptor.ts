@@ -1,40 +1,63 @@
 import { HttpInterceptorFn, HttpErrorResponse } from '@angular/common/http';
 import { inject } from '@angular/core';
-import { Auth, idToken } from '@angular/fire/auth';
+import { Auth, idToken, authState } from '@angular/fire/auth';
 import { Router } from '@angular/router';
-import { catchError, switchMap, take } from 'rxjs/operators';
-import { throwError } from 'rxjs';
+import { catchError, switchMap, take, filter, timeout, first } from 'rxjs/operators';
+import { throwError, of, timer } from 'rxjs';
 
 export const authInterceptor: HttpInterceptorFn = (req, next) => {
   const auth = inject(Auth);
   const router = inject(Router);
 
-  // Use idToken observable to ensure we wait for the auth state to initialize
-  return idToken(auth).pipe(
+  // We want to wait for Firebase Auth to initialize. 
+  // authState(auth) will emit the user or null once initialized.
+  return authState(auth).pipe(
+    // Give it a moment to initialize if it's null initially
+    // but don't block forever if no one is logged in.
     take(1),
-    switchMap((token) => {
-      let authReq = req;
-      if (token) {
-        authReq = req.clone({
-          setHeaders: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
+    switchMap((u) => {
+      if (!u) {
+        // console.log('AuthInterceptor: No user found, proceeding without token for:', req.url);
+        return next(req);
       }
 
-      return next(authReq).pipe(
-        catchError((error: HttpErrorResponse) => {
-          // If we get a 401 or 403, it means our session is invalid or we lack permissions
-          if (error.status === 401 || error.status === 403) {
-            console.error(
-              'Sessão expirada ou acesso negado. Redirecionando para login...',
-            );
-            // Optional: You could also call auth.signOut() here
-            router.navigate(['/login']);
-          }
-          return throwError(() => error);
+      // User is logged in, get the token. 
+      // idToken(auth) will emit the latest token.
+      return idToken(auth).pipe(
+        filter(token => token !== null),
+        take(1),
+        timeout({
+            each: 5000,
+            with: () => {
+                console.warn('AuthInterceptor: Timeout waiting for Firebase token');
+                return of(null);
+            }
         }),
+        switchMap((token) => {
+          let authReq = req;
+          if (token) {
+            // console.log('AuthInterceptor: Attaching token to request:', req.url);
+            authReq = req.clone({
+              setHeaders: {
+                Authorization: `Bearer ${token}`,
+              },
+            });
+          }
+
+          return next(authReq).pipe(
+            catchError((error: HttpErrorResponse) => {
+              if (error.status === 401 || error.status === 403) {
+                console.error(
+                  `AuthInterceptor: Session expired or access denied (${error.status}). Redirecting to login...`,
+                  error.message
+                );
+                router.navigate(['/login']);
+              }
+              return throwError(() => error);
+            }),
+          );
+        })
       );
-    }),
+    })
   );
 };

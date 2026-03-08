@@ -82,15 +82,15 @@ export class MaterialCreate {
   }
 
   isEditMode = false;
-  materialId: number | null = null;
+  materialSlug: string | null = null;
 
   ngOnInit() {
     this.route.paramMap.subscribe((params) => {
-      const id = params.get('id');
-      if (id) {
+      const slug = params.get('slug');
+      if (slug) {
         this.isEditMode = true;
-        this.materialId = +id;
-        this.loadMaterial(this.materialId);
+        this.materialSlug = slug;
+        this.loadMaterial(slug);
         // Remove required validator for image in edit mode as we might keep existing one
         this.materialForm.get('image')?.clearValidators();
         this.materialForm.get('image')?.updateValueAndValidity();
@@ -98,8 +98,8 @@ export class MaterialCreate {
     });
   }
 
-  loadMaterial(id: number) {
-    this.materiaisService.getMaterial(id).subscribe((material) => {
+  loadMaterial(slug: string) {
+    this.materiaisService.getMaterial(slug).subscribe((material) => {
       this.materialForm.patchValue({
         name: material.name,
         description: material.description,
@@ -140,8 +140,8 @@ export class MaterialCreate {
     }
 
     const request$ =
-      this.isEditMode && this.materialId
-        ? this.materiaisService.updateMaterial(this.materialId, formData)
+      this.isEditMode && this.materialSlug
+        ? this.materiaisService.updateMaterial(this.materialSlug, formData)
         : this.materiaisService.createMaterial(formData);
 
     request$.subscribe({

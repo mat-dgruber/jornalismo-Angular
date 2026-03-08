@@ -35,7 +35,7 @@ export class MaterialList implements OnInit {
     });
   }
 
-  deleteMaterial(id: number) {
+  deleteMaterial(slug: string) {
     this.confirmationService.confirm({
       message: 'Tem certeza que deseja excluir este material?',
       header: 'Confirmação de Exclusão',
@@ -45,7 +45,7 @@ export class MaterialList implements OnInit {
       acceptButtonStyleClass: 'p-button-danger p-button-text',
       rejectButtonStyleClass: 'p-button-text p-button-plain',
       accept: () => {
-        this.materiaisService.deleteMaterial(id).subscribe(() => {
+        this.materiaisService.deleteMaterial(slug).subscribe(() => {
           this.loadMateriais();
         });
       }
