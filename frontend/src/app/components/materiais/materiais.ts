@@ -11,7 +11,7 @@ import { environment } from '../../../environments/environment';
   templateUrl: './materiais.html',
   styleUrls: ['./materiais.css'],
   standalone: true,
-  imports: [CommonModule, RouterLink, SkeletonModule]
+  imports: [CommonModule, RouterLink, SkeletonModule],
 })
 export class Materiais implements OnInit {
   materials: Material[] = [];
@@ -28,27 +28,29 @@ export class Materiais implements OnInit {
       error: (error) => {
         console.error('Error fetching materials:', error);
         this.isLoading = false;
-      }
+      },
     });
   }
 
   getImageUrl(url: string | undefined): string {
     if (!url) return 'assets/Imagens/placeholder.jpg';
     if (url.startsWith('http')) return url;
-    
+
     // If it starts with /media/, we need to ensure it uses the backend URL
     // But remove duplicate / if needed
-    const baseUrl = environment.apiUrl.endsWith('/') ? environment.apiUrl.slice(0, -1) : environment.apiUrl;
+    const baseUrl = environment.apiUrl.endsWith('/')
+      ? environment.apiUrl.slice(0, -1)
+      : environment.apiUrl;
     const path = url.startsWith('/') ? url : `/${url}`;
     return `${baseUrl}${path}`;
   }
 
   onDownload(material: Material): void {
-    console.log('Download requested for:', material.name);
-    
+    console.log('Download requested for material object:', material);
+
     if (material.file) {
       const fileUrl = this.getImageUrl(material.file);
-      console.log('Attempting to download from:', fileUrl);
+      console.log('Generated download URL:', fileUrl);
 
       // 1. Open in new tab (as fallback)
       window.open(fileUrl, '_blank');
@@ -67,7 +69,7 @@ export class Materiais implements OnInit {
         error: (error) => {
           console.error('Download via service failed:', error);
           // Fallback is already handled by the window.open
-        }
+        },
       });
     } else {
       console.warn('Material has no file associated for download.');
