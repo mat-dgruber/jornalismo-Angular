@@ -30,11 +30,7 @@ SECRET_KEY = os.environ.get('SECRET_KEY', 'django-insecure-dev-key-change-in-pro
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.environ.get('DEBUG', 'True') == 'True'
 
-ALLOWED_HOSTS = [
-    "localhost",
-    "127.0.0.1",
-    "0.0.0.0",
-]
+ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', 'localhost,127.0.0.1,0.0.0.0').split(',')
 
 RENDER_EXTERNAL_HOSTNAME = os.environ.get('RENDER_EXTERNAL_HOSTNAME')
 if RENDER_EXTERNAL_HOSTNAME:
@@ -69,6 +65,7 @@ ALLOWED_ORIGINS = [
     "https://portfolio-jornalismo.web.app",
     "https://portfolio-jornalismo.firebaseapp.com",
     "https://mariaizabela.com.br",
+    "https://jornalismo-api-302135985728.southamerica-east1.run.app",
     "http://localhost:4200", # Localhost default
 ]
 
