@@ -139,16 +139,6 @@ export class MaterialCreate {
       formData.append('file', this.selectedFile);
     }
 
-    // DEBUG: Log FormData content
-    console.log('Sending FormData:');
-    formData.forEach((value, key) => {
-      if (value instanceof File) {
-        console.log(`${key}: File - ${value.name} (${value.size} bytes)`);
-      } else {
-        console.log(`${key}: ${value}`);
-      }
-    });
-
     const request$ =
       this.isEditMode && this.materialSlug
         ? this.materiaisService.updateMaterial(this.materialSlug, formData)

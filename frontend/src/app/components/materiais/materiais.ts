@@ -46,11 +46,8 @@ export class Materiais implements OnInit {
   }
 
   onDownload(material: Material): void {
-    console.log('Download requested for material object:', material);
-
     if (material.file) {
       const fileUrl = this.getImageUrl(material.file);
-      console.log('Generated download URL:', fileUrl);
 
       // 1. Open in new tab (as fallback)
       window.open(fileUrl, '_blank');

@@ -15,119 +15,65 @@
   <div class="container">
     <h2>Últimas Matérias</h2>
     <div class="portfolio-grid">
-      @if (isLoadingArticles) { @for (item of [1,2]; track item) {
-      <div class="portfolio-item">
-        <p-skeleton
-          height="200px"
-          styleClass="mb-3"
-          borderRadius="8px"
-        ></p-skeleton>
-        <p-skeleton width="70%" height="1.5rem" styleClass="mb-2"></p-skeleton>
-        <p-skeleton width="100%" height="1rem" styleClass="mb-2"></p-skeleton>
-        <p-skeleton width="60%" height="0.8rem" styleClass="mb-3"></p-skeleton>
-        <div class="mt-auto">
-          <p-skeleton
-            width="140px"
-            height="2.5rem"
-            borderRadius="25px"
-          ></p-skeleton>
-        </div>
-      </div>
-      } } @else { @for (article of recentArticles; track article.id) {
-      <div class="portfolio-item pointer">
-        @if (article.imagem) {
-        <img [src]="article.imagem" [alt]="article.titulo" class="post-image" />
+      @if (isLoadingArticles) {
+        @for (item of [1, 2]; track item) {
+          <div class="portfolio-item">
+            <p-skeleton
+              height="200px"
+              styleClass="mb-3"
+              borderRadius="8px"
+            ></p-skeleton>
+            <p-skeleton
+              width="70%"
+              height="1.5rem"
+              styleClass="mb-2"
+            ></p-skeleton>
+            <p-skeleton
+              width="100%"
+              height="1rem"
+              styleClass="mb-2"
+            ></p-skeleton>
+            <p-skeleton
+              width="60%"
+              height="0.8rem"
+              styleClass="mb-3"
+            ></p-skeleton>
+            <div class="mt-auto">
+              <p-skeleton
+                width="140px"
+                height="2.5rem"
+                borderRadius="25px"
+              ></p-skeleton>
+            </div>
+          </div>
         }
-        <h3>{{ article.titulo }}</h3>
-        <!-- Truncate content or use subtitle logic if needed. -->
-        <p class="description">
-          {{ article.subtitulo || article.conteudo.slice(0, 100) + "..." }}
-        </p>
-        <p class="source">Publicado em: {{ article.local_publicacao }}</p>
+      } @else {
+        @for (article of recentArticles; track article.id) {
+          <div class="portfolio-item pointer">
+            @if (article.imagem) {
+              <img
+                [src]="article.imagem"
+                [alt]="article.titulo"
+                class="post-image"
+              />
+            }
+            <h3>{{ article.titulo }}</h3>
+            <!-- Truncate content or use subtitle logic if needed. -->
+            <p class="description">
+              {{ article.subtitulo || article.conteudo.slice(0, 100) + "..." }}
+            </p>
+            <p class="source">Publicado em: {{ article.local_publicacao }}</p>
 
-        @if (article.link_externo) {
-        <a [href]="article.link_externo" target="_blank" class="read-more"
-          >Ler mais</a
-        >
+            @if (article.link_externo) {
+              <a [href]="article.link_externo" target="_blank" class="read-more"
+                >Ler mais</a
+              >
+            }
+          </div>
         }
-      </div>
-      } }
+      }
     </div>
     <a routerLink="/artigos" class="btn">Ver Todas as Matérias</a>
-  </div>
-</section>
-
-<section id="projetos" class="portfolio-section bg-light">
-  <div class="container">
-    <h2>Projetos Acadêmicos e Pessoais</h2>
-    <div class="portfolio-grid">
-      @if (isLoadingProjects) { @for (item of [1,2]; track item) {
-      <div class="portfolio-item">
-        <p-skeleton
-          height="200px"
-          styleClass="mb-3"
-          borderRadius="8px"
-        ></p-skeleton>
-        <p-skeleton width="70%" height="1.5rem" styleClass="mb-2"></p-skeleton>
-        <p-skeleton width="100%" height="1rem" styleClass="mb-2"></p-skeleton>
-        <div class="mt-auto">
-          <p-skeleton
-            width="120px"
-            height="2.5rem"
-            borderRadius="25px"
-          ></p-skeleton>
-        </div>
-      </div>
-      } } @else { @for (project of recentProjects; track project.id) {
-      <div class="portfolio-item">
-        @if (project.imagem) {
-        <img [src]="project.imagem" [alt]="project.titulo" class="post-image" />
-        }
-        <h3>{{ project.titulo }}</h3>
-        <p class="description">{{ project.descricao.slice(0, 150) + "..." }}</p>
-        <!-- Link to detail page if we have one, or external link -->
-        @if (project.link_externo) {
-        <a [href]="project.link_externo" target="_blank" class="btn"
-          >Ver Projeto</a
-        >
-        } @else {
-        <!-- If no external link, maybe link to local detail or list? For now just static text or list link -->
-        <a routerLink="/projetos" class="btn">Ver Mais</a>
-        }
-      </div>
-      } }
-    </div>
-    <a routerLink="/projetos" class="btn">Ver Todos os Projetos</a>
-  </div>
-</section>
-
-<section id="blog" class="portfolio-section">
-  <div class="container">
-    <h2>Blog</h2>
-    <div class="portfolio-grid">
-      @if (isLoadingPosts) { @for (item of [1,2]; track item) {
-      <div class="portfolio-item">
-        <p-skeleton
-          height="200px"
-          styleClass="mb-3"
-          borderRadius="8px"
-        ></p-skeleton>
-        <p-skeleton width="70%" height="1.5rem" styleClass="mb-2"></p-skeleton>
-        <p-skeleton width="80%" height="1rem" styleClass="mb-2"></p-skeleton>
-        <p-skeleton width="40%" height="0.9rem" styleClass="mb-1"></p-skeleton>
-      </div>
-      } } @else { @for (post of recentPosts; track post.slug) {
-      <div class="portfolio-item pointer" [routerLink]="['/post', post.slug]">
-        @if (post.image) {
-        <img [src]="post.image" [alt]="post.title" class="post-image" />
-        }
-        <h3>{{ post.title }}</h3>
-        <p class="description">{{ post.subtitle }}</p>
-        <span class="read-more">Ler mais</span>
-      </div>
-      } }
-    </div>
-    <a routerLink="/blog" class="btn">Ver Todos os Posts</a>
   </div>
 </section>
 
@@ -140,31 +86,162 @@
     </p>
     <br />
     <div class="portfolio-grid">
-      @if (isLoadingMaterials) { @for (item of [1,2]; track item) {
-      <div class="portfolio-item">
-        <p-skeleton
-          height="200px"
-          styleClass="mb-3"
-          borderRadius="8px"
-        ></p-skeleton>
-        <p-skeleton width="70%" height="1.5rem" styleClass="mb-2"></p-skeleton>
-        <p-skeleton width="100%" height="1rem" styleClass="mb-2"></p-skeleton>
-        <p-skeleton width="50%" height="0.9rem" styleClass="mb-1"></p-skeleton>
-      </div>
-      } } @else { @for (material of recentMaterials; track material.id) {
-      <div class="portfolio-item pointer" routerLink="/materiais">
-        @if (material.image) {
-        <img [src]="material.image" [alt]="material.name" class="post-image" />
+      @if (isLoadingMaterials) {
+        @for (item of [1, 2]; track item) {
+          <div class="portfolio-item">
+            <p-skeleton
+              height="200px"
+              styleClass="mb-3"
+              borderRadius="8px"
+            ></p-skeleton>
+            <p-skeleton
+              width="70%"
+              height="1.5rem"
+              styleClass="mb-2"
+            ></p-skeleton>
+            <p-skeleton
+              width="100%"
+              height="1rem"
+              styleClass="mb-2"
+            ></p-skeleton>
+            <p-skeleton
+              width="50%"
+              height="0.9rem"
+              styleClass="mb-1"
+            ></p-skeleton>
+          </div>
         }
-        <h3>{{ material.name }}</h3>
-        <p class="description">{{ material.description }}</p>
-        <span class="read-more">Ver Material</span>
-      </div>
-      } }
+      } @else {
+        @for (material of recentMaterials; track material.id) {
+          <div class="portfolio-item pointer" routerLink="/materiais">
+            @if (material.image) {
+              <img
+                [src]="material.image"
+                [alt]="material.name"
+                class="post-image"
+              />
+            }
+            <h3>{{ material.name }}</h3>
+            <p class="description">{{ material.description }}</p>
+            <span class="read-more">Ver Material</span>
+          </div>
+        }
+      }
     </div>
     <a routerLink="/materiais" class="btn">Ver Todos Materiais</a>
   </div>
 </section>
+
+<section id="projetos" class="portfolio-section">
+  <div class="container">
+    <h2>Projetos Acadêmicos e Pessoais</h2>
+    <div class="portfolio-grid">
+      @if (isLoadingProjects) {
+        @for (item of [1, 2]; track item) {
+          <div class="portfolio-item">
+            <p-skeleton
+              height="200px"
+              styleClass="mb-3"
+              borderRadius="8px"
+            ></p-skeleton>
+            <p-skeleton
+              width="70%"
+              height="1.5rem"
+              styleClass="mb-2"
+            ></p-skeleton>
+            <p-skeleton
+              width="100%"
+              height="1rem"
+              styleClass="mb-2"
+            ></p-skeleton>
+            <div class="mt-auto">
+              <p-skeleton
+                width="120px"
+                height="2.5rem"
+                borderRadius="25px"
+              ></p-skeleton>
+            </div>
+          </div>
+        }
+      } @else {
+        @for (project of recentProjects; track project.id) {
+          <div class="portfolio-item">
+            @if (project.imagem) {
+              <img
+                [src]="project.imagem"
+                [alt]="project.titulo"
+                class="post-image"
+              />
+            }
+            <h3>{{ project.titulo }}</h3>
+            <p class="description">
+              {{ project.descricao.slice(0, 150) + "..." }}
+            </p>
+            @if (project.link_externo) {
+              <a [href]="project.link_externo" target="_blank" class="btn"
+                >Ver Projeto</a
+              >
+            } @else {
+              <a routerLink="/projetos" class="btn">Ver Mais</a>
+            }
+          </div>
+        }
+      }
+    </div>
+    <a routerLink="/projetos" class="btn">Ver Todos os Projetos</a>
+  </div>
+</section>
+
+@if (isLoadingPosts || recentPosts.length > 0) {
+  <section id="blog" class="portfolio-section bg-light">
+    <div class="container">
+      <h2>Blog</h2>
+      <div class="portfolio-grid">
+        @if (isLoadingPosts) {
+          @for (item of [1, 2]; track item) {
+            <div class="portfolio-item">
+              <p-skeleton
+                height="200px"
+                styleClass="mb-3"
+                borderRadius="8px"
+              ></p-skeleton>
+              <p-skeleton
+                width="70%"
+                height="1.5rem"
+                styleClass="mb-2"
+              ></p-skeleton>
+              <p-skeleton
+                width="80%"
+                height="1rem"
+                styleClass="mb-2"
+              ></p-skeleton>
+              <p-skeleton
+                width="40%"
+                height="0.9rem"
+                styleClass="mb-1"
+              ></p-skeleton>
+            </div>
+          }
+        } @else {
+          @for (post of recentPosts; track post.slug) {
+            <div
+              class="portfolio-item pointer"
+              [routerLink]="['/post', post.slug]"
+            >
+              @if (post.image) {
+                <img [src]="post.image" [alt]="post.title" class="post-image" />
+              }
+              <h3>{{ post.title }}</h3>
+              <p class="description">{{ post.subtitle }}</p>
+              <span class="read-more">Ler mais</span>
+            </div>
+          }
+        }
+      </div>
+      <a routerLink="/blog" class="btn">Ver Todos os Posts</a>
+    </div>
+  </section>
+}
 
 <section id="contato" class="contact-section">
   <div class="container">
