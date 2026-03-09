@@ -2,6 +2,7 @@ import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { ArtigosService, Artigo } from '../../services/artigos.service';
+import { SeoService } from '../../services/seo.service';
 
 
 @Component({
@@ -14,8 +15,14 @@ import { ArtigosService, Artigo } from '../../services/artigos.service';
 export class Artigos implements OnInit {
   articles: Artigo[] = []; 
   private artigosService = inject(ArtigosService);
+  private seoService = inject(SeoService);
 
   ngOnInit(): void {
+    this.seoService.updateSeo({
+      title: 'Artigos',
+      description: 'Leia os artigos mais recentes de Maria Izabela sobre fé, sociedade, teologia e jornalismo.',
+      url: '/artigos'
+    });
     this.artigosService.getArtigos().subscribe((data) => {
         this.articles = data.reverse(); // Show newest first
     });

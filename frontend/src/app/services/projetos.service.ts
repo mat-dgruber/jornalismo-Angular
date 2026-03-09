@@ -6,7 +6,9 @@ import { environment } from '../../environments/environment';
 export interface Projeto {
   id?: number;
   titulo: string;
+  subtitulo?: string;
   descricao: string;
+  conteudo?: string;
   data_realizacao: string;
   tipo: 'academico' | 'pessoal';
   link_externo?: string;

@@ -1,99 +1,129 @@
-/* Estilos da página de listagem de artigos */
-.blog-page, .post-page {
-    padding: 80px 0;
+.artigos-page {
+    padding: var(--space-xl) 0;
+    background-color: #fafafa;
+    min-height: 80vh;
 }
 
-.blog-grid {
+.page-header {
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto var(--space-xl);
+}
+
+.page-title {
+    font-family: var(--font-heading);
+    font-size: 3.5rem;
+    margin-bottom: var(--space-sm);
+    color: var(--primary-color);
+}
+
+.page-subtitle {
+    font-size: 1.1rem;
+    color: #666;
+    line-height: 1.6;
+}
+
+.artigos-grid {
     display: grid;
-    grid-template-columns: 1fr;
-    gap: 40px;
+    grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+    gap: var(--space-xl);
+    margin-bottom: var(--space-2xl);
 }
 
-/* Grid de Portfólio */
-.portfolio-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 30px;
+.artigo-card {
+    background: #ffffff;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    box-shadow: var(--shadow-md);
+    transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+    display: flex;
+    flex-direction: column;
+    border: 1px solid rgba(0,0,0,0.05);
 }
 
-.portfolio-item {
-    background-color: #f6f3ff;
-    padding: 20px;
-    border-radius: 15px;
-    box-shadow: 0 1px 15px rgba(0, 0, 0, 0.463);
-    text-align: left;
+.artigo-card:hover {
+    transform: translateY(-10px);
+    box-shadow: var(--shadow-lg);
+}
+
+.artigo-image-wrapper {
+    width: 100%;
+    height: 240px;
+    overflow: hidden;
+    background-color: #f0f0f0;
+}
+
+.artigo-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s ease;
+}
+
+.artigo-card:hover .artigo-image {
+    transform: scale(1.05);
+}
+
+.artigo-content {
+    padding: var(--space-lg);
+    flex-grow: 1;
     display: flex;
     flex-direction: column;
 }
 
-.portfolio-item .btn {
-    margin-top: auto;
+.artigo-source {
+    display: inline-block;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    font-weight: 800;
+    letter-spacing: 0.05em;
+    padding: 4px 12px;
+    border-radius: var(--radius-full);
+    margin-bottom: var(--space-sm);
+    align-self: flex-start;
+    background-color: #f3e8ff;
+    color: var(--primary-color);
 }
 
-.portfolio-item h3 {
+.artigo-titulo {
     font-family: var(--font-heading);
-    font-size: 1.5rem;
-    margin-bottom: 10px;
+    font-size: 1.75rem;
+    line-height: 1.2;
+    margin-bottom: var(--space-md);
+    color: var(--primary-color);
 }
 
-.portfolio-item .description {
+.artigo-descricao {
     font-size: 1rem;
-    margin-bottom: 15px;
+    color: #555;
+    line-height: 1.7;
+    margin-bottom: var(--space-md);
+    flex-grow: 1;
 }
 
-.portfolio-item img {
+.artigo-date {
+    font-size: 0.85rem;
+    color: #888;
+    margin-bottom: var(--space-lg);
+}
+
+.btn-artigo {
     width: 100%;
-    height: auto;
-    border-radius: 8px;
-    margin-top: 15px;
+    padding: 1rem;
 }
 
-.blog-post-preview {
-    background-color: #fff;
-    padding: 30px;
-    border-radius: 15px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    text-align: left;
-}
-
-.blog-post-preview h3 {
-    font-family: var(--font-heading);
-    font-size: 1.8rem;
-}
-
-.post-excerpt {
-    margin-bottom: 20px;
-}
-
-.post-page .container {
-    max-width: 800px;
-}
-
-.post-header {
+.page-footer {
     text-align: center;
-    margin-bottom: 40px;
+    border-top: 1px solid #eee;
+    padding-top: var(--space-xl);
 }
 
-.post-title {
-    font-family: var(--font-heading);
-    font-size: 3rem;
-    margin-bottom: 10px;
-}
-
-.post-meta {
-    font-size: 0.9rem;
-    color: #777;
-    margin: 10px 0;
-}
-
-.post-footer {
-    text-align: center;
-    margin-top: 40px;
-}
-
-/* Responsividade da página de artigos */
 @media (max-width: 768px) {
-    .post-title {
-        font-size: 2.2rem;
+    .page-title {
+        font-size: 2.5rem;
+    }
+    
+    .artigos-grid {
+        grid-template-columns: 1fr;
     }
 }

@@ -1,6 +1,6 @@
 /* Seções da Home Page */
 .hero, .contact-section {
-    padding: 80px 0;
+    padding: var(--space-2xl) 0;
     text-align: center;
 }
 
@@ -11,12 +11,12 @@
     justify-content: center;
     position: relative;
     background-image: url('../../../assets/Imagens/banner-jornalismo-maria-izabela.png');
-    /* filter: blur(2px);  <-- Remove this line */
     background-size: cover;
     background-attachment: fixed;
     background-position: center center;
     background-repeat: no-repeat;
-    background-color: var(--primary-color); /* Fallback color */
+    background-color: var(--primary-color);
+    min-height: 70vh;
 }
 
 .hero::before {
@@ -26,7 +26,7 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: rgba(43, 2, 51, 0.6); /* Overlay color, adjusted from original gradient */
+    background-color: rgba(43, 2, 51, 0.65);
     z-index: 1;
 }
 
@@ -37,131 +37,176 @@
 
 .hero h2 {
     font-family: var(--font-heading);
-    font-size: 3rem;
-    margin-bottom: 10px;
+    font-size: clamp(2.5rem, 6vw, 4rem);
+    margin-bottom: var(--space-sm);
+    line-height: 1.1;
 }
 
 .hero p {
-    font-size: 1.2rem;
-    max-width: 700px;
+    font-size: 1.25rem;
+    max-width: 800px;
     color: var(--light-text-color);
     margin: 0 auto;
+    opacity: 0.9;
+    line-height: 1.5;
 }
 
 /* Seção de Contato */
+.contact-section.bg-purple {
+    background-color: var(--bg-light);
+}
+
+.contact-section.bg-purple h2, 
+.contact-section.bg-purple p {
+    color: var(--text-color);
+}
+
+.contact-section.bg-purple .contact-links a {
+    color: var(--primary-color);
+}
+
+.contact-section.bg-purple .contact-links a:hover {
+    background-color: rgba(43, 2, 51, 0.05);
+}
+
+.contact-section .contact-links {
+    display: flex;
+    justify-content: center;
+    gap: var(--space-md);
+    margin-top: var(--space-md);
+}
+
 .contact-section .contact-links a {
     color: var(--primary-color);
     text-decoration: none;
     font-weight: 700;
-    margin: 0 10px;
+    padding: var(--space-xs) var(--space-sm);
+    border-radius: var(--radius-sm);
+    transition: all 0.2s ease;
 }
 
 .contact-section .contact-links a:hover {
+    background-color: rgba(43, 2, 51, 0.05);
     text-decoration: underline;
 }
 
 /* Biografia */
 .bio-container {
     display: flex;
-    gap: 30px;
-    align-items: flex-start;
+    gap: var(--space-xl);
+    align-items: center;
+    text-align: left;
 }
 
 .bio-text {
-    flex: 2;
+    flex: 1.5;
 }
 
 .bio-photos {
     flex: 1;
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: var(--space-md);
 }
 
 .bio-photos img {
     width: 100%;
-    border-radius: 8px;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-md);
+    transition: transform 0.3s ease;
+}
+
+.bio-photos img:hover {
+    transform: scale(1.02);
 }
 
 .portfolio-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 30px;
-    margin-top: 30px;
-    margin-bottom: 30px;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: var(--space-lg);
+    margin-top: var(--space-lg);
+    margin-bottom: var(--space-lg);
 }
 
 .portfolio-item {
     background-color: var(--p-surface-0);
-    padding: 20px;
-    border-radius: 15px;
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    padding: var(--space-md);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-sm);
     text-align: left;
     display: flex;
     flex-direction: column;
     height: 100%;
-    transition: transform 0.2s, box-shadow 0.2s;
-    border: 1px solid var(--p-surface-200);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    border: 1px solid var(--p-surface-100);
+}
+
+.portfolio-item:hover {
+    transform: translateY(-8px);
+    box-shadow: var(--shadow-lg);
+    border-color: var(--secondary-color);
+}
+
+.portfolio-item h3 {
+    margin-top: var(--space-sm);
+    font-size: 1.5rem;
 }
 
 .portfolio-item .btn {
     align-self: flex-start;
+    margin-top: auto;
 }
-
-/* Add hover for non-pointer items too if needed, but pointer class handles transform. 
-   Here we just ensure the shadow updates. */
-.portfolio-item:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-}
-
 
 .post-image {
     width: 100%;
-    height: 200px;
+    height: 220px;
     object-fit: cover;
-    border-radius: 8px;
-    margin-bottom: 15px;
+    border-radius: var(--radius-md);
+    margin-bottom: var(--space-sm);
 }
 
 .pointer {
     cursor: pointer;
 }
 
-/* Remove separate pointer:hover since .portfolio-item:hover handles it */
-
 .read-more {
     margin-top: auto;
     color: var(--primary-color);
-    font-weight: bold;
+    font-weight: 700;
     font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
 }
 
 p {
     font-size: 1rem;
     margin-bottom: 1rem;
-    line-height: 1.5;
+    line-height: 1.6;
     color: var(--p-text-color);
     font-family: var(--font-body);
-    font-weight: 400;
 }
 
 /* Responsividade da Home */
 @media (max-width: 768px) {
     .hero,
     .contact-section {
-        text-align: center;
+        padding: var(--space-xl) 0;
     }
 
     .hero {
-        background-attachment: scroll; /* Fix for iOS mobile jitter */
+        background-attachment: scroll;
+        min-height: 50vh;
     }
 
     .bio-container {
         flex-direction: column;
+        gap: var(--space-lg);
+        text-align: center;
     }
 
     .portfolio-grid {
-        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        grid-template-columns: 1fr;
+        gap: var(--space-md);
     }
 }

@@ -1,0 +1,70 @@
+<main class="projeto-detail-page">
+  <div class="container">
+    <div class="back-link">
+      <a routerLink="/projetos" class="flex align-center gap-2">
+        <lucide-icon [name]="arrowLeft" size="18"></lucide-icon>
+        Voltar para Projetos
+      </a>
+    </div>
+
+    @if (projetoResource.isLoading()) {
+      <div class="skeleton-detail">
+        <p-skeleton width="80%" height="4rem" styleClass="mb-4"></p-skeleton>
+        <p-skeleton width="40%" height="1.5rem" styleClass="mb-6"></p-skeleton>
+        <p-skeleton height="400px" borderRadius="12px" styleClass="mb-6"></p-skeleton>
+        <p-skeleton width="100%" height="2rem" styleClass="mb-3"></p-skeleton>
+        <p-skeleton width="100%" height="2rem" styleClass="mb-3"></p-skeleton>
+        <p-skeleton width="60%" height="2rem" styleClass="mb-3"></p-skeleton>
+      </div>
+    } @else {
+      @if (projetoResource.value(); as projeto) {
+        <article class="projeto-article">
+          <header class="projeto-header">
+            <span class="projeto-type-badge" [ngClass]="projeto.tipo">
+              {{ projeto.tipo === 'academico' ? 'Projeto Acadêmico' : 'Projeto Pessoal' }}
+            </span>
+            <h1 class="projeto-title">{{ projeto.titulo }}</h1>
+            @if (projeto.subtitulo) {
+              <p class="projeto-subtitle">{{ projeto.subtitulo }}</p>
+            }
+            <div class="projeto-meta">
+              <span class="meta-item">Realizado em: {{ projeto.data_realizacao | date:'MMMM / yyyy' }}</span>
+            </div>
+          </header>
+
+          @if (projeto.imagem) {
+            <div class="projeto-hero-image">
+              <img [src]="projeto.imagem" [alt]="projeto.titulo" />
+            </div>
+          }
+
+          <div class="projeto-body">
+            <div class="projeto-resumo-section">
+              <h2 class="section-label">Resumo</h2>
+              <p class="resumo-text">{{ projeto.descricao }}</p>
+            </div>
+
+            @if (projeto.conteudo) {
+              <div class="projeto-divider"></div>
+              <div class="content-rich-text" [innerHTML]="projeto.conteudo"></div>
+            }
+          </div>
+
+          @if (projeto.link_externo) {
+            <div class="projeto-footer-actions">
+              <a [href]="projeto.link_externo" target="_blank" class="btn btn-full">
+                Acessar Projeto Completo (Link Externo)
+              </a>
+            </div>
+          }
+        </article>
+      } @else {
+        <div class="error-state">
+          <h2>Projeto não encontrado</h2>
+          <p>O projeto que você está procurando não existe ou foi removido.</p>
+          <a routerLink="/projetos" class="btn">Voltar para a Lista</a>
+        </div>
+      }
+    }
+  </div>
+</main>

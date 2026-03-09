@@ -22,6 +22,7 @@ import { AdminArtigoList } from './components/admin-artigo-list/admin-artigo-lis
 import { ArtigoCreate } from './components/artigo-create/artigo-create';
 import { AdminProjetoList } from './components/admin-projeto-list/admin-projeto-list';
 import { ProjetoCreate } from './components/projeto-create/projeto-create';
+import { ProjetoDetail } from './components/projeto-detail/projeto-detail';
 import { FeedbackSuccess } from './components/feedback-success/feedback-success';
 import { FeedbackError } from './components/feedback-error/feedback-error';
 
@@ -53,6 +54,7 @@ export const routes: Routes = [
      {path: 'projetos', component: Projetos},
      {path: 'projetos/novo', component: ProjetoCreate, canActivate: [authGuard]},
      {path: 'projetos/editar/:slug', component: ProjetoCreate, canActivate: [authGuard]},
+     {path: 'projetos/:slug', component: ProjetoDetail},
      {path: 'projeto-tcc', component: ProjetoTCC},
      {path: 'contato', component: Contato},
      {path: '**', redirectTo: ''},

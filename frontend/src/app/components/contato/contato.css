@@ -1,39 +1,44 @@
 .contact-form-container {
-    max-width: 600px;
-    margin: 40px auto;
-    padding: 30px;
-    background-color: var(--background-color);
-    border-radius: 12px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    max-width: 650px;
+    margin: var(--space-xl) auto;
+    padding: var(--space-lg);
+    background-color: var(--p-surface-0);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-lg);
+    border: 1px solid var(--p-surface-100);
 }
 
 h2 {
     text-align: center;
     color: var(--primary-color);
-    margin-bottom: 30px;
+    margin-bottom: var(--space-lg);
+    font-size: clamp(2rem, 4vw, 2.5rem);
 }
 
 .form-group {
-    margin-bottom: 20px;
+    margin-bottom: var(--space-md);
 }
 
 label {
     display: block;
-    margin-bottom: 8px;
+    margin-bottom: var(--space-xs);
     font-weight: 600;
-    color: var(--text-color);
+    color: var(--p-text-color);
+    font-size: 0.95rem;
 }
 
 input[type="text"],
 input[type="email"],
 textarea {
     width: 100%;
-    padding: 12px;
-    border: 1px solid #ccc;
-    border-radius: 8px;
+    padding: 0.875rem 1rem;
+    border: 1.5px solid var(--p-surface-200);
+    border-radius: var(--radius-md);
     font-family: var(--font-body);
     font-size: 1rem;
-    transition: border-color 0.3s ease;
+    color: var(--text-color);
+    background-color: var(--p-surface-50);
+    transition: all 0.2s ease;
 }
 
 input[type="text"]:focus,
@@ -41,47 +46,62 @@ input[type="email"]:focus,
 textarea:focus {
     outline: none;
     border-color: var(--primary-color);
+    background-color: var(--p-surface-0);
+    box-shadow: 0 0 0 4px rgba(43, 2, 51, 0.1);
 }
 
 textarea {
     resize: vertical;
-    min-height: 120px;
+    min-height: 150px;
 }
 
 .error-message {
-    color: #d9534f;
-    font-size: 0.9rem;
-    margin-top: 5px;
+    color: #ef4444;
+    font-size: 0.85rem;
+    margin-top: 4px;
+    font-weight: 500;
 }
 
 button[type="submit"] {
-    display: block;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     width: 100%;
-    padding: 12px 20px;
+    padding: 1rem;
     background-color: var(--primary-color);
     color: var(--light-text-color);
     border: none;
-    border-radius: 25px;
+    border-radius: var(--radius-full);
     font-size: 1.1rem;
     font-weight: 700;
     cursor: pointer;
-    transition: background-color 0.3s ease;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    margin-top: var(--space-md);
 }
 
 button[type="submit"]:hover:not(:disabled) {
-    background-color: #3b008db4;
+    background-color: #3b008d;
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+}
+
+button[type="submit"]:active:not(:disabled) {
+    transform: translateY(0);
 }
 
 button[type="submit"]:disabled {
-    background-color: #ccc;
+    background-color: var(--p-surface-300);
+    color: var(--p-surface-500);
     cursor: not-allowed;
 }
 
 .submission-message {
-    margin-top: 20px;
-    padding: 15px;
-    border-radius: 8px;
+    margin-top: var(--space-md);
+    padding: var(--space-sm);
+    border-radius: var(--radius-md);
     text-align: center;
-    background-color: #dff0d8;
-    color: #3c763d;
+    background-color: #ecfdf5;
+    color: #065f46;
+    border: 1px solid #a7f3d0;
+    font-weight: 600;
 }

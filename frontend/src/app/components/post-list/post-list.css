@@ -1,103 +1,107 @@
 /* Post List Styling matches Home Page Portfolio */
 
 .container {
-  /* Inherits from global .container, we can just add specific padding if needed */
-  padding-bottom: 4rem;
+  padding-bottom: var(--space-xl);
+  padding-top: var(--space-xl);
 }
 
 h1 {
   font-family: var(--font-heading);
   text-align: center;
   color: var(--primary-color);
-  margin-bottom: 2rem;
-  font-size: 3rem;
+  margin-bottom: var(--space-lg);
+  font-size: clamp(2.5rem, 5vw, 3.5rem);
 }
 
 /* Grid Layout */
 .grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: 30px;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: var(--space-lg);
 }
 
 /* Post Card - Similar to .portfolio-item */
 .post-card {
   background-color: var(--p-surface-0);
-  border-radius: 15px; /* Match portfolio item */
+  border-radius: var(--radius-lg);
   overflow: hidden;
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-  transition: transform 0.2s, box-shadow 0.2s;
+  box-shadow: var(--shadow-sm);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   display: flex;
   flex-direction: column;
   height: 100%;
-  border: 1px solid var(--p-surface-200);
+  border: 1px solid var(--p-surface-100);
 }
 
 .post-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  transform: translateY(-8px);
+  box-shadow: var(--shadow-lg);
+  border-color: var(--secondary-color);
 }
 
 .post-card img {
   width: 100%;
-  height: 220px;
+  height: 240px;
   object-fit: cover;
-  border-bottom: 3px solid var(--secondary-color);
+  transition: transform 0.5s ease;
+}
+
+.post-card:hover img {
+    transform: scale(1.05);
 }
 
 .post-card h2 {
   font-family: var(--font-heading);
   font-size: 1.5rem;
-  margin: 1.2rem;
-  margin-bottom: 0.5rem;
+  margin: var(--space-md) var(--space-md) var(--space-xs);
   color: var(--primary-color);
   line-height: 1.3;
 }
 
 .post-card p {
-  padding: 0 1.2rem;
+  padding: 0 var(--space-md);
   color: var(--text-color);
   font-family: var(--font-body);
   font-size: 1rem;
-  margin-bottom: 1rem;
+  margin-bottom: var(--space-sm);
 }
 
 .post-card small {
   display: block;
-  padding: 0 1.2rem;
-  color: #666; /* Neutral for metadata */
+  padding: 0 var(--space-md);
+  color: var(--p-text-color);
   font-size: 0.85rem;
-  font-style: italic;
-  margin-bottom: 0.2rem;
+  opacity: 0.8;
+  margin-bottom: var(--space-xs);
 }
 
 .content {
-  padding: 0 1.2rem 1.2rem;
+  padding: 0 var(--space-md) var(--space-md);
   font-size: 0.95rem;
   line-height: 1.6;
-  color: var(--text-color);
-  flex-grow: 1; /* Pushes button down */
-  opacity: 0.9;
+  color: var(--p-text-color);
+  flex-grow: 1;
 }
 
 /* Button */
 .post-card a {
-  display: block;
-  text-align: center;
-  padding: 1rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.75rem 1.5rem;
   background-color: var(--primary-color);
   color: var(--light-text-color);
   text-decoration: none;
   font-weight: 600;
-  letter-spacing: 0.5px;
-  transition: background-color 0.3s ease;
-  margin: 1.2rem;
-  border-radius: 25px; /* Pill shape matching global buttons */
+  transition: all 0.2s ease;
+  margin: var(--space-md);
+  border-radius: var(--radius-full);
   margin-top: auto;
 }
 
 .post-card a:hover {
-  background-color: #3b008db4; /* Matches global .btn:hover */
+  background-color: #3b008d;
+  box-shadow: var(--shadow-md);
 }
 
 /* Empty State */
@@ -105,5 +109,13 @@ h1 {
   text-align: center;
   grid-column: 1 / -1;
   font-size: 1.2rem;
-  color: #666;
+  color: var(--p-text-color);
+  opacity: 0.7;
+}
+
+@media (max-width: 768px) {
+    .grid {
+        grid-template-columns: 1fr;
+        gap: var(--space-md);
+    }
 }

@@ -7,11 +7,12 @@ import { InputText } from 'primeng/inputtext';
 import { Button } from 'primeng/button';
 import { SelectModule } from 'primeng/select';
 import { TextareaModule } from 'primeng/textarea';
+import { EditorModule } from 'primeng/editor';
 
 @Component({
   selector: 'app-projeto-create',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, FormsModule, InputText, Button, SelectModule, TextareaModule],
+  imports: [CommonModule, ReactiveFormsModule, FormsModule, InputText, Button, SelectModule, TextareaModule, EditorModule],
   templateUrl: './projeto-create.html',
   styleUrl: './projeto-create.css'
 })
@@ -27,7 +28,9 @@ export class ProjetoCreate implements OnInit {
 
   projetoForm: FormGroup = this.fb.group({
     titulo: ['', [Validators.required, Validators.minLength(5)]],
+    subtitulo: [''],
     descricao: ['', Validators.required],
+    conteudo: [''],
     data_realizacao: [new Date(), Validators.required],
     tipo: ['academico', Validators.required],
     link_externo: [''],
@@ -56,7 +59,9 @@ export class ProjetoCreate implements OnInit {
     this.projetosService.getProjeto(slug).subscribe(projeto => {
       this.projetoForm.patchValue({
         titulo: projeto.titulo,
+        subtitulo: projeto.subtitulo,
         descricao: projeto.descricao,
+        conteudo: projeto.conteudo,
         data_realizacao: new Date(projeto.data_realizacao),
         tipo: projeto.tipo,
         link_externo: projeto.link_externo
@@ -78,7 +83,9 @@ export class ProjetoCreate implements OnInit {
 
     const formData = new FormData();
     formData.append('titulo', this.projetoForm.get('titulo')?.value);
+    formData.append('subtitulo', this.projetoForm.get('subtitulo')?.value || '');
     formData.append('descricao', this.projetoForm.get('descricao')?.value);
+    formData.append('conteudo', this.projetoForm.get('conteudo')?.value || '');
     
     // Format date
     const date = this.projetoForm.get('data_realizacao')?.value;

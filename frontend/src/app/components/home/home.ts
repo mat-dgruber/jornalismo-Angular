@@ -8,6 +8,7 @@ import { Post } from '../../services/post.model';
 import { MateriaisService, Material } from '../../services/materiais.service';
 import { ArtigosService, Artigo } from '../../services/artigos.service';
 import { ProjetosService, Projeto } from '../../services/projetos.service';
+import { SeoService } from '../../services/seo.service';
 
 import { Observable } from 'rxjs';
 
@@ -48,10 +49,16 @@ export class Home implements OnInit {
   private materiaisService = inject(MateriaisService);
   private artigosService = inject(ArtigosService);
   private projetosService = inject(ProjetosService);
+  private seoService = inject(SeoService);
 
   constructor() { }
 
   ngOnInit(): void {
+    this.seoService.updateSeo({
+      title: 'Início',
+      description: 'Explore o portfólio de Maria Izabela, unindo Teologia e Jornalismo. Veja artigos, e-books e projetos acadêmicos.',
+      url: '/'
+    });
     if (articles.length > 0) {
       this.latestArticle = articles[articles.length - 1];
     }

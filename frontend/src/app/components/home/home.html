@@ -165,7 +165,7 @@
         }
       } @else {
         @for (project of recentProjects; track project.id) {
-          <div class="portfolio-item">
+          <div class="portfolio-item pointer" [routerLink]="['/projetos', project.slug]">
             @if (project.imagem) {
               <img
                 [src]="project.imagem"
@@ -177,13 +177,7 @@
             <p class="description">
               {{ project.descricao.slice(0, 150) + "..." }}
             </p>
-            @if (project.link_externo) {
-              <a [href]="project.link_externo" target="_blank" class="btn"
-                >Ver Projeto</a
-              >
-            } @else {
-              <a routerLink="/projetos" class="btn">Ver Mais</a>
-            }
+            <span class="read-more">Ver Detalhes</span>
           </div>
         }
       }

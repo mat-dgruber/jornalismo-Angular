@@ -1,84 +1,151 @@
 .materiais-page {
-    padding: 80px 0;
+    padding: var(--space-xl) 0;
+    background-color: #fafafa;
+    min-height: 80vh;
 }
 
 .page-header {
     text-align: center;
-    margin-bottom: 40px;
+    max-width: 800px;
+    margin: 0 auto var(--space-xl);
 }
 
 .page-title {
     font-family: var(--font-heading);
-    font-size: 3rem;
-    margin-bottom: 10px;
+    font-size: 3.5rem;
+    margin-bottom: var(--space-sm);
+    color: var(--primary-color);
 }
 
-.page-meta {
-    font-size: 1rem;
-    color: #777;
+.page-subtitle {
+    font-size: 1.1rem;
+    color: #666;
+    line-height: 1.6;
 }
 
 .materiais-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 30px;
+    grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+    gap: var(--space-xl);
+    margin-bottom: var(--space-2xl);
 }
 
-.material-item {
-    background-color: var(--p-surface-0);
-    padding: 20px;
-    border-radius: 15px;
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-    border: 1px solid var(--p-surface-200);
-    text-align: left;
+.material-card {
+    background: #ffffff;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    box-shadow: var(--shadow-md);
+    transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
     display: flex;
     flex-direction: column;
-    transition: transform 0.2s, box-shadow 0.2s;
+    border: 1px solid rgba(0,0,0,0.05);
 }
 
-.material-item:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+.material-card:hover {
+    transform: translateY(-10px);
+    box-shadow: var(--shadow-lg);
 }
 
-.material-item img {
+.material-image-wrapper {
     width: 100%;
-    height: 200px;
-    object-fit: cover;
-    border-radius: 10px;
-    margin-bottom: 15px;
+    height: 240px;
+    overflow: hidden;
+    background-color: #f0f0f0;
 }
 
-.material-item h3 {
-    margin-bottom: 10px;
-    font-family: var(--font-heading);
+.material-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s ease;
+}
+
+.material-card:hover .material-image {
+    transform: scale(1.05);
+}
+
+.material-content {
+    padding: var(--space-lg);
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.material-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--space-sm);
+}
+
+.material-category {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    font-weight: 800;
+    letter-spacing: 0.05em;
+    color: var(--primary-color);
+    background: #f3e8ff;
+    padding: 4px 10px;
+    border-radius: var(--radius-sm);
+}
+
+.material-price-tag {
+    font-weight: 700;
+    font-size: 0.9rem;
     color: var(--primary-color);
 }
 
-.material-item p {
+.material-price-tag.free {
+    color: #059669; /* Green for free */
+}
+
+.material-titulo {
+    font-family: var(--font-heading);
+    font-size: 1.75rem;
+    line-height: 1.2;
+    margin-bottom: var(--space-md);
+    color: var(--primary-color);
+}
+
+.material-descricao {
+    font-size: 1rem;
+    color: #555;
+    line-height: 1.7;
+    margin-bottom: var(--space-lg);
     flex-grow: 1;
-    margin-bottom: 15px;
-    color: var(--p-text-color);
 }
 
 .btn-material {
-    display: inline-block;
-    padding: 10px 20px;
-    background-color: var(--primary-color);
-    color: var(--light-text-color);
-    text-align: center;
-    border-radius: 25px; /* Pill shape */
-    text-decoration: none;
-    margin-top: auto;
-    align-self: flex-start;
-    transition: background-color 0.3s ease;
+    width: 100%;
+    padding: 1rem;
+    border: none;
+    font-family: var(--font-body);
 }
 
-.btn-material:hover {
-    background-color: #3b008db4;
+.btn-pago {
+    background-color: #059669;
+}
+
+.btn-pago:hover {
+    background-color: #047857;
 }
 
 .page-footer {
     text-align: center;
-    margin-top: 40px;
+    border-top: 1px solid #eee;
+    padding-top: var(--space-xl);
+}
+
+.skeleton-card {
+    padding: var(--space-lg);
+}
+
+@media (max-width: 768px) {
+    .page-title {
+        font-size: 2.5rem;
+    }
+    
+    .materiais-grid {
+        grid-template-columns: 1fr;
+    }
 }

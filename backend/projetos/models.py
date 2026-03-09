@@ -8,7 +8,9 @@ class Projeto(models.Model):
     ]
 
     titulo = models.CharField(max_length=200, verbose_name="Título")
-    descricao = models.TextField(verbose_name="Descrição")
+    subtitulo = models.CharField(max_length=255, verbose_name="Subtítulo", blank=True, null=True)
+    descricao = models.TextField(verbose_name="Descrição (Resumo para o card)")
+    conteudo = models.TextField(verbose_name="Conteúdo Completo", blank=True, null=True)
     data_realizacao = models.DateField(verbose_name="Data de Realização")
     tipo = models.CharField(max_length=20, choices=TIPO_CHOICES, verbose_name="Tipo de Projeto")
     link_externo = models.URLField(verbose_name="Link do Projeto", blank=True, null=True)

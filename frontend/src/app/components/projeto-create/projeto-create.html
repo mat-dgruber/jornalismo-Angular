@@ -30,6 +30,17 @@
         ></p-select>
       </div>
 
+      <div class="col-12 mt-3">
+        <label for="subtitulo" class="block mb-2 font-bold">Subtítulo (Opcional)</label>
+        <input
+          pInputText
+          id="subtitulo"
+          formControlName="subtitulo"
+          class="w-full"
+          placeholder="Subtítulo ou descrição curta para a página interna"
+        />
+      </div>
+
       <div class="col-12 md:col-6 mt-3">
         <label for="data" class="block mb-2 font-bold"
           >Data de Realização</label
@@ -57,14 +68,57 @@
       </div>
 
       <div class="col-12 mt-3">
-        <label for="descricao" class="block mb-2 font-bold">Descrição</label>
+        <label for="descricao" class="block mb-2 font-bold">Resumo (Para o Card)</label>
         <textarea
           pTextarea
           id="descricao"
           formControlName="descricao"
-          rows="5"
+          rows="3"
           class="w-full"
+          placeholder="Este resumo aparecerá na lista de projetos"
         ></textarea>
+      </div>
+
+      <div class="col-12 mt-3">
+        <label for="conteudo" class="block mb-2 font-bold">Conteúdo Completo (Página do Projeto)</label>
+        <p-editor id="conteudo" formControlName="conteudo" [style]="{ height: '400px' }" placeholder="Escreva aqui todo o conteúdo detalhado do projeto">
+          <p-header>
+            <span class="ql-formats">
+              <select class="ql-header">
+                <option value="1">Título 1</option>
+                <option value="2">Título 2</option>
+                <option value="3">Título 3</option>
+                <option selected>Normal</option>
+              </select>
+              <select class="ql-font"></select>
+            </span>
+            <span class="ql-formats">
+              <button class="ql-bold" aria-label="Negrito"></button>
+              <button class="ql-italic" aria-label="Itálico"></button>
+              <button class="ql-underline" aria-label="Sublinhado"></button>
+              <button class="ql-strike" aria-label="Tachado"></button>
+            </span>
+            <span class="ql-formats">
+              <select class="ql-color"></select>
+              <select class="ql-background"></select>
+            </span>
+            <span class="ql-formats">
+              <button class="ql-list" value="ordered" aria-label="Lista Ordenada"></button>
+              <button class="ql-list" value="bullet" aria-label="Lista com Marcadores"></button>
+              <select class="ql-align"></select>
+            </span>
+            <span class="ql-formats">
+              <button class="ql-link" aria-label="Inserir Link"></button>
+              <button class="ql-image" aria-label="Inserir Imagem"></button>
+              <button class="ql-video" aria-label="Inserir Vídeo"></button>
+              <button class="ql-blockquote" aria-label="Citação"></button>
+              <button class="ql-code-block" aria-label="Bloco de Código"></button>
+            </span>
+            <span class="ql-formats">
+              <button class="ql-clean" aria-label="Limpar Formatação"></button>
+            </span>
+          </p-header>
+        </p-editor>
       </div>
 
       <div class="col-12 mt-3">

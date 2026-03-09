@@ -1,46 +1,53 @@
-<main class="post-page">
+<main class="projetos-page">
   <div class="container">
-    <header class="post-header">
-      <h1 class="post-title">Projetos</h1>
-      <p class="post-meta">Uma coleção de projetos acadêmicos e pessoais.</p>
+    <header class="page-header">
+      <h1 class="page-title">Projetos</h1>
+      <p class="page-subtitle">Uma coleção de projetos acadêmicos e pessoais que refletem minha trajetória e paixões.</p>
     </header>
-    <div class="portfolio-grid">
-      @if (isLoading) { @for (item of [1,2,3,4,5,6]; track item) {
-      <div class="portfolio-item">
-        <p-skeleton
-          height="200px"
-          styleClass="mb-3"
-          borderRadius="8px"
-        ></p-skeleton>
-        <p-skeleton width="60%" height="2rem" styleClass="mb-2"></p-skeleton>
-        <p-skeleton width="100%" height="1rem" styleClass="mb-2"></p-skeleton>
-        <p-skeleton width="80%" height="1rem" styleClass="mb-3"></p-skeleton>
-        <div class="flex justify-content-center">
-          <p-skeleton
-            width="120px"
-            height="2.5rem"
-            borderRadius="25px"
-          ></p-skeleton>
-        </div>
-      </div>
-      } } @else { @for (project of projects; track project.id) {
-      <div class="portfolio-item">
-        @if (project.imagem) {
-        <img [src]="project.imagem" [alt]="project.titulo" class="post-image" />
-        }
-        <h3>{{ project.titulo }}</h3>
-        <p class="description">{{ project.descricao }}</p>
 
-        @if (project.link_externo) {
-        <a [href]="project.link_externo" target="_blank" class="btn"
-          >Ver Projeto</a
-        >
+    <div class="projetos-grid">
+      @if (isLoading) {
+        @for (item of [1,2,3,4,5,6]; track item) {
+          <div class="projeto-card skeleton-card">
+            <p-skeleton height="220px" borderRadius="12px" styleClass="mb-3"></p-skeleton>
+            <p-skeleton width="40%" height="1rem" styleClass="mb-2"></p-skeleton>
+            <p-skeleton width="80%" height="1.8rem" styleClass="mb-3"></p-skeleton>
+            <p-skeleton width="100%" height="3rem" styleClass="mb-3"></p-skeleton>
+            <p-skeleton width="120px" height="2.5rem" borderRadius="25px"></p-skeleton>
+          </div>
         }
-      </div>
-      } }
+      } @else {
+        @for (project of projects; track project.id) {
+          <div class="projeto-card">
+            @if (project.imagem) {
+              <div class="projeto-image-wrapper pointer" [routerLink]="['/projetos', project.slug]">
+                <img [src]="project.imagem" [alt]="project.titulo" class="projeto-image" />
+              </div>
+            }
+            <div class="projeto-content">
+              <span class="projeto-type" [ngClass]="project.tipo">
+                {{ project.tipo === 'academico' ? 'Acadêmico' : 'Pessoal' }}
+              </span>
+              <h3 class="projeto-titulo pointer" [routerLink]="['/projetos', project.slug]">{{ project.titulo }}</h3>
+              <p class="projeto-descricao">{{ project.descricao }}</p>
+
+              <div class="projeto-actions">
+                <a [routerLink]="['/projetos', project.slug]" class="btn btn-projeto">
+                  Ver Detalhes do Projeto
+                </a>
+              </div>
+            </div>
+          </div>
+        } @empty {
+          <div class="no-projects">
+            <p>Ainda não há projetos para exibir aqui.</p>
+          </div>
+        }
+      }
     </div>
-    <footer class="post-footer">
-      <a routerLink="/home" class="btn">Voltar à Página Inicial</a>
+
+    <footer class="page-footer">
+      <a routerLink="/home" class="btn btn-outline">Voltar ao Início</a>
     </footer>
   </div>
 </main>

@@ -1,30 +1,44 @@
-<main class="post-page">
+<main class="artigos-page">
   <div class="container">
-    <header class="post-header">
-      <h1 class="post-title">Artigos</h1>
-      <p class="post-meta">Uma coleção dos artigos escritos.</p>
+    <header class="page-header">
+      <h1 class="page-title">Artigos & Matérias</h1>
+      <p class="page-subtitle">Uma coleção de reportagens, artigos de opinião e análises sobre fé, sociedade e cultura.</p>
     </header>
-    <div class="portfolio-grid">
+
+    <div class="artigos-grid">
       @for (article of articles; track article.id) {
-      <div class="portfolio-item">
-        @if (article.imagem) {
-        <img [src]="article.imagem" [alt]="article.titulo" class="post-image" />
-        }
-        <h3>{{ article.titulo }}</h3>
-        <p class="description">
-          {{ article.subtitulo || article.conteudo.slice(0, 150) + "..." }}
-        </p>
-        <p class="source">Publicado em: {{ article.local_publicacao }}</p>
-        @if (article.link_externo) {
-        <a [href]="article.link_externo" target="_blank" class="btn"
-          >Ler Matéria Original</a
-        >
-        }
-      </div>
+        <div class="artigo-card">
+          @if (article.imagem) {
+            <div class="artigo-image-wrapper">
+              <img [src]="article.imagem" [alt]="article.titulo" class="artigo-image" />
+            </div>
+          }
+          <div class="artigo-content">
+            <span class="artigo-source">{{ article.local_publicacao }}</span>
+            <h3 class="artigo-titulo">{{ article.titulo }}</h3>
+            <p class="artigo-descricao">
+              {{ article.subtitulo || article.conteudo.slice(0, 150) + "..." }}
+            </p>
+            <p class="artigo-date">Publicado em: {{ article.data_publicacao | date:'dd/MM/yyyy' }}</p>
+
+            <div class="artigo-actions">
+              @if (article.link_externo) {
+                <a [href]="article.link_externo" target="_blank" class="btn btn-artigo">
+                  Ler Matéria Completa
+                </a>
+              }
+            </div>
+          </div>
+        </div>
+      } @empty {
+        <div class="no-results">
+          <p>Nenhum artigo encontrado no momento.</p>
+        </div>
       }
     </div>
-    <footer class="post-footer">
-      <a routerLink="/home" class="btn">Voltar à Página Inicial</a>
+
+    <footer class="page-footer">
+      <a routerLink="/home" class="btn btn-outline">Voltar ao Início</a>
     </footer>
   </div>
 </main>

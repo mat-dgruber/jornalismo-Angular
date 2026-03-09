@@ -1,79 +1,160 @@
-/* Estilos reutilizáveis de Portfólio/Grid */
-.post-page {
-    flex-grow: 1;
+.projetos-page {
+    padding: var(--space-xl) 0;
+    background-color: #fafafa;
+    min-height: 80vh;
 }
 
-.portfolio-section {
-    padding: 80px 0;
+.page-header {
     text-align: center;
+    max-width: 800px;
+    margin: 0 auto var(--space-xl);
 }
 
-.portfolio-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 30px;
-}
-
-.portfolio-item {
-    background-color: var(--p-surface-0);
-    padding: 20px;
-    border-radius: 15px;
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-    text-align: left;
-    transition: transform 0.2s, box-shadow 0.2s;
-    border: 1px solid var(--p-surface-200);
-}
-
-.portfolio-item:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-}
-
-.portfolio-item h3 {
+.page-title {
     font-family: var(--font-heading);
-    font-size: 1.5rem;
-    margin-bottom: 10px;
+    font-size: 3.5rem;
+    margin-bottom: var(--space-sm);
     color: var(--primary-color);
 }
 
-.portfolio-item .description {
-    font-size: 1rem;
-    margin-bottom: 15px;
-    color: var(--p-text-color);
+.page-subtitle {
+    font-size: 1.1rem;
+    color: #666;
+    line-height: 1.6;
 }
 
-.portfolio-item img {
-    width: 100%;
-    height: 200px;
-    object-fit: cover;
-    border-radius: 8px;
-    margin-bottom: 15px;
+.projetos-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+    gap: var(--space-xl);
+    margin-bottom: var(--space-2xl);
 }
 
-.embed-container {
-    position: relative;
-    padding-bottom: 56.25%; /* Proporção 16:9 */
-    height: 0;
+.projeto-card {
+    background: #ffffff;
+    border-radius: var(--radius-lg);
     overflow: hidden;
-    margin-top: 15px;
+    box-shadow: var(--shadow-md);
+    transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+    display: flex;
+    flex-direction: column;
+    border: 1px solid rgba(0,0,0,0.05);
 }
 
-.embed-container iframe {
-    position: absolute;
-    top: 0;
-    left: 0;
+.projeto-card:hover {
+    transform: translateY(-10px);
+    box-shadow: var(--shadow-lg);
+}
+
+.projeto-image-wrapper {
+    width: 100%;
+    height: 240px;
+    overflow: hidden;
+    background-color: #f0f0f0;
+}
+
+.projeto-image {
     width: 100%;
     height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s ease;
 }
 
-/* Responsividade do Portfólio */
+.projeto-card:hover .projeto-image {
+    transform: scale(1.05);
+}
+
+.projeto-content {
+    padding: var(--space-lg);
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.projeto-type {
+    display: inline-block;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    font-weight: 800;
+    letter-spacing: 0.05em;
+    padding: 4px 12px;
+    border-radius: var(--radius-full);
+    margin-bottom: var(--space-sm);
+    align-self: flex-start;
+}
+
+.projeto-type.academico {
+    background-color: #e0f2fe;
+    color: #0369a1;
+}
+
+.projeto-type.pessoal {
+    background-color: #fef3c7;
+    color: #b45309;
+}
+
+.projeto-titulo {
+    font-family: var(--font-heading);
+    font-size: 1.75rem;
+    line-height: 1.2;
+    margin-bottom: var(--space-md);
+    color: var(--primary-color);
+}
+
+.projeto-descricao {
+    font-size: 1rem;
+    color: #555;
+    line-height: 1.7;
+    margin-bottom: var(--space-lg);
+    flex-grow: 1;
+}
+
+.projeto-actions {
+    margin-top: auto;
+}
+
+.btn-projeto {
+    width: 100%;
+    padding: 1rem;
+    font-size: 0.95rem;
+}
+
+.no-projects {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: var(--space-2xl);
+    background: #fff;
+    border-radius: var(--radius-lg);
+    color: #888;
+}
+
+.page-footer {
+    text-align: center;
+    border-top: 1px solid #eee;
+    padding-top: var(--space-xl);
+}
+
+/* Skeleton refinements */
+.skeleton-card {
+    padding: var(--space-lg);
+}
+
+/* Responsividade */
 @media (max-width: 768px) {
-    .portfolio-item {
-        text-align: center;
+    .page-title {
+        font-size: 2.5rem;
+    }
+    
+    .projetos-grid {
+        grid-template-columns: 1fr;
+        gap: var(--space-lg);
     }
 
-    .btn {
-        margin-left: auto;
-        margin-right: auto;
+    .projeto-image-wrapper {
+        height: 200px;
+    }
+    
+    .projeto-content {
+        padding: var(--space-md);
     }
 }

@@ -1,8 +1,9 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { SkeletonModule } from 'primeng/skeleton';
 import { MateriaisService, Material } from '../../services/materiais.service';
+import { SeoService } from '../../services/seo.service';
 
 import { environment } from '../../../environments/environment';
 
@@ -16,10 +17,16 @@ import { environment } from '../../../environments/environment';
 export class Materiais implements OnInit {
   materials: Material[] = [];
   isLoading = true;
+  private seoService = inject(SeoService);
 
   constructor(private materiaisService: MateriaisService) {}
 
   ngOnInit() {
+    this.seoService.updateSeo({
+      title: 'Materiais',
+      description: 'Baixe e-books, planos de leitura e outros materiais gratuitos e pagos de Maria Izabela.',
+      url: '/materiais'
+    });
     this.materiaisService.getMateriais().subscribe({
       next: (data) => {
         this.materials = data;

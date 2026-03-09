@@ -1,5 +1,6 @@
 from django.db import models
 from django.utils.text import slugify
+from django.urls import reverse
 
 # Create your models here.
 class Material(models.Model):
@@ -29,7 +30,7 @@ class Material(models.Model):
         super().save(*args, **kwargs)
     
     def get_absolute_url(self):
-        return reverse("material_detail", kwargs={"slug": self.slug})
+        return reverse("material-detail", kwargs={"slug": self.slug})
 
     class Meta:
         verbose_name = "Material"
