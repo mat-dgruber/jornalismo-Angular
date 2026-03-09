@@ -225,5 +225,5 @@ STORAGES = {
 
 # Google Cloud Storage (Firebase)
 GS_BUCKET_NAME = os.environ.get("GS_BUCKET_NAME")
-GS_QUERYSTRING_AUTH = True  # Enable signed URLs to allow access to private files
-GS_DEFAULT_ACL = None # Optional: Let Firebase rules handle permissions
+GS_QUERYSTRING_AUTH = False  # Disable signed URLs for now to debug
+GS_DEFAULT_ACL = 'publicRead'
