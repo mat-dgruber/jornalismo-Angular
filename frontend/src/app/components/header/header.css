@@ -1,13 +1,13 @@
-/* Header e Navegação */
 .header {
-    background-color: var(--primary-color);
-    color: var(--light-text-color);
-    padding: var(--space-sm) 0;
+    background-color: rgba(255, 247, 252, 0.8);
+    backdrop-filter: blur(25px) saturate(200%);
+    -webkit-backdrop-filter: blur(25px) saturate(200%);
+    color: var(--text-color);
+    padding: var(--space-md) 0;
     position: sticky;
     top: 0;
-    z-index: 100;
-    box-shadow: var(--shadow-md);
-    transition: all 0.3s ease;
+    z-index: 1000;
+    transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
 }
 
 .header .container {
@@ -18,22 +18,22 @@
 
 .logo {
     font-family: var(--font-heading);
-    font-size: 1.75rem;
-    font-weight: 700;
-    letter-spacing: -0.025em;
+    font-size: clamp(1.8rem, 4vw, 2.4rem);
+    font-weight: 300;
+    letter-spacing: -0.05em;
     margin: 0;
     display: flex;
     align-items: center;
 }
 
 .logo a {
-    color: #ffffff !important;
+    color: var(--text-color) !important;
     text-decoration: none !important;
-    transition: opacity 0.2s ease;
+    transition: all 0.4s ease;
 }
 
 .logo a:hover {
-    opacity: 0.8;
+    color: var(--primary-color) !important;
 }
 
 .nav-links {
@@ -44,44 +44,57 @@
 }
 
 .nav-links li {
-    margin-left: 0; /* Resetting and using gap instead */
+    position: relative;
 }
 
 .nav-links a {
-    color: var(--light-text-color);
+    color: var(--text-color);
     text-decoration: none;
-    font-weight: 600;
-    font-size: 0.95rem;
-    transition: all 0.2s ease;
-    padding: var(--space-xs) var(--space-sm);
-    border-radius: var(--radius-sm);
+    font-weight: 700;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+    padding: 0.5rem 0.75rem;
+    opacity: 0.6;
 }
 
 .nav-links a:hover {
-    color: var(--secondary-color);
-    background-color: rgba(255, 255, 255, 0.1);
+    opacity: 1;
+    color: var(--primary-color);
+}
+
+.nav-links a::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 50%;
+    width: 0;
+    height: 2px;
+    background-color: var(--primary-color);
+    transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+    transform: translateX(-50%);
+}
+
+.nav-links a:hover::after {
+    width: 20px;
 }
 
 .menu-toggle {
     display: none;
-    font-size: 1.5rem;
-    background: rgba(255, 255, 255, 0.1);
+    font-size: 1.8rem;
+    background: transparent;
     border: none;
-    color: var(--light-text-color);
+    color: var(--text-color);
     cursor: pointer;
-    padding: var(--space-xs);
-    border-radius: var(--radius-sm);
-    transition: background 0.2s ease;
+    padding: 0.5rem;
+    transition: all 0.3s ease;
 }
 
-.menu-toggle:hover {
-    background: rgba(255, 255, 255, 0.2);
-}
-
-/* Responsividade do Header */
+/* Responsividade */
 @media (max-width: 768px) {
     .header {
-        padding: var(--space-xs) 0;
+        padding: var(--space-sm) 0;
     }
 
     .nav-links {
@@ -89,36 +102,34 @@
         flex-direction: column;
         width: 100%;
         text-align: center;
-        background-color: var(--primary-color);
-        position: absolute;
-        top: 100%; /* Below header */
+        background-color: var(--bg-surface);
+        position: fixed;
+        top: 0;
         left: 0;
+        height: 100vh;
+        justify-content: center;
         z-index: 100;
-        padding: var(--space-md) 0;
-        gap: var(--space-sm);
-        transform: translateY(-10px);
+        gap: var(--space-xl);
+        transform: translateX(100%);
         opacity: 0;
         pointer-events: none;
-        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        box-shadow: var(--shadow-lg);
+        transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
     }
 
     .nav-links.active {
-        transform: translateY(0);
+        transform: translateX(0);
         opacity: 1;
         pointer-events: auto;
     }
 
-    .nav-links li {
-        width: 100%;
-    }
-
     .nav-links a {
-        display: block;
-        padding: var(--space-sm);
+        font-size: 1.5rem;
+        padding: var(--space-md);
     }
 
     .menu-toggle {
         display: block;
+        position: relative;
+        z-index: 1001;
     }
 }

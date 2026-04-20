@@ -19,8 +19,8 @@ export class Artigos implements OnInit {
 
   ngOnInit(): void {
     this.seoService.updateSeo({
-      title: 'Artigos',
-      description: 'Leia os artigos mais recentes de Maria Izabela sobre fé, sociedade, teologia e jornalismo.',
+      title: 'Artigos | Maria Izabela',
+      description: 'Leia as reflexões e reportagens mais recentes de Maria Izabela sobre comunicação, sociedade e jornalismo.',
       url: '/artigos'
     });
     this.artigosService.getArtigos().subscribe((data) => {

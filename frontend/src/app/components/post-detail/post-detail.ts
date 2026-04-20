@@ -12,9 +12,15 @@ import { SkeletonModule } from 'primeng/skeleton';
 @Component({
   selector: 'app-post-detail',
   standalone: true,
-  imports: [CommonModule, RouterLink, LucideAngularModule, AuthorNamePipe, SkeletonModule],
+  imports: [
+    CommonModule,
+    RouterLink,
+    LucideAngularModule,
+    AuthorNamePipe,
+    SkeletonModule,
+  ],
   templateUrl: './post-detail.html',
-  styleUrl: './post-detail.css'
+  styleUrl: './post-detail.css',
 })
 export class PostDetail {
   readonly arrowLeft = ArrowLeft;
@@ -24,7 +30,7 @@ export class PostDetail {
 
   postResource = rxResource<Post, any>({
     params: () => this.route.snapshot.paramMap.get('slug') || undefined,
-    stream: ({params: slug}) => this.blogService.getPost(slug)
+    stream: ({ params: slug }) => this.blogService.getPost(slug),
   });
 
   constructor() {
@@ -36,7 +42,7 @@ export class PostDetail {
           description: post.subtitle || post.content.slice(0, 160),
           image: post.image,
           url: `/post/${post.slug}`,
-          type: 'article'
+          type: 'article',
         });
       }
     });

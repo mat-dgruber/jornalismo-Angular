@@ -1,44 +1,54 @@
 .contact-form-container {
-    max-width: 650px;
-    margin: var(--space-xl) auto;
-    padding: var(--space-lg);
-    background-color: var(--p-surface-0);
-    border-radius: var(--radius-lg);
-    box-shadow: var(--shadow-lg);
-    border: 1px solid var(--p-surface-100);
+    max-width: 700px;
+    margin: var(--space-2xl) auto;
+    padding: var(--space-2xl);
+    background-color: var(--bg-surface);
+    border-radius: var(--radius-2xl);
+    box-shadow: var(--shadow-aura);
+    border: none;
+    animation: editorialFade 1s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+@keyframes editorialFade {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
 }
 
 h2 {
     text-align: center;
-    color: var(--primary-color);
-    margin-bottom: var(--space-lg);
-    font-size: clamp(2rem, 4vw, 2.5rem);
+    color: var(--text-color);
+    margin-bottom: var(--space-xl);
+    font-size: clamp(2.5rem, 5vw, 3.5rem);
+    letter-spacing: -0.04em;
+    line-height: 1;
 }
 
 .form-group {
-    margin-bottom: var(--space-md);
+    margin-bottom: var(--space-lg);
 }
 
 label {
     display: block;
     margin-bottom: var(--space-xs);
-    font-weight: 600;
-    color: var(--p-text-color);
-    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--text-color);
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
 }
 
 input[type="text"],
 input[type="email"],
 textarea {
     width: 100%;
-    padding: 0.875rem 1rem;
-    border: 1.5px solid var(--p-surface-200);
+    padding: 1.2rem 1.5rem;
+    border: 1px solid var(--bg-surface-variant);
     border-radius: var(--radius-md);
     font-family: var(--font-body);
-    font-size: 1rem;
+    font-size: 1.1rem;
     color: var(--text-color);
-    background-color: var(--p-surface-50);
-    transition: all 0.2s ease;
+    background-color: var(--bg-main);
+    transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
 }
 
 input[type="text"]:focus,
@@ -46,20 +56,20 @@ input[type="email"]:focus,
 textarea:focus {
     outline: none;
     border-color: var(--primary-color);
-    background-color: var(--p-surface-0);
-    box-shadow: 0 0 0 4px rgba(43, 2, 51, 0.1);
+    background-color: var(--bg-surface);
+    box-shadow: 0 0 0 4px var(--primary-container);
 }
 
 textarea {
     resize: vertical;
-    min-height: 150px;
+    min-height: 200px;
 }
 
 .error-message {
     color: #ef4444;
     font-size: 0.85rem;
-    margin-top: 4px;
-    font-weight: 500;
+    margin-top: 6px;
+    font-weight: 600;
 }
 
 button[type="submit"] {
@@ -67,41 +77,56 @@ button[type="submit"] {
     align-items: center;
     justify-content: center;
     width: 100%;
-    padding: 1rem;
+    padding: 1.2rem;
     background-color: var(--primary-color);
-    color: var(--light-text-color);
+    color: white;
     border: none;
     border-radius: var(--radius-full);
     font-size: 1.1rem;
     font-weight: 700;
     cursor: pointer;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    margin-top: var(--space-md);
+    transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+    margin-top: var(--space-lg);
+    box-shadow: var(--shadow-aura);
 }
 
 button[type="submit"]:hover:not(:disabled) {
-    background-color: #3b008d;
-    transform: translateY(-2px);
-    box-shadow: var(--shadow-md);
+    background-color: var(--primary-dark);
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-hover);
 }
 
 button[type="submit"]:active:not(:disabled) {
-    transform: translateY(0);
+    transform: translateY(-2px);
 }
 
 button[type="submit"]:disabled {
-    background-color: var(--p-surface-300);
-    color: var(--p-surface-500);
+    background-color: var(--bg-surface-variant);
+    color: var(--text-dim);
     cursor: not-allowed;
+    box-shadow: none;
 }
 
 .submission-message {
-    margin-top: var(--space-md);
-    padding: var(--space-sm);
-    border-radius: var(--radius-md);
+    margin-top: var(--space-lg);
+    padding: var(--space-md);
+    border-radius: var(--radius-lg);
     text-align: center;
     background-color: #ecfdf5;
     color: #065f46;
     border: 1px solid #a7f3d0;
-    font-weight: 600;
+    font-weight: 700;
+}
+
+@media (max-width: 768px) {
+    .contact-form-container {
+        margin-top: var(--space-lg);
+        padding: var(--space-lg);
+        border-radius: 0;
+        box-shadow: none;
+    }
+
+    h2 {
+        font-size: 2.5rem;
+    }
 }

@@ -1,15 +1,19 @@
-/* Footer */
 .footer {
-    background-color: var(--primary-color);
-    color: var(--light-text-color);
-    padding: var(--space-lg) 0;
+    padding: var(--space-2xl) 0;
     text-align: center;
     margin-top: auto;
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    border-top: 1px solid var(--bg-surface-variant);
 }
 
 .footer p {
     margin-bottom: 0;
-    font-size: 0.95rem;
-    opacity: 0.8;
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--text-dim);
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+}
+
+.footer span.accent {
+    color: var(--primary-color);
 }
