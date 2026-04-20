@@ -1,19 +1,28 @@
 <section id="biografia" class="hero">
+  <div class="hero-background"></div>
   <div class="container">
     <div class="hero-content">
-      <h2>Maria Izabela — Jornalismo & Teologia</h2>
-      <p>
-        Formada em Teologia e cursando Jornalismo, escrevo artigos sobre fé e
-        sociedade. Busco ampliar minha atuação na comunicação e Teologia, unindo
-        conhecimento e ética para impactar positivamente o público.
-      </p>
+      <span class="hero-badge">Jornalismo • Comunicação • Teologia</span>
+      <h1>Maria Izabela</h1>
+      <h2>Explorando a intersecção entre jornalismo, verdade e teologia.</h2>
+      <p>Unindo pesquisa acadêmica e narrativa midiática para comunicar o que realmente importa.</p>
+      <div class="hero-actions">
+        <a href="#materias" class="btn btn-primary">Ver Conteúdos</a>
+        <a href="#contato" class="btn btn-outline">Entre em Contato</a>
+      </div>
     </div>
   </div>
 </section>
 
+<div class="container">
+  <blockquote class="editorial-quote">
+    "A comunicação é o fio que tece a compreensão entre a teologia e a vida cotidiana."
+  </blockquote>
+</div>
+
 <section id="materias" class="portfolio-section">
   <div class="container">
-    <h2>Últimas Matérias</h2>
+    <h2>Artigos</h2>
     <div class="portfolio-grid">
       @if (isLoadingArticles) {
         @for (item of [1, 2]; track item) {
@@ -73,11 +82,11 @@
         }
       }
     </div>
-    <a routerLink="/artigos" class="btn">Ver Todas as Matérias</a>
+    <a routerLink="/artigos" class="btn btn-outline">Ver Todos os Artigos</a>
   </div>
 </section>
 
-<section id="materiais" class="portfolio-section bg-light">
+<section id="materiais" class="portfolio-section">
   <div class="container">
     <h2>Materiais</h2>
     <p>
@@ -128,7 +137,7 @@
         }
       }
     </div>
-    <a routerLink="/materiais" class="btn">Ver Todos Materiais</a>
+    <a routerLink="/materiais" class="btn btn-outline">Ver Todos Materiais</a>
   </div>
 </section>
 
@@ -182,12 +191,12 @@
         }
       }
     </div>
-    <a routerLink="/projetos" class="btn">Ver Todos os Projetos</a>
+    <a routerLink="/projetos" class="btn btn-outline">Ver Todos os Projetos</a>
   </div>
 </section>
 
 @if (isLoadingPosts || recentPosts.length > 0) {
-  <section id="blog" class="portfolio-section bg-light">
+  <section id="blog" class="portfolio-section">
     <div class="container">
       <h2>Blog</h2>
       <div class="portfolio-grid">
@@ -236,6 +245,96 @@
     </div>
   </section>
 }
+
+<section id="sobre-mim" class="about-section">
+  <div class="container">
+    <div class="about-grid">
+      <div class="about-image">
+        <img src="assets/Imagens/maria-izabela-editorial.png" alt="Maria Izabela - Perfil Editorial" class="portrait-image">
+      </div>
+      <div class="about-content">
+        <h4 class="about-subtitle">Sobre Mim</h4>
+        <h2 class="about-title">Minha missão é dar voz às histórias que moldam o amanhã.</h2>
+        <div class="about-text">
+          <p>
+            Com mais de uma década de experiência em jornalismo investigativo e consultoria estratégica, 
+            Maria Izabela une a precisão técnica ao olhar humano. Sua trajetória é marcada pela busca 
+            incessante por transparência e inovação nos meios digitais.
+          </p>
+          <p>
+            Especialista em comunicação ética, ela desenvolve projetos que vão além da superfície, 
+            criando conexões reais entre marcas, instituições e o público em um cenário de constante 
+            saturação de informação.
+          </p>
+          <div class="about-actions">
+            <p-button (onClick)="showCertifications()" label="Certificações & Formação" icon="pi pi-id-card" styleClass="p-button-outlined"></p-button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Modal de Certificações (Lattes) -->
+<p-dialog 
+  [(visible)]="isCertificationsModalVisible" 
+  [modal]="true" 
+  [header]="'Currículo e Certificações'" 
+  [draggable]="false" 
+  [resizable]="false"
+  [breakpoints]="{ '960px': '75vw', '641px': '90vw' }"
+  [style]="{ width: '60vw' }"
+  styleClass="lattes-modal"
+>
+  <div class="lattes-container">
+    <div class="lattes-header">
+      <div class="profile-info">
+        <h3>{{ lattesData.nome }}</h3>
+        <p class="lattes-id">ID Lattes: <span>{{ lattesData.id }}</span></p>
+      </div>
+      <a [href]="lattesData.url" target="_blank" class="btn-lattes">
+        <i class="pi pi-external-link"></i> Abrir Lattes Oficial
+      </a>
+    </div>
+
+    <div class="lattes-section">
+      <h4><i class="pi pi-book"></i> Resumo Profissional</h4>
+      <p class="resumo">{{ lattesData.resumo }}</p>
+    </div>
+
+    <div class="lattes-grid">
+      <div class="lattes-col">
+        <h4><i class="pi pi-graduation-cap"></i> Formação Acadêmica</h4>
+        <div class="lattes-list">
+          @for (item of lattesData.formacao; track item.curso) {
+            <div class="lattes-item">
+              <span class="ano">{{ item.periodo }}</span>
+              <div class="item-content">
+                <strong>{{ item.curso }}</strong>
+                <p>{{ item.instituicao }}</p>
+              </div>
+            </div>
+          }
+        </div>
+      </div>
+
+      <div class="lattes-col">
+        <h4><i class="pi pi-verified"></i> Cursos & Extensões</h4>
+        <div class="lattes-list scrollable">
+          @for (item of lattesData.complementar; track item.curso) {
+            <div class="lattes-item">
+              <span class="ano">{{ item.periodo }}</span>
+              <div class="item-content">
+                <strong>{{ item.curso }}</strong>
+                <p>{{ item.carga ? 'Carga horária: ' + item.carga : 'Extensão Universitária' }}</p>
+              </div>
+            </div>
+          }
+        </div>
+      </div>
+    </div>
+  </div>
+</p-dialog>
 
 <section id="contato" class="contact-section">
   <div class="container">

@@ -10,8 +10,8 @@ export class SeoService {
   private metaService = inject(Meta);
   private document = inject(DOCUMENT);
 
-  private siteTitle = 'Maria Izabela | Jornalismo & Teologia';
-  private defaultDescription = 'Portfólio de Maria Izabela. Artigos, materiais e projetos sobre Jornalismo e Teologia.';
+  private siteTitle = 'Maria Izabela | Comunicação & Jornalismo';
+  private defaultDescription = 'Portfólio de Maria Izabela. Confira artigos, projetos e materiais sobre comunicação, jornalismo e teologia.';
 
   updateSeo(config: {
     title?: string;
@@ -23,7 +23,7 @@ export class SeoService {
   }) {
     const title = config.title ? `${config.title} | ${this.siteTitle}` : this.siteTitle;
     const description = config.description || this.defaultDescription;
-    const keywords = config.keywords || 'jornalismo, teologia, maria izabela, artigos, portfólio, fé e sociedade';
+    const keywords = config.keywords || 'comunicação digital, jornalismo, maria izabela, portfólio, marketing de conteúdo, teologia';
     const image = config.image || 'assets/Imagens/banner-jornalismo-maria-izabela.png';
     const url = config.url ? `https://mariaizabela.com.br${config.url}` : 'https://mariaizabela.com.br';
     const type = config.type || 'website';
@@ -49,6 +49,32 @@ export class SeoService {
 
     // Canonical
     this.updateCanonicalUrl(url);
+
+    // Dynamic JSON-LD (Structured Data)
+    if (config.type === 'article') {
+      this.updateJsonLd({
+        "@context": "https://schema.org",
+        "@type": "NewsArticle",
+        "headline": title,
+        "description": description,
+        "image": image,
+        "url": url,
+        "author": {
+          "@type": "Person",
+          "name": "Maria Izabela"
+        }
+      });
+    }
+  }
+
+  private updateJsonLd(data: any) {
+    let script: HTMLScriptElement | null = this.document.querySelector('script[type="application/ld+json"]');
+    if (script === null) {
+      script = this.document.createElement('script');
+      script.setAttribute('type', 'application/ld+json');
+      this.document.head.appendChild(script);
+    }
+    script.text = JSON.stringify(data);
   }
 
   private updateCanonicalUrl(url: string) {

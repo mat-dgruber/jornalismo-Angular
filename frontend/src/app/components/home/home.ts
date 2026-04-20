@@ -3,6 +3,8 @@ import { RouterLink } from '@angular/router';
 import { articles } from './articles';
 import { CommonModule } from '@angular/common';
 import { SkeletonModule } from 'primeng/skeleton';
+import { DialogModule } from 'primeng/dialog';
+import { ButtonModule } from 'primeng/button';
 import { BlogService } from '../../services/blog.service';
 import { Post } from '../../services/post.model';
 import { MateriaisService, Material } from '../../services/materiais.service';
@@ -23,7 +25,7 @@ interface Article {
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [RouterLink, CommonModule, SkeletonModule],
+  imports: [RouterLink, CommonModule, SkeletonModule, DialogModule, ButtonModule],
   templateUrl: './home.html',
   styleUrls: ['./home.css']
 })
@@ -38,7 +40,39 @@ export class Home implements OnInit {
   isLoadingMaterials = true;
   isLoadingArticles = true;
   isLoadingProjects = true;
-  
+
+  isCertificationsModalVisible = false;
+
+  lattesData = {
+    nome: 'Maria Izabela Araújo',
+    id: '5526357506410764',
+    url: 'https://lattes.cnpq.br/5526357506410764',
+    formacao: [
+      {
+        periodo: '2025',
+        curso: 'Bacharelado em Jornalismo',
+        instituicao: 'Centro Universitário Internacional Uninter (Bolsista)'
+      },
+      {
+        periodo: '2022',
+        curso: 'Bacharelado em Teologia',
+        instituicao: 'Centro Universitário Internacional Uninter'
+      }
+    ],
+    complementar: [
+      { periodo: '2025', curso: 'Hebraico Bíblico e Cultura Judaica', carga: '50h' },
+      { periodo: '2025', curso: 'Literatura Brasileira - Formação de Lei', carga: '5h' },
+      { periodo: '2025', curso: 'Francês Básico', carga: '30h' },
+      { periodo: '2025', curso: 'Língua Inglesa (Basic & Intermediate)', carga: '84h' },
+      { periodo: '2025', curso: 'Desafios da Diversidade Religiosa', carga: '5h' },
+      { periodo: '2025', curso: 'Historiadores e as Conexões', carga: '5h' },
+      { periodo: '2025', curso: 'Como preparar artigos para publicação acadêmica', carga: '2h' },
+      { periodo: '2025', curso: 'Mulheres na Teologia', carga: '2h' },
+      { periodo: '2024', curso: 'Papel das Religiões no Espaço Público', carga: '5h' }
+    ],
+    resumo: 'Sólida formação acadêmica com dupla graduação em Teologia (2022) e Jornalismo (2025). Experiência principal em Teologia, com aprofundamento em Linguagens, Cultura e Temas Sociais. Comprometida em conectar Humanidades com inovações do mercado.'
+  };
+
   featuredProject = {
     title: 'FÉ SOB FOGO: UMA ANÁLISE TEOLÓGICA E GEOPOLÍTICA DA PERSEGUIÇÃO AOS CRISTÃOS E O DEVER DE INTERVENÇÃO DOS PAÍSES LIVRES',
     description: 'Este trabalho aborda tanto o desafio da perseguição a cristãos na China quanto em outros países ao redor do mundo, trazendo tanto análises sobre os motivos quanto possíveis soluções para tais ocorrências.',
@@ -55,8 +89,9 @@ export class Home implements OnInit {
 
   ngOnInit(): void {
     this.seoService.updateSeo({
-      title: 'Início',
-      description: 'Explore o portfólio de Maria Izabela, unindo Teologia e Jornalismo. Veja artigos, e-books e projetos acadêmicos.',
+      title: 'Maria Izabela | Início',
+      description: 'Explore o portfólio de Maria Izabela. Soluções em comunicação digital, jornalismo ético e projetos multi-disciplinares.',
+      keywords: 'comunicação, jornalismo, marketing, portfólio, maria izabela',
       url: '/'
     });
     if (articles.length > 0) {
@@ -112,5 +147,9 @@ export class Home implements OnInit {
       },
       error: () => this.isLoadingProjects = false
     });
+  }
+
+  showCertifications() {
+    this.isCertificationsModalVisible = true;
   }
 }
