@@ -29,7 +29,13 @@
             "styles": [
               "src/styles.css",
               "node_modules/quill/dist/quill.snow.css"
-            ]
+            ],
+            "server": "src/main.server.ts",
+            "outputMode": "static",
+            "prerender": {
+              "discoverRoutes": false,
+              "routesFile": "routes.txt"
+            }
           },
           "configurations": {
             "production": {
