@@ -1,5 +1,5 @@
-import { Component, OnInit, inject } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { Component, OnInit, inject, AfterViewInit } from '@angular/core';
+import { Router, ActivatedRoute, RouterLink } from '@angular/router';
 import { articles } from './articles';
 import { CommonModule } from '@angular/common';
 import { SkeletonModule } from 'primeng/skeleton';
@@ -29,7 +29,7 @@ interface Article {
   templateUrl: './home.html',
   styleUrls: ['./home.css']
 })
-export class Home implements OnInit {
+export class Home implements OnInit, AfterViewInit {
   latestArticle!: Article;
   recentPosts: Post[] = [];
   recentMaterials: Material[] = [];
@@ -84,6 +84,8 @@ export class Home implements OnInit {
   private artigosService = inject(ArtigosService);
   private projetosService = inject(ProjetosService);
   private seoService = inject(SeoService);
+  private router = inject(Router);
+  private route = inject(ActivatedRoute);
 
   constructor() { }
 
@@ -147,6 +149,14 @@ export class Home implements OnInit {
       },
       error: () => this.isLoadingProjects = false
     });
+  }
+
+  ngAfterViewInit(): void {
+    // Se não houver fragmento (âncora) na URL, força o scroll para o topo
+    // para evitar que o navegador pule para seções intermediárias no carregamento inicial
+    if (!this.route.snapshot.fragment) {
+      window.scrollTo({ top: 0, behavior: 'instant' });
+    }
   }
 
   showCertifications() {
