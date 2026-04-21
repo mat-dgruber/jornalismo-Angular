@@ -18,5 +18,5 @@ RUN uv sync
 
 ENV PATH="/app/.venv/bin:$PATH"
 
-# Comando padrão para produção (gunicorn)
-CMD ["sh", "-c", "gunicorn config.wsgi:application --bind 0.0.0.0:${PORT:-8080} --workers 1 --threads 8 --timeout 0 --access-logfile - --error-logfile -"]
+# Coleta arquivos estáticos e inicia o servidor
+CMD ["sh", "-c", "python manage.py collectstatic --noinput && gunicorn config.wsgi:application --bind 0.0.0.0:${PORT:-8080} --workers 1 --threads 8 --timeout 0 --access-logfile - --error-logfile -"]
