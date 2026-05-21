@@ -1,5 +1,5 @@
-DATABASE_URL: "postgresql://user:password@host:port/dbname"
+DATABASE_URL: "postgresql://postgres:postgres@localhost:5432/postgres"
 SECRET_KEY: "your-secret-key-here"
 DEBUG: "False"
-GS_BUCKET_NAME: "your-bucket-name-here"
-ALLOWED_HOSTS: "your-allowed-hosts-here"
+GS_BUCKET_NAME: "journal-ai-bucket"
+ALLOWED_HOSTS: "*"
