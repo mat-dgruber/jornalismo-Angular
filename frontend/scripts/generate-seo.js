@@ -7,6 +7,11 @@ const SITE_BASE = 'https://mariaizabela.com.br';
 const OUTPUT_DIR = path.join(__dirname, '../public');
 const ROUTES_FILE = path.join(__dirname, '../routes.txt');
 
+// Garantir que o diretório de saída existe
+if (!fs.existsSync(OUTPUT_DIR)) {
+  fs.mkdirSync(OUTPUT_DIR, { recursive: true });
+}
+
 async function fetchData(endpoint) {
   try {
     const response = await fetch(`${API_BASE}/api/${endpoint}/`);
@@ -27,7 +32,7 @@ async function generate() {
     fetchData('materiais')
   ]);
 
-  const routes = [
+  const initialRoutes = [
     '/',
     '/blog',
     '/artigos',
@@ -37,11 +42,27 @@ async function generate() {
     '/projeto-tcc'
   ];
 
+  const routesSet = new Set(initialRoutes);
+
   // Adicionar rotas dinâmicas
-  posts.forEach(p => routes.push(`/post/${p.slug}`));
-  artigos.forEach(a => routes.push(`/artigos/editar/${a.slug}`)); // Se quiser indexar edições (opcional)
-  projetos.forEach(pr => routes.push(`/projetos/${pr.slug}`));
-  materiais.forEach(m => routes.push(`/materiais`)); // Materiais parecem não ter página de detalhe própria no routes.ts atual
+  posts.forEach(p => {
+    if (p.slug) routesSet.add(`/post/${p.slug}`);
+  });
+  
+  // Artigos: filtramos rotas de edição/admin para SEO
+  artigos.forEach(a => {
+    // Se no futuro houver página de visualização pública:
+    // routesSet.add(`/artigos/${a.slug}`);
+  });
+
+  projetos.forEach(pr => {
+    if (pr.slug) routesSet.add(`/projetos/${pr.slug}`);
+  });
+
+  // Materiais: Atualmente não possuem página de detalhe, mantemos apenas a rota base (já no initialRoutes)
+
+  // Converter Set para Array e ordenar
+  const routes = Array.from(routesSet).sort();
 
   // 1. Salvar routes.txt para o Angular Prerender
   fs.writeFileSync(ROUTES_FILE, routes.join('\n'));

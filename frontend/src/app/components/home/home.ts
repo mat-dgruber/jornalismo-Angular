@@ -155,7 +155,7 @@ export class Home implements OnInit, AfterViewInit {
     // Se não houver fragmento (âncora) na URL, força o scroll para o topo
     // para evitar que o navegador pule para seções intermediárias no carregamento inicial
     if (!this.route.snapshot.fragment) {
-      window.scrollTo({ top: 0, behavior: 'instant' });
+      window.scrollTo({ top: 0, behavior: 'auto' });
     }
   }
 

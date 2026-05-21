@@ -16,6 +16,7 @@
     
     /* Modern Archivist Palette - Muted Editorial Vibe */
     --primary-color: #6c596e; /* Muted Mauve */
+    --primary-dark: #4a3a4c;
     --primary-light: #8e7b91; 
     --primary-container: #f5daf4; 
     --secondary-color: #665c69;
@@ -27,6 +28,7 @@
     
     --text-color: #3b2d43; /* Deep Purple Gray for perfect legibility */
     --text-muted: #6a5972; 
+    --text-dim: #92839b;
     --light-text-color: #ffffff;
     
     --font-heading: 'Newsreader', serif;
@@ -52,6 +54,7 @@
     --radius-sm: 6px;
     --radius-md: 12px;
     --radius-lg: 24px;
+    --radius-2xl: 32px;
     --shadow-aura: 0 24px 48px -12px rgba(59, 45, 67, 0.04); /* Muted atmospheric shadow */
     --shadow-hover: 0 32px 64px -16px rgba(59, 45, 67, 0.08); /* Soft lift */
 }
