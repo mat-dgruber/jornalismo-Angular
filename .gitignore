@@ -20,3 +20,4 @@ coverage/
 postgres_data/
 /frontend/.angular
 .agent/
+env_vars.yaml

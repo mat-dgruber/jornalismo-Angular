@@ -1,0 +1,7 @@
+/
+/artigos
+/blog
+/contato
+/materiais
+/projeto-tcc
+/projetos
