@@ -1,8 +1,7 @@
-__pycache__/
-*.py[cod]
-*$py.class
-.env
 .venv/
+.env
+__pycache__/
 certs/serviceAccountKey.json
 media/
 db.sqlite3
+env_vars.yaml

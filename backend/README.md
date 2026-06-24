@@ -11,7 +11,6 @@ Este é o backend do projeto, construído com **Django** e **Django REST Framewo
     ```
 
 2.  **Ative o ambiente:**
-
     - Windows: `.venv\Scripts\activate`
     - Linux/Mac: `source .venv/bin/activate`
 
