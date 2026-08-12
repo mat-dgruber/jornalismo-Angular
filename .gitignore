@@ -23,6 +23,8 @@ postgres_data/
 env_vars.yaml
 graphify-out/
 .firebase/
+**/.firebase/
+frontend/.firebase/
 __pycache__/
 *.pyc
 .venv/
