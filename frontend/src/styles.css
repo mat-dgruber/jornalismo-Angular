@@ -92,8 +92,11 @@
     --shadow-hover: 0 32px 64px -16px rgba(59, 45, 67, 0.08); /* Soft lift */
 }
 
-html {
-    scroll-behavior: smooth;
+/* Smooth scroll em âncoras do usuário sem afetar o carregamento da página */
+@media (prefers-reduced-motion: no-preference) {
+    :root {
+        scroll-behavior: auto;
+    }
 }
 
 body {

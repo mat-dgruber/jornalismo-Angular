@@ -1,7 +1,7 @@
-import { Component, OnInit, inject, AfterViewInit } from '@angular/core';
+import { Component, OnInit, inject, AfterViewInit, PLATFORM_ID } from '@angular/core';
 import { Router, ActivatedRoute, RouterLink } from '@angular/router';
 import { articles } from './articles';
-import { CommonModule } from '@angular/common';
+import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { SkeletonModule } from 'primeng/skeleton';
 import { DialogModule } from 'primeng/dialog';
 import { ButtonModule } from 'primeng/button';
@@ -30,6 +30,7 @@ interface Article {
   styleUrls: ['./home.css']
 })
 export class Home implements OnInit, AfterViewInit {
+  private platformId = inject(PLATFORM_ID);
   latestArticle!: Article;
   recentPosts: Post[] = [];
   recentMaterials: Material[] = [];
@@ -152,10 +153,8 @@ export class Home implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    // Se não houver fragmento (âncora) na URL, força o scroll para o topo
-    // para evitar que o navegador pule para seções intermediárias no carregamento inicial
-    if (!this.route.snapshot.fragment) {
-      window.scrollTo({ top: 0, behavior: 'auto' });
+    if (isPlatformBrowser(this.platformId) && !this.route.snapshot.fragment) {
+      window.scrollTo({ top: 0, left: 0, behavior: 'instant' as ScrollBehavior });
     }
   }
 
