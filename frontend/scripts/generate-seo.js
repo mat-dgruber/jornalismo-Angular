@@ -89,6 +89,22 @@ Allow: /
 Disallow: /admin/
 Disallow: /login
 
+# Explicit Permissions for AI & LLM Crawlers
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Bytespider
+Allow: /
+
 Sitemap: ${SITE_BASE}/sitemap.xml
 `;
   fs.writeFileSync(path.join(OUTPUT_DIR, 'robots.txt'), robots);

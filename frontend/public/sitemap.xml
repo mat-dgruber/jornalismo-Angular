@@ -2,57 +2,47 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://mariaizabela.com.br/</loc>
-    <lastmod>2026-04-20</lastmod>
+    <lastmod>2026-08-12</lastmod>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://mariaizabela.com.br/blog</loc>
-    <lastmod>2026-04-20</lastmod>
-    <priority>0.8</priority>
-  </url>
-  <url>
     <loc>https://mariaizabela.com.br/artigos</loc>
-    <lastmod>2026-04-20</lastmod>
+    <lastmod>2026-08-12</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://mariaizabela.com.br/projetos</loc>
-    <lastmod>2026-04-20</lastmod>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://mariaizabela.com.br/materiais</loc>
-    <lastmod>2026-04-20</lastmod>
+    <loc>https://mariaizabela.com.br/blog</loc>
+    <lastmod>2026-08-12</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://mariaizabela.com.br/contato</loc>
-    <lastmod>2026-04-20</lastmod>
+    <lastmod>2026-08-12</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://mariaizabela.com.br/materiais</loc>
+    <lastmod>2026-08-12</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://mariaizabela.com.br/projeto-tcc</loc>
-    <lastmod>2026-04-20</lastmod>
+    <lastmod>2026-08-12</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://mariaizabela.com.br/projetos/o-jornalismo-em-sociedade-e-a-massificacao-de-conteudos-1</loc>
-    <lastmod>2026-04-20</lastmod>
+    <loc>https://mariaizabela.com.br/projetos</loc>
+    <lastmod>2026-08-12</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://mariaizabela.com.br/projetos/fe-sob-fogo-analise-teologica</loc>
-    <lastmod>2026-04-20</lastmod>
+    <lastmod>2026-08-12</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://mariaizabela.com.br/materiais</loc>
-    <lastmod>2026-04-20</lastmod>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://mariaizabela.com.br/materiais</loc>
-    <lastmod>2026-04-20</lastmod>
+    <loc>https://mariaizabela.com.br/projetos/o-jornalismo-em-sociedade-e-a-massificacao-de-conteudos-1</loc>
+    <lastmod>2026-08-12</lastmod>
     <priority>0.8</priority>
   </url>
 </urlset>

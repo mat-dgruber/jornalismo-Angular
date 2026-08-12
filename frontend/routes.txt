@@ -5,3 +5,5 @@
 /materiais
 /projeto-tcc
 /projetos
+/projetos/fe-sob-fogo-analise-teologica
+/projetos/o-jornalismo-em-sociedade-e-a-massificacao-de-conteudos-1

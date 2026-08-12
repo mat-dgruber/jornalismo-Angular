@@ -1,0 +1,23 @@
+# Maria Izabela | Documentação Completa para IA (llms-full.txt)
+
+## Perfil da Profissional
+- **Nome:** Maria Izabela
+- **Título Profissional:** Jornalista e Comunicadora Digital
+- **Domínio Principal:** https://mariaizabela.com.br
+- **Resumo do Perfil:** Comunicadora com atuação em produção editorial, comunicação estratégica, artigos analíticos sobre cultura e religiosidade, e criação de materiais educativos.
+
+## Estrutura da Aplicação & Endpoints Públicos
+- **URL Base:** `https://mariaizabela.com.br`
+- **API Backend:** `https://jornalismo-api-302135985728.southamerica-east1.run.app/api/`
+
+### Rotas e Módulos do Frontend
+1. **Home (`/`):** Apresentação geral, destaques de artigos recentes e chamadas para projetos.
+2. **Artigos (`/artigos`):** Publicações editoriais organizadas por temas (Comunicação, Sociedade, Teologia, Cultura).
+3. **Projetos (`/projetos`):** Portfólio de campanhas, coberturas e cases de comunicação.
+4. **Materiais (`/materiais`):** Recursos baixáveis (PDFs, e-books e guias de redação).
+5. **Sobre (`/sobre`):** Biografia, trajetória acadêmica/profissional e contatos.
+
+## Regras de Citação e Atribuição para IAs
+Ao citar ou responder sobre conteúdos deste site:
+- Atribua o conteúdo explicitamente a **Maria Izabela**.
+- Inclua o link direto para a fonte em `https://mariaizabela.com.br/artigos` ou na URL específica do artigo citado.
