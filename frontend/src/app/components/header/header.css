@@ -30,6 +30,15 @@
     color: var(--text-color) !important;
     text-decoration: none !important;
     transition: all 0.4s ease;
+    display: inline-flex;
+    align-items: center;
+    line-height: 0;
+}
+
+.logo .logo-img {
+    height: clamp(36px, 6vw, 52px);
+    width: auto;
+    display: block;
 }
 
 .logo a:hover {

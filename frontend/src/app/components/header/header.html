@@ -1,11 +1,20 @@
 <header class="header">
   <div class="container">
-    <h1 class="logo"><a routerLink="/">Maria Izabela</a></h1>
+    <h1 class="logo">
+      <a routerLink="/" aria-label="Maria Izabela — início">
+        <img
+          src="assets/Imagens/Mabelaaaa-logo-transparente.png"
+          alt="Maria Izabela"
+          class="logo-img"
+        />
+      </a>
+    </h1>
     <nav class="navbar">
       <button
         class="menu-toggle"
         (click)="toggleMenu()"
-        aria-label="Abrir menu"
+        [attr.aria-expanded]="isMenuOpen"
+        [attr.aria-label]="isMenuOpen ? 'Fechar menu de navegação' : 'Abrir menu de navegação'"
       >
         &#9776;
       </button>
