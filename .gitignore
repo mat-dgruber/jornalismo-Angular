@@ -21,3 +21,11 @@ postgres_data/
 /frontend/.angular
 .agent/
 env_vars.yaml
+graphify-out/
+.firebase/
+__pycache__/
+*.pyc
+.venv/
+venv/
+backend/.venv/
+.remember/

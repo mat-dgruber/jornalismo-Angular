@@ -1,0 +1,21 @@
+# Rules for files and directories ignored by graphify
+graphify-out/
+node_modules/
+frontend/node_modules/
+.git/
+.angular/
+frontend/.angular/
+dist/
+build/
+coverage/
+.next/
+.cache/
+*.log
+.env*
+*.pyc
+__pycache__/
+.venv/
+venv/
+backend/.venv/
+.remember/
+.firebase/
