@@ -1,33 +1,42 @@
+# MARK: - Imports & Dependencies
 from rest_framework import permissions
 from .usage_stats import get_db_usage, get_storage_usage, DB_LIMIT_BYTES, STORAGE_LIMIT_BYTES
 
+# MARK: - Custom Permission Classes
 class IsUnderUsageLimit(permissions.BasePermission):
-    """
-    Custom permission to only allow writes if usage is under limits.
+    """Permissão do Django REST Framework para proteção contra exaustão de armazenamento e DoS.
+
+    Bloqueia mutações de dados (POST, PUT, PATCH) caso os limites de armazenamento
+    do banco de dados ou de arquivos estáticos/mídia sejam ultrapassados.
     """
 
+    message = "Limite de armazenamento da cota atingido. Novas escritas estão temporariamente bloqueadas."
+
     def has_permission(self, request, view):
-        # Allow safe methods (GET, HEAD, OPTIONS)
+        """Verifica se a requisição possui permissão com base nos limites atuais de infraestrutura.
+
+        Args:
+            request (rest_framework.request.Request): Objeto da requisição HTTP do Django.
+            view (rest_framework.viewsets.ViewSet): Viewset de destino da requisição.
+
+        Returns:
+            bool: True se a requisição for de leitura segura (GET, HEAD, OPTIONS) ou
+            se o consumo de dados estiver abaixo da cota; False caso contrário.
+        """
+        # MARK: - Safe Methods Bypass
         if request.method in permissions.SAFE_METHODS:
             return True
 
-        # Check limits for unsafe methods (POST, PUT, PATCH, DELETE)
-        # Note: DELETE might free up space, so strictly speaking we should allow it.
-        # But 'unsafe methods' usually covers modification.
-        # Let's allow DELETE to clear space.
-        if request.method == 'DELETE':
-            return True
+        # MARK: - Storage & Database Limit Checks
+        db_bytes = get_db_usage()
+        storage_bytes = get_storage_usage()
 
-        # Check DB Limit
-        db_usage = get_db_usage()
-        if db_usage >= DB_LIMIT_BYTES:
-            self.message = "Database limit exceeded (1GB). Please delete some data to continue."
+        if db_bytes >= DB_LIMIT_BYTES:
+            self.message = "Limite do banco de dados atingido. Novas criações estão temporariamente bloqueadas."
             return False
 
-        # Check Storage Limit
-        storage_usage = get_storage_usage()
-        if storage_usage >= STORAGE_LIMIT_BYTES:
-            self.message = "Storage limit exceeded (5GB). Please delete some files to continue."
+        if storage_bytes >= STORAGE_LIMIT_BYTES:
+            self.message = "Limite de arquivos atingido. Novos uploads estão temporariamente bloqueados."
             return False
 
         return True

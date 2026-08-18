@@ -1,83 +1,77 @@
-
-import json
-from firebase_admin import auth, credentials
-import firebase_admin
-from rest_framework import authentication
-from rest_framework import exceptions
-from django.contrib.auth.models import User
-from django.conf import settings
+# MARK: - Imports & Dependencies
 import os
-# Initialize Firebase Admin SDK if not already initialized
-if not firebase_admin._apps:
-    base_dir = settings.BASE_DIR
-    local_cred_path = os.path.join(base_dir, 'certs', 'serviceAccountKey.json')
-    env_cred_path = os.getenv('FIREBASE_CREDENTIALS_PATH')
-    json_cred_env = os.getenv('FIREBASE_SERVICE_ACCOUNT_JSON')
+import firebase_admin
+from firebase_admin import auth, credentials
+from django.contrib.auth.models import User
+from rest_framework import authentication, exceptions
 
-    # Force the project ID from environment or default to the correct one
-    firebase_project_id = os.getenv('FIREBASE_PROJECT_ID', 'portfolio-jornalismo')
-    options = {'projectId': firebase_project_id}
+# MARK: - Firebase SDK Initialization
+# Inicializa o Firebase Admin SDK prioritariamente via Application Default Credentials (ADC)
+# ou por arquivo de credenciais definido em variável de ambiente.
+try:
+    if not firebase_admin._apps:
+        cred_path = os.environ.get('FIREBASE_CREDENTIALS_PATH')
+        if cred_path and os.path.exists(cred_path):
+            cred = credentials.Certificate(cred_path)
+            firebase_admin.initialize_app(cred)
+        else:
+            # Fallback seguro para GCP Cloud Run (ADC) ou inicialização padrão
+            firebase_admin.initialize_app()
+except Exception as e:
+    print(f"Aviso de inicialização do Firebase Admin SDK: {e}")
 
-    if json_cred_env:
-        # Load from JSON string in environment variable
-        try:
-            cred_dict = json.loads(json_cred_env)
-            cred = credentials.Certificate(cred_dict)
-            firebase_admin.initialize_app(cred, options=options)
-        except Exception as e:
-            print(f"Firebase ERROR: Failed to initialize from JSON env: {e}")
-    elif env_cred_path:
-        # Load from file path in environment variable
-        cred = credentials.Certificate(env_cred_path)
-        firebase_admin.initialize_app(cred, options=options)
-    elif os.path.exists(local_cred_path):
-        # Load from local file (Dev)
-        cred = credentials.Certificate(local_cred_path)
-        firebase_admin.initialize_app(cred, options=options)
-    else:
-        # Fallback for ADC (Cloud Run default)
-        try:
-             firebase_admin.initialize_app(options=options)
-             print(f"Firebase: Initialized using Default Credentials for project {firebase_project_id}")
-        except Exception as e:
-            print(f"Firebase: Failed to initialize with ADC: {e}")
-
+# MARK: - Authentication Class
 class FirebaseAuthentication(authentication.BaseAuthentication):
+    """Classe de autenticação customizada para o Django REST Framework via Firebase Auth JWT.
+
+    Valida o token Bearer enviado no cabeçalho 'Authorization' contra as chaves públicas
+    do Firebase e sincroniza/obtém o usuário correspondente no Django User Model.
+    """
+
     def authenticate(self, request):
+        """Autentica a requisição HTTP verificando o token Bearer do Firebase.
+
+        Args:
+            request (rest_framework.request.Request): Objeto da requisição HTTP do Django.
+
+        Returns:
+            tuple[User, dict] | None: Tupla contendo a instância de User do Django e o payload
+            decodificado do token JWT se autenticado com sucesso, ou None se nenhum token for enviado.
+
+        Raises:
+            exceptions.AuthenticationFailed: Se o token for inválido, expirado ou revogado.
+        """
+        # MARK: - Header Extraction
         auth_header = request.META.get('HTTP_AUTHORIZATION')
         if not auth_header:
-            # print("FirebaseAuthentication: No Authorization header found")
             return None
 
-        # print("FirebaseAuthentication: Header found:", auth_header[:20] + "...")
-        id_token = auth_header.split(' ').pop()
-        decoded_token = None
-        
+        parts = auth_header.split()
+        if parts[0].lower() != 'bearer':
+            return None
+
+        if len(parts) == 1:
+            raise exceptions.AuthenticationFailed('Cabeçalho de autorização inválido: Nenhum token fornecido.')
+        elif len(parts) > 2:
+            raise exceptions.AuthenticationFailed('Cabeçalho de autorização inválido: Token contém espaços extras.')
+
+        id_token = parts[1]
+
+        # MARK: - JWT Token Verification
         try:
+            # Decodifica e valida a assinatura criptográfica do ID Token no Firebase
             decoded_token = auth.verify_id_token(id_token)
         except Exception as e:
-            print(f"FirebaseAuthentication ERROR: Token verification failed: {e}")
-            raise exceptions.AuthenticationFailed(f'Invalid Firebase token: {e}')
+            raise exceptions.AuthenticationFailed(f'Token do Firebase inválido ou expirado: {str(e)}')
 
-        if not decoded_token:
-            print("FirebaseAuthentication ERROR: No decoded token")
-            return None
-
+        # MARK: - Django User Sync
         uid = decoded_token.get('uid')
-        email = decoded_token.get('email')
-        
-        if not email:
-             raise exceptions.AuthenticationFailed('Firebase token has no email')
+        email = decoded_token.get('email', '')
 
-        # Get or create the user
-        try:
-            user = User.objects.get(username=uid)
-        except User.DoesNotExist:
-            try:
-                user = User.objects.create_user(username=uid, email=email)
-                print(f"FirebaseAuthentication: Created new user for uid: {uid}")
-            except Exception as e:
-                print(f"FirebaseAuthentication ERROR during user creation: {e}")
-                user = User.objects.get(username=uid)
+        # Localiza ou cria o usuário espelho no Django baseado no UID único do Firebase
+        user, created = User.objects.get_or_create(
+            username=uid,
+            defaults={'email': email}
+        )
 
-        return (user, None)
+        return (user, decoded_token)

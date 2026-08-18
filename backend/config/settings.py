@@ -227,3 +227,8 @@ STORAGES = {
 GS_BUCKET_NAME = os.environ.get("GS_BUCKET_NAME")
 GS_QUERYSTRING_AUTH = False  # Disable signed URLs for now to debug
 GS_DEFAULT_ACL = 'publicRead'
+
+# Configurações de cookies de segurança para produção (habilitado quando DEBUG = False)
+SESSION_COOKIE_SECURE = not DEBUG
+CSRF_COOKIE_SECURE = not DEBUG
+
