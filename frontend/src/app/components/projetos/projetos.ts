@@ -26,7 +26,7 @@ export class Projetos implements OnInit {
     });
     this.projetosService.getProjetos().subscribe({
       next: (data) => {
-        this.projects = data.reverse();
+        this.projects = [...data].reverse();
         this.isLoading = false;
       },
       error: () => {

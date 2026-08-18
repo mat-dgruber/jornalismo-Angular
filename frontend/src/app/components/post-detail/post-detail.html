@@ -1,7 +1,10 @@
-<div class="container">
-  <a routerLink="/blog" class="back-fab" aria-label="Voltar">
-    <lucide-icon [img]="arrowLeft" size="24"></lucide-icon>
-  </a>
+<div class="container post-detail-container">
+  <div class="back-nav">
+    <a routerLink="/blog" class="back-button" aria-label="Voltar ao Blog">
+      <lucide-icon [img]="arrowLeft" size="20"></lucide-icon>
+      <span class="back-label">Voltar ao Blog</span>
+    </a>
+  </div>
 
   @if (postResource.isLoading()) {
     <article class="post-detail">
@@ -47,29 +50,24 @@
   } @else if (postResource.error()) {
     <div class="error-state">
       <p>Erro ao carregar o post. Verifique sua conexão.</p>
-      <button (click)="postResource.reload()">Tentar novamente</button>
+      <button class="btn btn-primary mt-3" (click)="postResource.reload()">Tentar novamente</button>
     </div>
   } @else if (postResource.value(); as p) {
     <article class="post-detail">
       <header>
-        <img [src]="p.image" [alt]="p.title" class="post-banner" />
+        @if (p.image) {
+          <img [src]="p.image" [alt]="p.title" class="post-banner" />
+        }
         <h1>{{ p.title }}</h1>
-        <p class="subtitle">{{ p.subtitle }}</p>
-        <hr />
+        @if (p.subtitle) {
+          <p class="subtitle">{{ p.subtitle }}</p>
+        }
         <div class="meta">
-          <span>Por: {{ p | authorName }}</span> |
+          <span>Por: {{ p | authorName }}</span>
+          <span class="meta-divider">•</span>
           <span>Data: {{ p.published_date | date: "dd/MM/yyyy" }}</span>
         </div>
-        <hr />
       </header>
-
-      <!--
-    @if (p.image) {
-    <div class="image-wrapper">
-      <img [src]="p.image" [alt]="p.title">
-    </div>
-    }
--->
 
       <div class="content" [innerHTML]="p.content"></div>
     </article>

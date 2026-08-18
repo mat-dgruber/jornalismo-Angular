@@ -3,44 +3,50 @@
     justify-content: center;
     align-items: center;
     min-height: 80vh;
-    background-color: #f3f4f6;
+    padding: var(--space-lg) var(--space-md);
 }
 
 .login-card {
-    background: white;
-    padding: 2.5rem;
-    border-radius: 1rem;
-    box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+    background: var(--bg-surface);
+    padding: var(--space-2xl);
+    border-radius: var(--radius-2xl);
+    box-shadow: var(--shadow-aura);
     width: 100%;
-    max-width: 400px;
+    max-width: 440px;
     text-align: center;
 }
 
 .login-card h1 {
-    font-size: 1.8rem;
+    font-family: var(--font-heading);
+    font-size: 2.2rem;
     margin-bottom: 0.5rem;
-    color: #1f2937;
+    color: var(--primary-color);
+    letter-spacing: -0.03em;
 }
 
 .login-card p {
-    color: #6b7280;
-    margin-bottom: 2rem;
+    color: var(--text-muted);
+    margin-bottom: var(--space-xl);
+    font-size: 0.95rem;
 }
 
 .login-form {
     text-align: left;
-    margin-bottom: 1.5rem;
+    margin-bottom: var(--space-lg);
 }
 
 .form-group {
-    margin-bottom: 1rem;
+    margin-bottom: var(--space-md);
 }
 
 .form-group label {
     display: block;
-    margin-bottom: 0.5rem;
-    color: #374151;
-    font-weight: 500;
+    margin-bottom: var(--space-xs);
+    color: var(--text-color);
+    font-weight: 700;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
 }
 
 .w-full {
@@ -51,18 +57,32 @@
     display: flex;
     align-items: center;
     text-align: center;
-    margin: 1.5rem 0;
-    color: #9ca3af;
+    margin: var(--space-lg) 0;
+    color: var(--text-dim);
 }
 
 .divider::before,
 .divider::after {
     content: '';
     flex: 1;
-    border-bottom: 1px solid #e5e7eb;
+    border-bottom: 1px solid var(--bg-surface-variant);
 }
 
 .divider span {
     padding: 0 0.75rem;
-    font-size: 0.875rem;
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+}
+
+@media (max-width: 768px) {
+    .login-container {
+        padding: var(--space-md);
+        min-height: 70vh;
+    }
+
+    .login-card {
+        padding: var(--space-xl) var(--space-md);
+        border-radius: var(--radius-lg);
+    }
 }

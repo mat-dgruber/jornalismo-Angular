@@ -1,45 +1,77 @@
 <div class="container">
-  <h1>Postagens</h1>
+  <header class="page-header">
+    <h1 class="page-title">Blog</h1>
+    <p class="page-subtitle">Reflexões, artigos e ensaios sobre jornalismo, teologia e cultura contemporânea.</p>
+  </header>
 
   <div class="grid">
-    @if (isLoading) { @for (item of [1,2,3,4,5,6]; track item) {
-    <article class="post-card">
-      <p-skeleton height="220px" styleClass="mb-3"></p-skeleton>
-      <div class="p-3">
-        <p-skeleton width="80%" height="1.5rem" styleClass="mb-2"></p-skeleton>
-        <p-skeleton width="60%" height="1rem" styleClass="mb-3"></p-skeleton>
-        <p-skeleton width="40%" height="0.85rem" styleClass="mb-1"></p-skeleton>
-        <p-skeleton width="40%" height="0.85rem" styleClass="mb-3"></p-skeleton>
-        <p-skeleton width="100%" height="4rem" styleClass="mb-3"></p-skeleton>
-        <div class="flex justify-content-center mt-auto">
-          <p-skeleton
-            width="100%"
-            height="3rem"
-            borderRadius="25px"
-          ></p-skeleton>
-        </div>
-      </div>
-    </article>
-    } } @else { @for (post of posts(); track post.id) {
-    <article class="post-card">
-      @if (post.image) {
-      <img [src]="post.image" [alt]="post.title" [title]="post.title" />
+    @if (isLoading) {
+      @for (item of [1,2,3,4,5,6]; track item) {
+        <article class="post-card skeleton-card">
+          <p-skeleton height="220px" styleClass="mb-3"></p-skeleton>
+          <div class="p-3">
+            <p-skeleton width="80%" height="1.5rem" styleClass="mb-2"></p-skeleton>
+            <p-skeleton width="60%" height="1rem" styleClass="mb-3"></p-skeleton>
+            <p-skeleton width="40%" height="0.85rem" styleClass="mb-1"></p-skeleton>
+            <p-skeleton width="40%" height="0.85rem" styleClass="mb-3"></p-skeleton>
+            <p-skeleton width="100%" height="3rem" styleClass="mb-3"></p-skeleton>
+            <div class="mt-auto">
+              <p-skeleton
+                width="100%"
+                height="2.5rem"
+                borderRadius="25px"
+              ></p-skeleton>
+            </div>
+          </div>
+        </article>
       }
+    } @else {
+      @for (post of posts(); track post.id) {
+        <article class="post-card">
+          @if (post.image) {
+            <a [routerLink]="['/post', post.slug]" class="post-image-wrapper">
+              <img [src]="post.image" [alt]="post.title" [title]="post.title" loading="lazy" />
+            </a>
+          }
 
-      <h2>{{ post.title }}</h2>
-      <p>{{ post.subtitle }}</p>
+          <div class="post-card-body">
+            @if (post.category) {
+              <span class="post-category">{{ post.category }}</span>
+            }
 
-      <small> Por: {{ post.author_first_name }}</small>
-      <small> Data: {{ post.published_date | date : "dd/MM/yyyy" }}</small>
+            <h2 class="post-title">
+              <a [routerLink]="['/post', post.slug]">{{ post.title }}</a>
+            </h2>
 
-      <div class="content">
-        {{ post.content | stripHtml | slice : 0 : 100 }}...
-      </div>
+            @if (post.subtitle) {
+              <p class="post-subtitle">{{ post.subtitle }}</p>
+            }
 
-      <a [routerLink]="['/post', post.slug]">Ler mais</a>
-    </article>
-    } @empty {
-    <p>Nenhuma postagem disponível no blog ainda.</p>
-    } }
+            <div class="post-meta">
+              <span>{{ post.author_first_name }}</span>
+              <span>•</span>
+              <span>{{ post.published_date | date : "dd/MM/yyyy" }}</span>
+            </div>
+
+            <div class="content">
+              {{ post.content | stripHtml | slice : 0 : 120 }}...
+            </div>
+
+            <div class="post-actions">
+              <a [routerLink]="['/post', post.slug]" class="btn-read-more">
+                Ler mais
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M5 12h14M12 5l7 7-7 7"/>
+                </svg>
+              </a>
+            </div>
+          </div>
+        </article>
+      } @empty {
+        <div class="empty-state-editorial">
+          <p>Nenhuma postagem disponível no blog ainda.</p>
+        </div>
+      }
+    }
   </div>
 </div>

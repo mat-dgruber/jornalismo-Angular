@@ -64,6 +64,8 @@
                 [src]="article.imagem"
                 [alt]="article.titulo"
                 class="post-image"
+                loading="lazy"
+                decoding="async"
               />
             }
             <h3>{{ article.titulo }}</h3>
@@ -122,18 +124,20 @@
         }
       } @else {
         @for (material of recentMaterials; track material.id) {
-          <div class="portfolio-item pointer" routerLink="/materiais">
+          <a class="portfolio-item pointer" routerLink="/materiais">
             @if (material.image) {
               <img
                 [src]="material.image"
                 [alt]="material.name"
                 class="post-image"
+                loading="lazy"
+                decoding="async"
               />
             }
             <h3>{{ material.name }}</h3>
             <p class="description">{{ material.description }}</p>
             <span class="read-more">Ver Material</span>
-          </div>
+          </a>
         }
       }
     </div>
@@ -174,12 +178,14 @@
         }
       } @else {
         @for (project of recentProjects; track project.id) {
-          <div class="portfolio-item pointer" [routerLink]="['/projetos', project.slug]">
+          <a class="portfolio-item pointer" [routerLink]="['/projetos', project.slug]">
             @if (project.imagem) {
               <img
                 [src]="project.imagem"
                 [alt]="project.titulo"
                 class="post-image"
+                loading="lazy"
+                decoding="async"
               />
             }
             <h3>{{ project.titulo }}</h3>
@@ -187,7 +193,7 @@
               {{ project.descricao.slice(0, 150) + "..." }}
             </p>
             <span class="read-more">Ver Detalhes</span>
-          </div>
+          </a>
         }
       }
     </div>
@@ -227,17 +233,17 @@
           }
         } @else {
           @for (post of recentPosts; track post.slug) {
-            <div
+            <a
               class="portfolio-item pointer"
               [routerLink]="['/post', post.slug]"
             >
               @if (post.image) {
-                <img [src]="post.image" [alt]="post.title" class="post-image" />
+                <img [src]="post.image" [alt]="post.title" class="post-image" loading="lazy" decoding="async" />
               }
               <h3>{{ post.title }}</h3>
               <p class="description">{{ post.subtitle }}</p>
               <span class="read-more">Ler mais</span>
-            </div>
+            </a>
           }
         }
       </div>

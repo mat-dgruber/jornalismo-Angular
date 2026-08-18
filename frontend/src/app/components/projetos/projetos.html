@@ -20,34 +20,39 @@
         @for (project of projects; track project.id) {
           <div class="projeto-card">
             @if (project.imagem) {
-              <div class="projeto-image-wrapper pointer" [routerLink]="['/projetos', project.slug]">
-                <img [src]="project.imagem" [alt]="project.titulo" class="projeto-image" />
-              </div>
+              <a class="projeto-image-wrapper" [routerLink]="['/projetos', project.slug]">
+                <img [src]="project.imagem" [alt]="project.titulo" class="projeto-image" loading="lazy" />
+              </a>
             }
             <div class="projeto-content">
               <span class="projeto-type" [ngClass]="project.tipo">
                 {{ project.tipo === 'academico' ? 'Acadêmico' : 'Pessoal' }}
               </span>
-              <h3 class="projeto-titulo pointer" [routerLink]="['/projetos', project.slug]">{{ project.titulo }}</h3>
+              <h3 class="projeto-titulo">
+                <a [routerLink]="['/projetos', project.slug]">{{ project.titulo }}</a>
+              </h3>
               <p class="projeto-descricao">{{ project.descricao }}</p>
 
               <div class="projeto-actions">
                 <a [routerLink]="['/projetos', project.slug]" class="btn btn-projeto">
-                  Ver Detalhes do Projeto
+                  Ver Detalhes
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M5 12h14M12 5l7 7-7 7"/>
+                  </svg>
                 </a>
               </div>
             </div>
           </div>
         } @empty {
-          <div class="no-projects">
-            <p>Ainda não há projetos para exibir aqui.</p>
+          <div class="empty-state-editorial">
+            <p>Nenhum projeto disponível no momento.</p>
           </div>
         }
       }
     </div>
 
     <footer class="page-footer">
-      <a routerLink="/home" class="btn btn-outline">Voltar ao Início</a>
+      <a routerLink="/" class="btn btn-outline">Voltar ao Início</a>
     </footer>
   </div>
 </main>

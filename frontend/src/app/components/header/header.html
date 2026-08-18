@@ -19,8 +19,9 @@
         [attr.aria-expanded]="isMenuOpen"
         [attr.aria-label]="isMenuOpen ? 'Fechar menu de navegação' : 'Abrir menu de navegação'"
       >
-        &#9776;
+        {{ isMenuOpen ? '✕' : '☰' }}
       </button>
+      <div class="nav-backdrop" [class.active]="isMenuOpen" (click)="closeMenu()"></div>
       <ul class="nav-links" [class.active]="isMenuOpen">
         @if (isHomePage()) {
           <li><a href="#materias" (click)="closeMenu()">Artigos</a></li>
@@ -31,26 +32,31 @@
           <li>
             <a
               [routerLink]="'/artigos'"
-              fragment="materias"
+              routerLinkActive="active"
               (click)="closeMenu()"
               >Artigos</a
             >
           </li>
           <li>
             <a
-              [routerLink]="['/blog']"
-              fragment="blog-recentes"
+              [routerLink]="'/blog'"
+              routerLinkActive="active"
               (click)="closeMenu()"
               >Blog</a
             >
           </li>
           <li>
-            <a [routerLink]="'/materiais'" (click)="closeMenu()">Materiais</a>
+            <a
+              [routerLink]="'/materiais'"
+              routerLinkActive="active"
+              (click)="closeMenu()"
+              >Materiais</a
+            >
           </li>
           <li>
             <a
               [routerLink]="'/projetos'"
-              fragment="projetos"
+              routerLinkActive="active"
               (click)="closeMenu()"
               >Projetos</a
             >
@@ -58,7 +64,7 @@
           <li>
             <a
               [routerLink]="'/contato'"
-              fragment="contato"
+              routerLinkActive="active"
               (click)="closeMenu()"
               >Contato</a
             >

@@ -110,3 +110,22 @@ p-editor {
 ::ng-deep .p-editor-content.p-focus {
     border-color: var(--primary-color);
 }
+
+@media (max-width: 768px) {
+  .container {
+    padding: 1.25rem;
+    margin: 1rem auto;
+    border-radius: 12px;
+  }
+
+  h2 {
+    font-size: 1.8rem;
+    margin-bottom: 1.25rem;
+  }
+
+  .file-upload-wrapper {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+

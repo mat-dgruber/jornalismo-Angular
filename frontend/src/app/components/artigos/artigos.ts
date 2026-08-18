@@ -24,7 +24,7 @@ export class Artigos implements OnInit {
       url: '/artigos'
     });
     this.artigosService.getArtigos().subscribe((data) => {
-        this.articles = data.reverse(); // Show newest first
+        this.articles = [...data].reverse(); // Show newest first
     });
   }
 }
