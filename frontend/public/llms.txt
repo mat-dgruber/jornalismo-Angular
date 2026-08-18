@@ -1,18 +1,22 @@
-# Maria Izabela | Comunicação & Jornalismo
+# Maria Izabela | Comunicação, Jornalismo & Teologia
 
-> Portfólio oficial de Maria Izabela, jornalista e comunicadora digital especializada em redação editorial, estratégias de conteúdo, jornalismo investigativo e teologia.
+> Portfólio oficial e repositório editorial de Maria Izabela, jornalista e comunicadora digital especializada em redação analítica, comunicação institucional, jornalismo investigativo, projetos culturais e estudos teológicos.
 
-## Visão Geral
-- **Autora:** Maria Izabela
-- **Áreas de Atuação:** Jornalismo Cultural, Comunicação Institucional, Redação de Artigos, Produção de Conteúdo Teológico
-- **Website:** https://mariaizabela.com.br
+## Informações Gerais
+- **Autora:** Maria Izabela Araújo
+- **Formação & Atuação:** Bacharela em Teologia, Graduanda em Jornalismo, Comunicadora Digital e Redatora Editorial.
+- **Currículo Lattes:** http://lattes.cnpq.br/3418579458231221 (ID: 3418579458231221)
+- **Website Oficial:** https://mariaizabela.com.br
+- **Contato Principal:** contato@mariaizabela.com.br
 
-## Seções do Site
-- [Artigos](https://mariaizabela.com.br/artigos): Ensaios, reportagens e análises sobre jornalismo e cultura.
-- [Projetos](https://mariaizabela.com.br/projetos): Trabalhos selecionados em comunicação estratégica e editorial.
-- [Materiais](https://mariaizabela.com.br/materiais): Recursos, guias e e-books disponíveis para download.
-- [Sobre](https://mariaizabela.com.br/sobre): Trajetória profissional, bio e princípios editoriais.
+## Seções & Recursos Principais
+- [Página Inicial](https://mariaizabela.com.br/): Destaques editoriais, biografia e principais matérias recentes.
+- [Blog](https://mariaizabela.com.br/blog): Ensaios profundos, análises reflexivas sobre sociedade, comunicação e religiosidade contemporânea.
+- [Artigos & Reportagens](https://mariaizabela.com.br/artigos): Acervo de publicações em veículos de imprensa e portais de mídia.
+- [Projetos](https://mariaizabela.com.br/projetos): Portfólio de cases acadêmicos, reportagens especiais e iniciativas de comunicação social.
+- [Materiais](https://mariaizabela.com.br/materiais): Recursos educativos, e-books e guias temáticos para download gratuito ou aquisição.
+- [Contato](https://mariaizabela.com.br/contato): Formulário direto e canais profissionais para contratação, palestras e consultoria editorial.
 
 ## Optional
-- [Sitemap](https://mariaizabela.com.br/sitemap.xml): Mapeamento em XML das páginas publicadas.
-- [llms-full.txt](https://mariaizabela.com.br/llms-full.txt): Contexto expandido para agentes de IA e modelos de linguagem.
+- [Sitemap XML](https://mariaizabela.com.br/sitemap.xml): Índice estruturado de todas as páginas públicas.
+- [llms-full.txt](https://mariaizabela.com.br/llms-full.txt): Mapeamento abrangente de APIs, endpoints, biografia detalhada e diretrizes de citação para LLMs.
