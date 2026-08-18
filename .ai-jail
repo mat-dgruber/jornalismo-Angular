@@ -1,0 +1,42 @@
+# Configuração do Sandbox ai-jail para jornalismo-Angular
+# Permite acesso exclusivo às ferramentas e ao diretório do projeto
+
+project_root = "."
+
+# Diretórios com permissão de escrita
+allow_write = [
+  ".",
+  "frontend",
+  "backend",
+  "docs",
+  "graphify-out",
+  ".claude",
+  ".gemini",
+  ".agent"
+]
+
+# Binários e executáveis permitidos
+allow_exec = [
+  "node",
+  "npm",
+  "npx",
+  "ng",
+  "python",
+  "python3",
+  "uv",
+  "ruff",
+  "graphify",
+  "git",
+  "jq",
+  "sh",
+  "bash",
+  "zsh"
+]
+
+# Proíbe explicitamente leitura fora do workspace
+deny_read = [
+  "~/.ssh",
+  "~/.gnupg",
+  "~/.aws",
+  "~/.config/gcloud"
+]
